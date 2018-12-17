@@ -4,15 +4,9 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-ADD sensehel /app/sensehel
-
-ADD manage.py /app
-
-ADD requirements.txt /app
+ADD . /app
 
 RUN pip install -r requirements.txt
-
-EXPOSE 8000
 
 CMD ["./manage.py", "migrate"]
 
