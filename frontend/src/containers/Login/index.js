@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './login.styles.css';
-import Images from '../../assets';
+import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 

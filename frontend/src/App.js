@@ -5,11 +5,13 @@ import './theme/Colors.css';
 
 // Routes
 import LoginPage from './containers/Login';
+import Tabs from './containers/Tabs';
 
 const App = () => (
   <Router>
     <div>
       <Route path="/" exact component={LoginPage} />
+      <Route path="/tabs" component={Tabs} />
     </div>
   </Router>
 );
