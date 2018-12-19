@@ -27,3 +27,15 @@ services:
       POSTGRES_DB: forum
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
+  frontend:
+      build: ./frontend
+      command: ["npm", "start"]
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./frontend:/app/frontend
+        - node-modules:/app/frontend/node_modules
+
+volumes:
+  node-modules:
