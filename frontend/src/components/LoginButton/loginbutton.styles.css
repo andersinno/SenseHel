@@ -1,0 +1,17 @@
+.button {
+  background-color: var(--darkBlue);
+  border: 0;
+  border-radius: 35px;
+  height: 60px;
+  outline: none;
+  cursor: pointer;
+}
+
+p {
+  color: var(--white) !important;
+}
+
+.button:hover,
+.button:active {
+  background-color: var(--darkBlue-lighter);
+}
