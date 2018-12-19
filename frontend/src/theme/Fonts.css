@@ -1,0 +1,73 @@
+.common {
+  color: #515253;
+}
+
+.headline {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.title {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+.subheader {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.subheader2 {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.large-body {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.body-text {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: lighter;
+  font-size: 16px; /* was 10px */
+}
+
+.small-body {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: lighter;
+  font-size: 6px;
+}
+
+.number {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.largeNumber {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+.button-text {
+  color: #515253;
+  font-family: Avenir, sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+}

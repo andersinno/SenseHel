@@ -1,0 +1,46 @@
+.login-page {
+  background-color: #325a75;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login-page__content {
+  background-image: url('../../assets/Images/Login.png');
+  box-shadow: inset 0 0 0 2000px #325a75cc;
+  min-width: 350px;
+  max-width: 500px;
+  min-height: 640px;
+  max-height: 840px;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+.content__img-logo {
+  width: 255px;
+  margin: 125px auto 140px auto;
+  display: block;
+}
+
+.content__input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+  margin: 0 30px;
+}
