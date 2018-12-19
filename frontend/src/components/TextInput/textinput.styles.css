@@ -1,26 +1,26 @@
 input {
   height: 30px;
   border: 0;
-  border-bottom: 1px solid #fbfbfb;
+  border-bottom: 1px solid var(--white);
   background-color: transparent;
   margin-bottom: 20px;
   color: #fbfbfb !important;
-  padding: 10px;
+  padding: 10px 0;
   outline: none;
 }
 
 input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #fbfbfb;
+  color: var(--white);
   opacity: 1; /* Firefox */
 }
 
 input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #fbfbfb;
+  color: var(--white);
 }
 
 input::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #fbfbfb;
+  color: var(--white);
 }

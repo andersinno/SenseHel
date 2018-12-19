@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './login.styles.css';
 import Images from '../../assets';
 import TextInput from '../../components/TextInput';
+import LoginButton from '../../components/LoginButton';
 
 class Index extends Component {
   onLogin = () => {};
@@ -17,6 +18,10 @@ class Index extends Component {
             <TextInput placeholder="User number" />
 
             <TextInput placeholder="PIN code" />
+          </div>
+
+          <div className="content__button-container">
+            <LoginButton />
           </div>
         </div>
       </div>
