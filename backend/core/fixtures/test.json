@@ -1,0 +1,46 @@
+[
+{
+    "model": "core.apartment",
+    "pk": 1,
+    "fields": {
+        "first_name": "John",
+        "last_name": "Snow",
+        "street": "Winterfell",
+        "city": "Seven Kingdoms",
+        "postal_code": 1234,
+        "phone": 1234,
+        "pin_code": 1234,
+        "sensors": [
+            1
+        ]
+    }
+},
+{
+    "model": "core.sensor",
+    "pk": 1,
+    "fields": {
+        "description": "Elsys ERS-CO2",
+        "provides": [
+            1
+        ]
+    }
+},
+{
+    "model": "core.sensorprovides",
+    "pk": 1,
+    "fields": {
+        "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
+        "description": "Temperature, Celcius"
+    }
+},
+{
+    "model": "core.service",
+    "pk": 1,
+    "fields": {
+        "name": "Testservice",
+        "description": "Test Description",
+        "eula_url": "Eula URL",
+        "requires": []
+    }
+}
+]

@@ -8,7 +8,6 @@ ADD . /app
 
 RUN pip install -r requirements.txt
 
-CMD ["./manage.py", "migrate"]
+CMD ["./manage.py", "migrate", "--noinput"]
 
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
-

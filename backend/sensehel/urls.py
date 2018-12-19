@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include
 
 from api.login import LoginTokenAPIView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^api/login', LoginTokenAPIView.as_view(), name='login'),
+    url(r'^api/', include('core.api.urls')),
 ]
