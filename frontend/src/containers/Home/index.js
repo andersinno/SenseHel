@@ -7,6 +7,7 @@ const HomePage = () => (
     <AppHeader
       headline="PAULI TOIVONEN"
       title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
+      hasBgImage
     />
     HOME
   </div>
