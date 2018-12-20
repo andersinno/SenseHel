@@ -6,6 +6,7 @@ import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 import Spinner from '../../components/Spinner';
+import API from '../../services/Api';
 
 class LoginPage extends Component {
   state = {
@@ -19,9 +20,20 @@ class LoginPage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onLogin = () => {
+  onLogin = async () => {
+    const { userNumber, pinCode } = this.state;
+
     this.setState({ loading: true });
-    setTimeout(() => this.setState({ login: true, loading: false }), 2000);
+
+    try {
+      const res = await API.login(userNumber, pinCode);
+      console.log(res);
+    } catch (e) {
+      this.setState({ loading: false });
+      window.alert(e);
+      console.error(e);
+    }
+    // setTimeout(() => this.setState({ login: true, loading: false }), 2000);
   };
 
   render() {
