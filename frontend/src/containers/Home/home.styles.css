@@ -2,3 +2,23 @@
   width: 100%;
   height: 100%;
 }
+
+.home-page__cards-container {
+  display: flex;
+  width: 95%;
+  text-align: center;
+  padding: 0 0 15px 20px;
+
+  position: absolute;
+  top: 20%; /* Since AppHeader height is 25%, this is 20% from the top */
+
+  overflow-x: auto;
+  flex-wrap: nowrap;
+
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-page__cards-container::-webkit-scrollbar {
+  display: none;
+}
