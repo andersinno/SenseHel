@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './tabs.styles.css';
 import Icons from '../../assets/Icons';
 import HomePage from '../Home';
+import SubscriptionsPage from '../Subscriptions';
+import SensorsPage from '../Sensors';
+import AboutPage from '../About';
 
 const tabOptions = [
   {
@@ -12,19 +15,19 @@ const tabOptions = [
   },
   {
     name: 'subscriptions',
-    component: () => <h1>SUBSCRIPTIONS</h1>,
+    component: () => <SubscriptionsPage />,
     icon: Icons.Subscription_Icon,
     activeIcon: Icons.Subscription_Icon_Active
   },
   {
     name: 'sensors',
-    component: () => <h1>SENSORS</h1>,
+    component: () => <SensorsPage />,
     icon: Icons.Sensors_Icon,
     activeIcon: Icons.Sensors_Icon_Active
   },
   {
     name: 'about',
-    component: () => <h1>ABOUT</h1>,
+    component: () => <AboutPage />,
     icon: Icons.About_Icon,
     activeIcon: Icons.About_Icon_Active
   }
