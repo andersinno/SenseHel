@@ -28,3 +28,9 @@
     top: 23%;
   }
 }
+
+@media screen and (min-device-width: 750px) {
+  .home-page__cards-container {
+    justify-content: center;
+  }
+}
