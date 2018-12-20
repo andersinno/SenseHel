@@ -10,7 +10,7 @@
   padding: 0 0 15px 20px;
 
   position: absolute;
-  top: 20%; /* Since AppHeader height is 25%, this is 20% from the top */
+  top: 20%; /* Since AppHeader height is 25%  */
 
   overflow-x: auto;
   flex-wrap: nowrap;
@@ -21,4 +21,10 @@
 
 .home-page__cards-container::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-device-height: 640px) {
+  .home-page__cards-container {
+    top: 23%;
+  }
 }

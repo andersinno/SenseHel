@@ -1,17 +1,21 @@
 import React from 'react';
 import './subscribedservicecard.styles.css';
-import Icons from '../../assets/Icons';
 
-const SubscribedServiceCard = () => (
+const SubscribedServiceCard = ({ title, icon, value, unit, lastUpdated }) => (
   <div className="service-card">
     <div className="service-card__header">
-      <span className="body-text">Temperature</span>
-      <img
-        className="service-card__header__icon"
-        src={Icons.Temperature_Warning}
-        alt="temperature"
-      />
+      <span className="body-text">{title}</span>
+      <img className="service-card__header__icon" src={icon} alt={title} />
     </div>
+
+    <div>
+      <span className="large-number">
+        {value}
+        <span className="number">{unit}</span>
+      </span>
+    </div>
+
+    <div className="small-body">Updated {lastUpdated}</div>
   </div>
 );
 

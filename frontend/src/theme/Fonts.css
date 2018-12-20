@@ -50,21 +50,21 @@
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .number {
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
 }
 
-.largeNumber {
+.large-number {
   color: #515253;
   font-family: Avenir, sans-serif;
-  font-weight: normal;
-  font-size: 30px;
+  font-weight: 500;
+  font-size: 40px;
 }
 
 .button-text {
