@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import './login.styles.css';
 import Images from '../../assets/Images';
@@ -8,17 +9,22 @@ import LoginButton from '../../components/LoginButton';
 class Index extends Component {
   state = {
     userNumber: '',
-    pinCode: ''
+    pinCode: '',
+    login: false
   };
 
   onChangeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onLogin = () => {};
+  onLogin = () => {
+    setTimeout(() => this.setState({ login: true }), 2000);
+  };
 
   render() {
-    const { userNumber, pinCode } = this.state;
+    const { userNumber, pinCode, login } = this.state;
+
+    if (login) return <Redirect to="/main" />;
 
     return (
       <div className="login-page">
@@ -42,7 +48,7 @@ class Index extends Component {
           </div>
 
           <div className="content__button-container">
-            <LoginButton />
+            <LoginButton onClick={this.onLogin} />
           </div>
         </div>
       </div>
