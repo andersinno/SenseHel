@@ -21,7 +21,7 @@
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .subheader2 {
@@ -42,7 +42,7 @@
 .body-text {
   color: #515253;
   font-family: Avenir, sans-serif;
-  font-weight: lighter;
+  font-weight: normal;
   font-size: 16px; /* was 10px */
 }
 
@@ -50,14 +50,14 @@
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: lighter;
-  font-size: 6px;
+  font-size: 12px;
 }
 
 .number {
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .largeNumber {
