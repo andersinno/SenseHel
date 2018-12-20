@@ -43,3 +43,13 @@
     height: 60px;
   }
 }
+
+@media screen and (min-width: 1000px) {
+  .icon-container__img {
+    width: 10%;
+  }
+
+  .bottom-tab-navigator {
+    height: 60px;
+  }
+}
