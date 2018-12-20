@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './tabs.styles.css';
 import Icons from '../../assets/Icons';
+import HomePage from '../Home';
 
 const tabOptions = [
   {
     name: 'home',
-    component: () => <h1>HOME</h1>,
+    component: () => <HomePage />,
     icon: Icons.Home_Icon,
     activeIcon: Icons.Home_Icon_Active
   },
@@ -42,8 +43,8 @@ class Tabs extends Component {
     const { activeTab } = this.state;
 
     return (
-      <div>
-        <div>{activeTab.component()}</div>
+      <div className="tabs-page">
+        <div className="tabs-page__page">{activeTab.component()}</div>
 
         <BottomTabNavigator
           tabs={tabOptions}

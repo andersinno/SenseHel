@@ -49,6 +49,7 @@ class Index extends Component {
               name="pinCode"
               value={pinCode}
               onChange={this.onChangeInput}
+              type="password"
             />
           </div>
 

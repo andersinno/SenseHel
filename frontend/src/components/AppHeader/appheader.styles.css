@@ -1,0 +1,24 @@
+.app-header {
+  height: 25%;
+  width: 100%;
+  background-image: linear-gradient(to right, #182642cc, #355370cc),
+    url('../../assets/Images/Home.png');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  background-size: cover;
+}
+
+.app-header__content {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line {
+  width: 20px;
+  border-bottom: 1px solid var(--white);
+  margin: 15px 0;
+}

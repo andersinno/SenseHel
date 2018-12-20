@@ -1,7 +1,22 @@
+.tabs-page {
+  min-width: 350px;
+  max-width: 500px;
+  min-height: 560px;
+  max-height: 840px;
+  height: 91vh;
+  width: 100vw;
+  margin: auto;
+}
+
+.tabs-page__page {
+  height: 100%;
+  width: 100%;
+}
+
 .bottom-tab-navigator {
   background-color: var(--white);
   height: 50px;
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
@@ -21,11 +36,5 @@
 }
 
 .icon-container__img {
-  width: 15%;
-}
-
-@media only screen and (max-width: 600px) {
-  .icon-container__img {
-    width: 25%;
-  }
+  width: 25%;
 }
