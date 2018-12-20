@@ -5,12 +5,14 @@ import './login.styles.css';
 import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
+import Spinner from '../../components/Spinner';
 
 class Index extends Component {
   state = {
     userNumber: '',
     pinCode: '',
-    login: false
+    login: false,
+    loading: false
   };
 
   onChangeInput = e => {
@@ -18,17 +20,20 @@ class Index extends Component {
   };
 
   onLogin = () => {
-    setTimeout(() => this.setState({ login: true }), 2000);
+    this.setState({ loading: true });
+    setTimeout(() => this.setState({ login: true, loading: false }), 2000);
   };
 
   render() {
-    const { userNumber, pinCode, login } = this.state;
+    const { userNumber, pinCode, login, loading } = this.state;
 
     if (login) return <Redirect to="/main" />;
 
     return (
       <div className="login-page">
         <div className="login-page__content">
+          {loading && <Spinner />}
+
           <img className="content__img-logo" src={Images.Logo} alt="logo" />
 
           <div className="content__input-container">
@@ -48,7 +53,7 @@ class Index extends Component {
           </div>
 
           <div className="content__button-container">
-            <LoginButton onClick={this.onLogin} />
+            <LoginButton onClick={this.onLogin} disabled={loading} />
           </div>
         </div>
       </div>
