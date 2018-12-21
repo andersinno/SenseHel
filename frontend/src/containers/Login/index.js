@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import './login.styles.css';
-import Images from '../../assets';
+import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
+import Spinner from '../../components/Spinner';
 
 class Index extends Component {
   state = {
     userNumber: '',
-    pinCode: ''
+    pinCode: '',
+    login: false,
+    loading: false
   };
 
   onChangeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onLogin = () => {};
+  onLogin = () => {
+    this.setState({ loading: true });
+    setTimeout(() => this.setState({ login: true, loading: false }), 2000);
+  };
 
   render() {
-    const { userNumber, pinCode } = this.state;
+    const { userNumber, pinCode, login, loading } = this.state;
+
+    if (login) return <Redirect to="/main" />;
 
     return (
       <div className="login-page">
         <div className="login-page__content">
+          {loading && <Spinner />}
+
           <img className="content__img-logo" src={Images.Logo} alt="logo" />
 
           <div className="content__input-container">
@@ -42,7 +53,7 @@ class Index extends Component {
           </div>
 
           <div className="content__button-container">
-            <LoginButton />
+            <LoginButton onClick={this.onLogin} disabled={loading} />
           </div>
         </div>
       </div>
