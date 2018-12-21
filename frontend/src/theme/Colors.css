@@ -8,4 +8,8 @@
   --darkGrey: #515253;
   --lightGrey: #d8d8d8;
   --white: #fbfbfb;
+  --darkBlueGradientFrom: #182642;
+  --darkBlueGradientTo: #355370;
+  --darkBlueGradientFromT: #182642cc; /* translucent */
+  --darkBlueGradientToT: #355370cc; /* translucent */
 }

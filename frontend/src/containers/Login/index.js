@@ -7,7 +7,7 @@ import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 import Spinner from '../../components/Spinner';
 
-class Index extends Component {
+class LoginPage extends Component {
   state = {
     userNumber: '',
     pinCode: '',
@@ -49,6 +49,7 @@ class Index extends Component {
               name="pinCode"
               value={pinCode}
               onChange={this.onChangeInput}
+              type="password"
             />
           </div>
 
@@ -61,4 +62,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default LoginPage;

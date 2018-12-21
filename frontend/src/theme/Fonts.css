@@ -1,22 +1,23 @@
-.common {
-  color: #515253;
-}
-
 .headline {
+  margin: 0;
   color: #515253;
   font-family: Avenir, sans-serif;
-  font-weight: normal;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
 }
 
 .title {
+  margin: 0;
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .subheader {
+  margin: 0;
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: bold;
@@ -24,6 +25,7 @@
 }
 
 .subheader2 {
+  margin: 0;
   color: #515253;
   font-family: Avenir, sans-serif;
   font-weight: bold;
