@@ -1,22 +1,17 @@
 import React from 'react';
 import './offeredservicecard.styles.css';
-import Images from '../../assets/Images';
 import Icons from '../../assets/Icons';
 
-const OfferedServiceCard = () => (
+const OfferedServiceCard = ({ image, name, description, price, benefit }) => (
   <div className="offered-service-card">
     <div className="offered-service-card__row1">
       <div className="offered-service-card__col1">
-        <img src={Images.Placeholder} className="col1__img" alt="service" />
+        <img src={image} className="col1__img" alt="service" />
       </div>
 
       <div className="offered-service-card__col2">
-        <p className="headline offered-service-card__text"> Service name </p>
-        <p className="body-text offered-service-card__text">
-          {' '}
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-          nonummy nibh euismod
-        </p>
+        <p className="headline offered-service-card__text">{name}</p>
+        <p className="body-text offered-service-card__text">{description}</p>
       </div>
 
       <div className="offered-service-card__col3">
@@ -35,7 +30,7 @@ const OfferedServiceCard = () => (
 
           <tr>
             <td className="body-text">
-              <b>Free</b>
+              <b>{price}</b>
             </td>
             <td className="body-text">
               <img
@@ -43,7 +38,7 @@ const OfferedServiceCard = () => (
                 src={Icons.Green_Arrow}
                 alt="green arrow"
               />
-              <b>5%</b>
+              <b>{benefit}%</b>
             </td>
           </tr>
         </table>
