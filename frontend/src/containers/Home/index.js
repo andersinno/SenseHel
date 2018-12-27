@@ -35,7 +35,7 @@ const HomePage = () => (
       hasBgImage
     />
 
-    <div className="home-page__cards-container">
+    <div className="home-page__cards-container tab-page__content">
       {mockSubscriptions.map(s => (
         <SubscribedServiceCard
           title={s.title}

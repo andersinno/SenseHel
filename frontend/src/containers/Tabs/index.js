@@ -8,12 +8,6 @@ import AboutPage from '../About';
 
 const tabOptions = [
   {
-    name: 'home',
-    component: () => <HomePage />,
-    icon: Icons.Home_Icon,
-    activeIcon: Icons.Home_Icon_Active
-  },
-  {
     name: 'subscriptions',
     component: () => <SubscriptionsPage />,
     icon: Icons.Subscription_Icon,
@@ -30,6 +24,12 @@ const tabOptions = [
     component: () => <AboutPage />,
     icon: Icons.About_Icon,
     activeIcon: Icons.About_Icon_Active
+  },
+  {
+    name: 'home',
+    component: () => <HomePage />,
+    icon: Icons.Home_Icon,
+    activeIcon: Icons.Home_Icon_Active
   }
 ];
 

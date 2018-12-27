@@ -12,3 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Make contents of tabs overlap with AppHeader */
+.tab-page__content {
+  position: absolute;
+  top: 20%; /* Since AppHeader height is 25%  */
+}

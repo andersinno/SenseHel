@@ -9,9 +9,6 @@
   text-align: center;
   padding: 0 0 15px 20px;
 
-  position: absolute;
-  top: 20%; /* Since AppHeader height is 25%  */
-
   overflow-x: auto;
   flex-wrap: nowrap;
 
