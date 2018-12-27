@@ -33,6 +33,9 @@ class SensorProvides(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=32)
+    price = models.CharField(max_length=8)
+    benefit_short = models.CharField(max_length=20)
+    benefit_long = models.CharField(max_length=255)
     description = models.TextField(max_length=512)
     eula_url = models.CharField(max_length=255)
     requires = models.ManyToManyField('ServiceRequirement')

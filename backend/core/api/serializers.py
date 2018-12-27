@@ -6,7 +6,7 @@ from ..models import Service, Apartment
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
-        fields = ('name', 'description', 'eula_url')
+        fields = ('name', 'description', 'price', 'benefit_short', 'benefit_long', 'eula_url')
 
 
 class ApartmentSerializer(serializers.HyperlinkedModelSerializer):
