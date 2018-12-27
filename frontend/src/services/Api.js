@@ -16,13 +16,7 @@ class Api {
       password
     });
 
-    console.log(res);
-
-    if (res.status === 200) {
-      return res;
-    }
-
-    throw new Error(`Login failed with status ${res.status}, error: ${res}`);
+    return res;
   }
 }
 

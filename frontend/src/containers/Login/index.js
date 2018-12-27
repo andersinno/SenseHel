@@ -27,19 +27,19 @@ class LoginPage extends Component {
 
     try {
       const res = await API.login(userNumber, pinCode);
-      console.log(res);
-    } catch (e) {
+      localStorage.setItem('@AUTH_TOKEN', res.data.token);
+      this.setState({ login: true });
+    } catch (error) {
       this.setState({ loading: false });
-      window.alert(e);
-      console.error(e);
+      window.alert(error.response.data.error);
     }
-    // setTimeout(() => this.setState({ login: true, loading: false }), 2000);
   };
 
   render() {
+    const loggedIn = localStorage.getItem('@AUTH_TOKEN');
     const { userNumber, pinCode, login, loading } = this.state;
 
-    if (login) return <Redirect to="/main" />;
+    if (login || loggedIn) return <Redirect to="/" />;
 
     return (
       <div className="login-page">

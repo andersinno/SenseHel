@@ -16,7 +16,7 @@ const ProtectedRoute = ({ component, ...rest }) => {
   }
 
   // Not logged in, redirect to login page
-  const renderer = () => <Redirect to="/" />;
+  const renderer = () => <Redirect to="/login" />;
 
   return <Route render={renderer} {...rest} />;
 };
@@ -24,8 +24,8 @@ const ProtectedRoute = ({ component, ...rest }) => {
 const App = () => (
   <Router>
     <Switch>
-      <Route path="/" exact component={LoginPage} />
-      <ProtectedRoute path="/main" component={Tabs} />
+      <Route path="/login" exact component={LoginPage} />
+      <ProtectedRoute path="/" component={Tabs} />
       <Redirect to="/" />
     </Switch>
   </Router>
