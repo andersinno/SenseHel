@@ -25,5 +25,9 @@ export default {
   Sensors_Icon: require('./Sensors.png'),
   Sensors_Icon_Active: require('./Sensors_Light grey.png'),
   Subscription_Icon: require('./Subscription.png'),
-  Subscription_Icon_Active: require('./Subscription_Light grey.png')
+  Subscription_Icon_Active: require('./Subscription_Light grey.png'),
+
+  Arrow_Up: require('./Grey-arrow-up.png'),
+  Arrow_Down: require('./Grey-arrow-down.png'),
+  Green_Arrow: require('./Green-arrow.png')
 };
