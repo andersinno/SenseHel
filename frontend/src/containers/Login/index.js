@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import _ from 'lodash';
 
 import './login.styles.css';
 import Images from '../../assets/Images';
@@ -31,7 +32,7 @@ class LoginPage extends Component {
       this.setState({ login: true, loading: false });
     } catch (error) {
       this.setState({ loading: false });
-      window.alert(error.response.data.error);
+      window.alert(_.get(error, 'response.data.error', error));
     }
   };
 
