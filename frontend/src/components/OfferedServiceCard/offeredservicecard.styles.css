@@ -46,7 +46,7 @@ td {
   margin-left: 20px;
 }
 
-.offered-service-card1__col3 {
+.offered-service-card__col3 {
   flex: 1;
 }
 
@@ -56,11 +56,14 @@ td {
   margin: 0 5px 15px 15px;
 }
 
-.col3__icon {
-  width: 18px;
-  margin: 0 10px;
-  position: absolute;
+.col3__show-more-icon {
+  margin: 0 10px !important;
+  position: absolute !important;
   right: 0;
+}
+
+.col3__show-more-icon-clicked {
+  transform: rotate(180deg);
 }
 
 .row2__col2__table {
