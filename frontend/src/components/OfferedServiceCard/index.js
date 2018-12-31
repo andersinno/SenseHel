@@ -34,12 +34,20 @@ class OfferedServiceCard extends Component {
   };
 
   render() {
-    const { image, name, description, price, benefit, classes } = this.props;
+    const {
+      image,
+      name,
+      description,
+      price,
+      benefit,
+      requiredSensors,
+      classes
+    } = this.props;
     const { expanded } = this.state;
 
     return (
       <div className="offered-service-card">
-        <div className="offered-service-card__row1">
+        <div className="offered-service-card__row">
           <div className="offered-service-card__col1">
             <img src={image} className="col1__img" alt="service" />
           </div>
@@ -69,7 +77,7 @@ class OfferedServiceCard extends Component {
         </div>
 
         {!expanded && (
-          <div className="offered-service-card__row2">
+          <div className="offered-service-card__row">
             <div className="offered-service-card__col1" />
             <div className="offered-service-card__col2">
               <table className="row2__col2__table">
@@ -88,7 +96,7 @@ class OfferedServiceCard extends Component {
                       src={Icons.Green_Arrow}
                       alt="green arrow"
                     />
-                    <b>{benefit}%</b>
+                    <b>{benefit.short}%</b>
                   </td>
                 </tr>
               </table>
@@ -97,12 +105,48 @@ class OfferedServiceCard extends Component {
         )}
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div className="offered-service-card__row2">
+          <div className="offered-service-card__row">
             <img
               className="service-image"
               src={Images.Placeholder_Long}
               alt="placeholder"
             />
+          </div>
+
+          <div className="offered-service-card__row offered-service-card__row--detail">
+            <p className="title offered-service-card__text row--detail__title">
+              DETAIL
+            </p>
+            <p className="body-text offered-service-card__text row--detail__description">
+              {description}
+            </p>
+          </div>
+
+          <div className="offered-service-card__row offered-service-card__row--detail">
+            <p className="title offered-service-card__text row--detail__title">
+              BENEFIT
+            </p>
+            <p className="body-text offered-service-card__text row--detail__description">{`${
+              benefit.long
+            }`}</p>
+          </div>
+
+          <div className="offered-service-card__row offered-service-card__row--detail">
+            <p className="title offered-service-card__text row--detail__title">
+              PRICE
+            </p>
+            <p className="body-text offered-service-card__text row--detail__description">
+              {price}
+            </p>
+          </div>
+
+          <div className="offered-service-card__row offered-service-card__row--detail">
+            <p className="title offered-service-card__text row--detail__title">
+              REQUIRED SENSORS
+            </p>
+            <p className="body-text offered-service-card__text row--detail__description">
+              {requiredSensors}
+            </p>
           </div>
         </Collapse>
       </div>

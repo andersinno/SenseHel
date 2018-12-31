@@ -11,7 +11,12 @@ const offeredServices = [
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
-    benefit: 5
+    benefit: {
+      short: 5,
+      long:
+        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
+    },
+    requiredSensors: 'Temperature / Something'
   },
   {
     image: Images.Placeholder,
@@ -19,7 +24,12 @@ const offeredServices = [
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
-    benefit: 12
+    benefit: {
+      short: 5,
+      long:
+        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
+    },
+    requiredSensors: 'Temperature / Something'
   },
   {
     image: Images.Placeholder,
@@ -27,7 +37,12 @@ const offeredServices = [
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
-    benefit: 1
+    benefit: {
+      short: 5,
+      long:
+        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
+    },
+    requiredSensors: 'Temperature / Something'
   },
   {
     image: Images.Placeholder,
@@ -35,7 +50,12 @@ const offeredServices = [
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
-    benefit: 3
+    benefit: {
+      short: 5,
+      long:
+        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
+    },
+    requiredSensors: 'Temperature / Something'
   }
 ];
 
@@ -51,6 +71,7 @@ const SubscriptionsPage = () => (
           description={service.description}
           price={service.price}
           benefit={service.benefit}
+          requiredSensors={service.requiredSensors}
         />
       ))}
     </div>

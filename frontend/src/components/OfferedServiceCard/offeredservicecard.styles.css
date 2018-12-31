@@ -11,7 +11,7 @@ td {
   margin-bottom: 20px;
   border-radius: 3px;
   box-shadow: 2px 4px 12px -1px var(--shadowGrey);
-  padding: 15px 0 15px 15px;
+  padding: 0 0 15px 15px;
 }
 
 .offered-service-card__text {
@@ -19,13 +19,9 @@ td {
   text-align: left !important;
 }
 
-.offered-service-card__row1 {
+.offered-service-card__row {
   display: flex;
-}
-
-.offered-service-card__row2 {
-  display: flex;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .offered-service-card__col1 {
@@ -33,17 +29,13 @@ td {
   display: flex;
   /*justify-content: center;*/
   align-items: flex-start;
-}
-
-@media screen and (max-width: 500px) {
-  .offered-service-card__col1 {
-    flex: 2;
-  }
+  margin-top: 15px;
 }
 
 .offered-service-card__col2 {
   flex: 5;
   margin-left: 15px;
+  margin-top: 15px;
 }
 
 .offered-service-card__col3 {
@@ -64,7 +56,38 @@ td {
   margin-right: 4px;
 }
 
-.offered-service-card__row2 .service-image {
+.offered-service-card__row .service-image {
   max-width: 95%;
   max-height: 100px;
+  margin-right: 15px;
+}
+
+.offered-service-card__row--detail {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin-right: 15px;
+  border-bottom: 1px solid var(--lightGrey);
+}
+
+.row--detail__title {
+  font-weight: 500;
+  flex: 1;
+}
+
+.row--detail__description {
+  margin-left: 15px;
+  flex: 6;
+  margin-top: 0;
+  white-space: pre-wrap;
+}
+
+@media screen and (max-width: 500px) {
+  .offered-service-card__col1 {
+    flex: 2;
+  }
+
+  .row--detail__title {
+    flex: 2;
+  }
 }
