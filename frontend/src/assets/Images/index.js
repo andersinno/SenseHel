@@ -7,5 +7,6 @@ export default {
   Banner: require('./6aika-eakr-vipuv-ul-banner.png'),
   Logo: require('./IVTY_tunnus_RGB_L.png'),
 
-  Placeholder: require('./placeholder.png')
+  Placeholder: require('./placeholder.png'),
+  Placeholder_Long: require('./pix-horizontal-placeholder.jpg')
 };

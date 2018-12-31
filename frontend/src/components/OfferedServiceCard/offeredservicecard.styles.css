@@ -5,14 +5,13 @@ td {
 }
 
 .offered-service-card {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  width: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  background-color: var(--white);
   margin-bottom: 20px;
   border-radius: 3px;
   box-shadow: 2px 4px 12px -1px var(--shadowGrey);
-  padding-top: 10px;
+  padding: 15px 0 15px 15px;
 }
 
 .offered-service-card__text {
@@ -26,12 +25,13 @@ td {
 
 .offered-service-card__row2 {
   display: flex;
+  margin-top: 5px;
 }
 
 .offered-service-card__col1 {
   flex: 1;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: flex-start;
 }
 
@@ -43,7 +43,7 @@ td {
 
 .offered-service-card__col2 {
   flex: 5;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .offered-service-card__col3 {
@@ -53,17 +53,6 @@ td {
 .col1__img {
   max-width: 88%;
   max-height: 88%;
-  margin: 0 5px 15px 15px;
-}
-
-.col3__show-more-icon {
-  margin: 0 10px !important;
-  position: absolute !important;
-  right: 0;
-}
-
-.col3__show-more-icon-clicked {
-  transform: rotate(180deg);
 }
 
 .row2__col2__table {
@@ -73,4 +62,9 @@ td {
 .benefit-col__body-text__icon {
   width: 13px;
   margin-right: 4px;
+}
+
+.offered-service-card__row2 .service-image {
+  max-width: 95%;
+  max-height: 100px;
 }
