@@ -4,6 +4,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse/Collapse';
+import Slide from '@material-ui/core/Slide/Slide';
+import Fade from '@material-ui/core/Fade/Fade';
 
 import './offeredservicecard.styles.css';
 import Icons from '../../assets/Icons';
@@ -55,11 +57,11 @@ class OfferedServiceCard extends Component {
           <div className="offered-service-card__col2">
             <p className="headline offered-service-card__text">{name}</p>
 
-            {!expanded && (
+            <Fade in={!expanded} timeout={200} unmountOnExit>
               <p className="body-text offered-service-card__text">
                 {description}
               </p>
-            )}
+            </Fade>
           </div>
 
           <div className="offered-service-card__col3">
@@ -76,78 +78,90 @@ class OfferedServiceCard extends Component {
           </div>
         </div>
 
-        {!expanded && (
+        <Fade in={!expanded} timeout={200} unmountOnExit>
           <div className="offered-service-card__row">
             <div className="offered-service-card__col1" />
             <div className="offered-service-card__col2">
               <table className="row2__col2__table">
-                <tr>
-                  <th className="body-text">Price</th>
-                  <th className="body-text">Benefit</th>
-                </tr>
+                <tbody>
+                  <tr>
+                    <th className="body-text">Price</th>
+                    <th className="body-text">Benefit</th>
+                  </tr>
 
-                <tr>
-                  <td className="body-text">
-                    <b>{price}</b>
-                  </td>
-                  <td className="body-text">
-                    <img
-                      className="benefit-col__body-text__icon"
-                      src={Icons.Green_Arrow}
-                      alt="green arrow"
-                    />
-                    <b>{benefit.short}%</b>
-                  </td>
-                </tr>
+                  <tr>
+                    <td className="body-text">
+                      <b>{price}</b>
+                    </td>
+                    <td className="body-text">
+                      <img
+                        className="benefit-col__body-text__icon"
+                        src={Icons.Green_Arrow}
+                        alt="green arrow"
+                      />
+                      <b>{benefit.short}%</b>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
-        )}
+        </Fade>
 
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div className="offered-service-card__row">
-            <img
-              className="service-image"
-              src={Images.Placeholder_Long}
-              alt="placeholder"
-            />
-          </div>
+        <Collapse in={expanded} timeout="auto" mountOnEnter unmountOnExit>
+          <Slide
+            direction="up"
+            in={expanded}
+            timeout={500}
+            mountOnEnter
+            unmountOnExit
+          >
+            <div>
+              <div className="offered-service-card__row">
+                <img
+                  className="service-image"
+                  src={Images.Placeholder_Long}
+                  alt="placeholder"
+                />
+              </div>
 
-          <div className="offered-service-card__row offered-service-card__row--detail">
-            <p className="title offered-service-card__text row--detail__title">
-              DETAIL
-            </p>
-            <p className="body-text offered-service-card__text row--detail__description">
-              {description}
-            </p>
-          </div>
+              <div className="offered-service-card__row offered-service-card__row--detail">
+                <p className="title offered-service-card__text row--detail__title">
+                  DETAIL
+                </p>
+                <p className="body-text offered-service-card__text row--detail__description">
+                  {description}
+                </p>
+              </div>
 
-          <div className="offered-service-card__row offered-service-card__row--detail">
-            <p className="title offered-service-card__text row--detail__title">
-              BENEFIT
-            </p>
-            <p className="body-text offered-service-card__text row--detail__description">{`${
-              benefit.long
-            }`}</p>
-          </div>
+              <div className="offered-service-card__row offered-service-card__row--detail">
+                <p className="title offered-service-card__text row--detail__title">
+                  BENEFIT
+                </p>
+                <p className="body-text offered-service-card__text row--detail__description">{`${
+                  benefit.long
+                }`}</p>
+              </div>
 
-          <div className="offered-service-card__row offered-service-card__row--detail">
-            <p className="title offered-service-card__text row--detail__title">
-              PRICE
-            </p>
-            <p className="body-text offered-service-card__text row--detail__description">
-              {price}
-            </p>
-          </div>
+              <div className="offered-service-card__row offered-service-card__row--detail">
+                <p className="title offered-service-card__text row--detail__title">
+                  PRICE
+                </p>
+                <p className="body-text offered-service-card__text row--detail__description">
+                  {price}
+                </p>
+              </div>
 
-          <div className="offered-service-card__row offered-service-card__row--detail">
-            <p className="title offered-service-card__text row--detail__title">
-              REQUIRED SENSORS
-            </p>
-            <p className="body-text offered-service-card__text row--detail__description">
-              {requiredSensors}
-            </p>
-          </div>
+              <div className="offered-service-card__row offered-service-card__row--detail">
+                <p className="title offered-service-card__text row--detail__title">
+                  REQUIRED SENSORS
+                </p>
+                <p className="body-text offered-service-card__text row--detail__description">
+                  {requiredSensors}
+                </p>
+              </div>
+            </div>
+          </Slide>
         </Collapse>
       </div>
     );
