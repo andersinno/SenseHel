@@ -3,12 +3,10 @@
     "model": "core.apartment",
     "pk": 1,
     "fields": {
-        "first_name": "FirstN1",
-        "last_name": "LastN1",
         "street": "Street",
         "city": "City",
         "postal_code": 1234,
-        "phone": 1234,
+        "user_id": 1,
         "sensors": [
             1
         ]
