@@ -1,0 +1,25 @@
+.detail {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 15px 15px 0 0;
+  border-bottom: 1px solid var(--lightGrey);
+}
+
+.detail__title {
+  font-weight: 500;
+  flex: 1;
+}
+
+.detail__description {
+  margin-left: 15px;
+  flex: 6;
+  margin-top: 0;
+  white-space: pre-wrap;
+}
+
+@media screen and (max-width: 500px) {
+  .detail__title {
+    flex: 2;
+  }
+}

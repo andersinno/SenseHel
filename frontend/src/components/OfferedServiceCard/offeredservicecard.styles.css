@@ -1,50 +1,10 @@
-th,
-td {
+.price-benefit-table th,
+.price-benefit-table td {
   padding: 0 10px 5px 0;
   text-align: center;
 }
 
-.offered-service-card {
-  background-color: var(--white);
-  margin-bottom: 20px;
-  border-radius: 3px;
-  box-shadow: 2px 4px 12px -1px var(--shadowGrey);
-}
-
-.offered-service-card__text {
-  color: var(--darkGrey) !important;
-  text-align: left !important;
-}
-
-.offered-service-card__row {
-  display: flex;
-}
-
-.offered-service-card__col1 {
-  flex: 1;
-  display: flex;
-  /*justify-content: center;*/
-  align-items: flex-start;
-  margin-top: 15px;
-  margin-left: 15px;
-}
-
-.offered-service-card__col2 {
-  flex: 5;
-  margin-left: 15px;
-  margin-top: 15px;
-}
-
-.offered-service-card__col3 {
-  flex: 1;
-}
-
-.col1__img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.row2__col2__table {
+.price-benefit-table {
   margin-bottom: 10px;
 }
 
@@ -53,40 +13,10 @@ td {
   margin-right: 4px;
 }
 
-.offered-service-card__row .service-image {
+.card__row .service-image {
   max-width: 95%;
   max-height: 100px;
   margin: 15px 15px 15px 0;
-}
-
-.offered-service-card__row--detail {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  margin: 15px 15px 0 0;
-  border-bottom: 1px solid var(--lightGrey);
-}
-
-.row--detail__title {
-  font-weight: 500;
-  flex: 1;
-}
-
-.row--detail__description {
-  margin-left: 15px;
-  flex: 6;
-  margin-top: 0;
-  white-space: pre-wrap;
-}
-
-@media screen and (max-width: 500px) {
-  .offered-service-card__col1 {
-    flex: 2;
-  }
-
-  .row--detail__title {
-    flex: 2;
-  }
 }
 
 .offered-service-card__row--checkboxes {
