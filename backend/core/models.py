@@ -1,17 +1,34 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class User(AbstractUser):
+    """
+    From AbstractUser relevant fields
+
+    username
+    first_name
+    last_name
+    email
+
+    See baseclass for full details
+    """
+    phone = models.IntegerField(null=True)
+    invite_code = models.CharField(max_length=64)
+
+    # Ask non null field values during createsuperuser
+    REQUIRED_FIELDS = AbstractUser.REQUIRED_FIELDS + ['phone']
+
+
 class Apartment(models.Model):
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=32)
     postal_code = models.IntegerField()
-    phone = models.IntegerField()
     sensors = models.ManyToManyField('Sensor')
 
     def __str__(self):
-        return f'{self.first_name}, {self.last_name} - {self.street} ({self.postal_code})'
+        return f'{self.user.first_name}, {self.user.last_name} - {self.street} ({self.postal_code})'
 
 
 class Sensor(models.Model):
