@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router';
 import './theme/Fonts.css';
 import './theme/Colors.css';
 
@@ -7,12 +8,26 @@ import './theme/Colors.css';
 import LoginPage from './containers/Login';
 import Tabs from './containers/Tabs';
 
+const ProtectedRoute = ({ component, ...rest }) => {
+  const loggedIn = localStorage.getItem('@AUTH_TOKEN');
+
+  if (loggedIn) {
+    return <Route component={component} {...rest} />;
+  }
+
+  // Not logged in, redirect to login page
+  const renderer = () => <Redirect to="/login" />;
+
+  return <Route render={renderer} {...rest} />;
+};
+
 const App = () => (
   <Router>
-    <div>
-      <Route path="/" exact component={LoginPage} />
-      <Route path="/main" component={Tabs} />
-    </div>
+    <Switch>
+      <Route path="/login" exact component={LoginPage} />
+      <ProtectedRoute path="/" component={Tabs} />
+      <Redirect to="/" />
+    </Switch>
   </Router>
 );
 
