@@ -13,6 +13,7 @@ const styles = theme => ({
   expand: {
     position: 'absolute',
     right: 0,
+    margin: 5,
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
