@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import _ from 'lodash';
 
 import './login.styles.css';
 import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 import Spinner from '../../components/Spinner';
+import API from '../../services/Api';
 
 class LoginPage extends Component {
   state = {
@@ -19,15 +21,26 @@ class LoginPage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onLogin = () => {
+  onLogin = async () => {
+    const { userNumber, pinCode } = this.state;
+
     this.setState({ loading: true });
-    setTimeout(() => this.setState({ login: true, loading: false }), 2000);
+
+    try {
+      const res = await API.login(userNumber, pinCode);
+      localStorage.setItem('@AUTH_TOKEN', res.data.token);
+      this.setState({ login: true, loading: false });
+    } catch (error) {
+      this.setState({ loading: false });
+      window.alert(_.get(error, 'response.data.error', error));
+    }
   };
 
   render() {
+    const loggedIn = localStorage.getItem('@AUTH_TOKEN');
     const { userNumber, pinCode, login, loading } = this.state;
 
-    if (login) return <Redirect to="/main" />;
+    if (login || loggedIn) return <Redirect to="/" />;
 
     return (
       <div className="login-page">

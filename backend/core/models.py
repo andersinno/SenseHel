@@ -8,7 +8,6 @@ class Apartment(models.Model):
     city = models.CharField(max_length=32)
     postal_code = models.IntegerField()
     phone = models.IntegerField()
-    pin_code = models.IntegerField()
     sensors = models.ManyToManyField('Sensor')
 
     def __str__(self):
@@ -17,36 +16,34 @@ class Apartment(models.Model):
 
 class Sensor(models.Model):
     description = models.TextField(max_length=512)
-    provides = models.ManyToManyField('SensorProvides')
+    provides = models.ManyToManyField('SensorAttribute')
 
     def __str__(self):
         return f'{self.description}'
 
 
-class SensorProvides(models.Model):
+class SensorAttribute(models.Model):
     uri = models.CharField(max_length=255)
     description = models.CharField(max_length=128)
 
     def __str__(self):
         return f' {self.uri} ({self.description})'
 
+    class Meta:
+        verbose_name_plural = "Sensor Attributes"
+
 
 class Service(models.Model):
     name = models.CharField(max_length=32)
+    price = models.CharField(max_length=8)
+    benefit_short = models.CharField(max_length=20)
+    benefit_long = models.CharField(max_length=255)
     description = models.TextField(max_length=512)
     eula_url = models.CharField(max_length=255)
-    requires = models.ManyToManyField('ServiceRequirement')
+    requires = models.ManyToManyField('SensorAttribute')
 
     def __str__(self):
         return f'{self.name}'
-
-
-class ServiceRequirement(models.Model):
-    uri = models.CharField(max_length=255)
-    description = models.CharField(max_length=128)
-
-    def __str__(self):
-        return f'Service requires {self.uri}'
 
 
 class Subscription(models.Model):

@@ -1,10 +1,8 @@
 from django.contrib import admin
 
-from .models import (Apartment, Sensor, SensorProvides, Service,
-                     ServiceRequirement)
+from .models import (Apartment, Sensor, SensorAttribute, Service)
 
 admin.site.register(Apartment)
 admin.site.register(Sensor)
 admin.site.register(Service)
-admin.site.register(ServiceRequirement)
-admin.site.register(SensorProvides)
+admin.site.register(SensorAttribute)

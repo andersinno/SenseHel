@@ -1,46 +1,89 @@
 [
-{
+  {
     "model": "core.apartment",
     "pk": 1,
     "fields": {
-        "first_name": "John",
-        "last_name": "Snow",
-        "street": "Winterfell",
-        "city": "Seven Kingdoms",
-        "postal_code": 1234,
-        "phone": 1234,
-        "pin_code": 1234,
-        "sensors": [
-            1
-        ]
+      "first_name": "FirstN1",
+      "last_name": "LastN1",
+      "street": "Street",
+      "city": "City",
+      "postal_code": 1234,
+      "phone": 1234,
+      "sensors": [1]
     }
-},
-{
+  },
+  {
     "model": "core.sensor",
     "pk": 1,
     "fields": {
-        "description": "Elsys ERS-CO2",
-        "provides": [
-            1
-        ]
+      "description": "Elsys ERS-CO2",
+      "provides": [1, 2, 4]
     }
-},
-{
-    "model": "core.sensorprovides",
+  },
+  {
+    "model": "core.sensor",
+    "pk": 2,
+    "fields": {
+      "description": "Mock, Temperature only",
+      "provides": [1]
+    }
+  },
+  {
+    "model": "core.sensorattribute",
     "pk": 1,
     "fields": {
-        "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
-        "description": "Temperature, Celcius"
+      "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
+      "description": "Temperature, Celcius"
     }
-},
-{
+  },
+  {
+    "model": "core.sensorattribute",
+    "pk": 2,
+    "fields": {
+      "uri": "http://www.yso.fi/onto/yso/p6453",
+      "description": "Humidity, Percentage"
+    }
+  },
+  {
+    "model": "core.sensorattribute",
+    "pk": 3,
+    "fields": {
+      "uri": "http://finto.fi/yso/en/page/p9266",
+      "description": "Presence"
+    }
+  },
+  {
+    "model": "core.sensorattribute",
+    "pk": 4,
+    "fields": {
+      "uri": "http://finto.fi/afo/en/page/p4770",
+      "description": "Co2, PPM"
+    }
+  },
+  {
     "model": "core.service",
     "pk": 1,
     "fields": {
-        "name": "Testservice",
-        "description": "Test Description",
-        "eula_url": "Eula URL",
-        "requires": []
+      "name": "Mock 1 (temp, co2)",
+      "price": "Free",
+      "benefit_short": "Energy savings",
+      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "description": "Requires temperature and co2",
+      "eula_url": "https://google.com",
+      "requires": [1, 4]
     }
-}
+  },
+  {
+    "model": "core.service",
+    "pk": 2,
+    "fields": {
+      "name": "Mock 2 (presence)",
+      "price": "Free",
+      "benefit_short": "Energy savings",
+      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "description": "Requires presence",
+      "eula_url": "https://google.com",
+      "requires": [3]
+    }
+  }
 ]
