@@ -11,8 +11,7 @@ import './card.styles.css';
 
 const styles = theme => ({
   expand: {
-    position: 'absolute',
-    right: 0,
+    float: 'right',
     margin: 5,
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {

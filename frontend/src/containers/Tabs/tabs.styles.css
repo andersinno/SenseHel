@@ -46,9 +46,9 @@
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
   .icon-container__img {
-    width: 10%;
+    width: 9%;
   }
 
   .bottom-tab-navigator {
