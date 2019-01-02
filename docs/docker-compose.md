@@ -3,7 +3,6 @@
 Install docker and docker-compose, note that package managers might have very outdated versions.
 Please see each tool homepage for recommended installation.
 
-
 ## 1. Building
 
 ```bash

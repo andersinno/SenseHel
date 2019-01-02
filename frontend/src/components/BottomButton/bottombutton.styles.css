@@ -1,0 +1,61 @@
+.bottom-button {
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  height: 60px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  outline: none;
+  cursor: pointer;
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.bottom-button--default {
+  background-color: var(--darkBlue);
+}
+
+.bottom-button--default:hover {
+  background: var(--darkBlue-lighter)
+    radial-gradient(circle, transparent 1%, var(--darkBlue-lighter) 1%)
+    center/15000%;
+}
+
+.bottom-button--default:active {
+  background-color: var(--darkBlue);
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.bottom-button--negative {
+  background-color: var(--red);
+}
+
+.bottom-button--negative:hover {
+  background: var(--red-lighter)
+    radial-gradient(circle, transparent 1%, var(--red-lighter) 1%) center/15000%;
+}
+
+.bottom-button--negative:active {
+  background-color: var(--red);
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.bottom-button--disabled {
+  background-color: var(--lightGrey);
+}
+
+.bottom-button--disabled:hover {
+  background: var(--lightGrey);
+}
+
+.bottom-button--disabled:active {
+  background-color: var(--lightGrey);
+}
+
+.title--disabled {
+  color: var(--darkGrey) !important;
+}

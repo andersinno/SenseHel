@@ -1,100 +1,89 @@
 [
-{
+  {
     "model": "core.apartment",
     "pk": 1,
     "fields": {
-        "street": "Street",
-        "city": "City",
-        "postal_code": 1234,
-        "user_id": 1,
-        "sensors": [
-            1
-        ]
+      "street": "Street",
+      "city": "City",
+      "postal_code": 1234,
+      "user_id": 1,
+      "sensors": [
+          1
+      ]
     }
-},
-{
+  },
+  {
     "model": "core.sensor",
     "pk": 1,
     "fields": {
-        "description": "Elsys ERS-CO2",
-        "provides": [
-            1,
-            2,
-            4
-        ]
+      "description": "Elsys ERS-CO2",
+      "provides": [1, 2, 4]
     }
-},
-{
+  },
+  {
     "model": "core.sensor",
     "pk": 2,
     "fields": {
-        "description": "Mock, Temperature only",
-        "provides": [
-            1
-        ]
+      "description": "Mock, Temperature only",
+      "provides": [1]
     }
-},
-{
+  },
+  {
     "model": "core.sensorattribute",
     "pk": 1,
     "fields": {
-        "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
-        "description": "Temperature, Celcius"
+      "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
+      "description": "Temperature, Celcius"
     }
-},
-{
+  },
+  {
     "model": "core.sensorattribute",
     "pk": 2,
     "fields": {
-        "uri": "http://www.yso.fi/onto/yso/p6453",
-        "description": "Humidity, Percentage"
+      "uri": "http://www.yso.fi/onto/yso/p6453",
+      "description": "Humidity, Percentage"
     }
-},
-{
+  },
+  {
     "model": "core.sensorattribute",
     "pk": 3,
     "fields": {
-        "uri": "http://finto.fi/yso/en/page/p9266",
-        "description": "Presence"
+      "uri": "http://finto.fi/yso/en/page/p9266",
+      "description": "Presence"
     }
-},
-{
+  },
+  {
     "model": "core.sensorattribute",
     "pk": 4,
     "fields": {
-        "uri": "http://finto.fi/afo/en/page/p4770",
-        "description": "Co2, PPM"
+      "uri": "http://finto.fi/afo/en/page/p4770",
+      "description": "Co2, PPM"
     }
-},
-{
+  },
+  {
     "model": "core.service",
     "pk": 1,
     "fields": {
-        "name": "Mock 1 (temp, co2)",
-        "price": "Free",
-        "benefit_short": "Energy savings",
-        "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "description": "Requires temperature and co2",
-        "eula_url": "https://google.com",
-        "requires": [
-            1,
-            4
-        ]
+      "name": "Mock 1 (temp, co2)",
+      "price": "Free",
+      "benefit_short": "Energy savings",
+      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "description": "Requires temperature and co2",
+      "eula_url": "https://google.com",
+      "requires": [1, 4]
     }
-},
-{
+  },
+  {
     "model": "core.service",
     "pk": 2,
     "fields": {
-        "name": "Mock 2 (presence)",
-        "price": "Free",
-        "benefit_short": "Energy savings",
-        "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "description": "Requires presence",
-        "eula_url": "https://google.com",
-        "requires": [
-            3
-        ]
+      "name": "Mock 2 (presence)",
+      "price": "Free",
+      "benefit_short": "Energy savings",
+      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "description": "Requires presence",
+      "eula_url": "https://google.com",
+      "requires": [3]
     }
-}
+  }
 ]
