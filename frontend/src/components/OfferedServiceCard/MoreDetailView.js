@@ -6,6 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox/Checkbox';
 import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core';
 import Images from '../../assets/Images';
+import BottomButton from '../BottomButton';
 
 const styles = {
   root: {
@@ -114,30 +115,39 @@ class MoreDetailView extends Component {
           unmountOnExit
         >
           <div>
-            <div className="offered-service-card__row">
-              <img
-                className="service-image"
-                src={Images.Placeholder_Long}
-                alt="placeholder"
+            <div className="offered-service-card__detail-container">
+              <div className="offered-service-card__row">
+                <img
+                  className="service-image"
+                  src={Images.Placeholder_Long}
+                  alt="placeholder"
+                />
+              </div>
+
+              <DetailItem title="DETAIL" description={description} />
+
+              <DetailItem title="BENEFIT" description={benefit.long} />
+
+              <DetailItem title="PRICE" description={price} />
+
+              <DetailItem
+                title="REQUIRED SENSORS"
+                description={requiredSensors}
+              />
+
+              <CheckBoxes
+                termsChecked={termsChecked}
+                consentChecked={consentChecked}
+                handleChange={this.handleCheckChange}
+                classes={classes}
               />
             </div>
 
-            <DetailItem title="DETAIL" description={description} />
-
-            <DetailItem title="BENEFIT" description={benefit.long} />
-
-            <DetailItem title="PRICE" description={price} />
-
-            <DetailItem
-              title="REQUIRED SENSORS"
-              description={requiredSensors}
-            />
-
-            <CheckBoxes
-              termsChecked={termsChecked}
-              consentChecked={consentChecked}
-              handleChange={this.handleCheckChange}
-              classes={classes}
+            <BottomButton
+              buttonType="default"
+              title="subscribe"
+              onClick={this.handleSubscribe}
+              disabled={!termsChecked || !consentChecked}
             />
           </div>
         </Slide>

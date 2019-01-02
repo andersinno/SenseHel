@@ -9,7 +9,6 @@ td {
   margin-bottom: 20px;
   border-radius: 3px;
   box-shadow: 2px 4px 12px -1px var(--shadowGrey);
-  padding: 0 0 5px 15px;
 }
 
 .offered-service-card__text {
@@ -27,6 +26,7 @@ td {
   /*justify-content: center;*/
   align-items: flex-start;
   margin-top: 15px;
+  margin-left: 15px;
 }
 
 .offered-service-card__col2 {
@@ -91,4 +91,8 @@ td {
 
 .offered-service-card__row--checkboxes {
   margin: 10px 0;
+}
+
+.offered-service-card__detail-container {
+  padding: 0 0 5px 15px;
 }
