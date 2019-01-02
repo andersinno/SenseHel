@@ -1,0 +1,73 @@
+th,
+td {
+  padding: 0 10px 5px 0;
+  text-align: center;
+}
+
+.offered-service-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  box-shadow: 2px 4px 12px -1px var(--shadowGrey);
+  padding-top: 10px;
+}
+
+.offered-service-card__text {
+  color: var(--darkGrey) !important;
+  text-align: left !important;
+}
+
+.offered-service-card__row1 {
+  display: flex;
+}
+
+.offered-service-card__row2 {
+  display: flex;
+}
+
+.offered-service-card__col1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 500px) {
+  .offered-service-card__col1 {
+    flex: 2;
+  }
+}
+
+.offered-service-card__col2 {
+  flex: 5;
+  margin-left: 20px;
+}
+
+.offered-service-card1__col3 {
+  flex: 1;
+}
+
+.col1__img {
+  max-width: 88%;
+  max-height: 88%;
+  margin: 0 5px 15px 15px;
+}
+
+.col3__icon {
+  width: 18px;
+  margin: 0 10px;
+  position: absolute;
+  right: 0;
+}
+
+.row2__col2__table {
+  margin-bottom: 20px;
+}
+
+.benefit-col__body-text__icon {
+  width: 13px;
+  margin-right: 4px;
+}

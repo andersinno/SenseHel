@@ -6,6 +6,7 @@
 .tabs-page__page {
   height: 91%;
   width: 100%;
+  position: relative;
   overflow: auto;
 }
 
