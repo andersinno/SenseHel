@@ -33,6 +33,8 @@ class CollapsibleComponent extends Component {
       benefit,
       price,
       requiredSensors,
+      termsAndConditions,
+      privacyPolicy,
       classes
     } = this.props;
     const { termsChecked, consentChecked, requesting, subscribed } = this.state;
@@ -69,6 +71,8 @@ class CollapsibleComponent extends Component {
             handleChange={this.handleCheckChange}
             classes={classes}
             disabled={subscribed}
+            termsAndConditions={termsAndConditions}
+            privacyPolicy={privacyPolicy}
           />
         </div>
 

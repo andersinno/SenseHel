@@ -16,7 +16,9 @@ const offeredServices = [
       long:
         '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
     },
-    requiredSensors: 'Temperature / Something'
+    requiredSensors: 'Temperature / Something',
+    termsAndConditions: 'http://example.com',
+    privacyPolicy: 'http://example.com'
   },
   {
     image: Images.Placeholder,
@@ -29,7 +31,9 @@ const offeredServices = [
       long:
         '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
     },
-    requiredSensors: 'Temperature / Something'
+    requiredSensors: 'Temperature / Something',
+    termsAndConditions: 'http://example.com',
+    privacyPolicy: 'http://example.com'
   },
   {
     image: Images.Placeholder,
@@ -42,7 +46,9 @@ const offeredServices = [
       long:
         '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
     },
-    requiredSensors: 'Temperature / Something'
+    requiredSensors: 'Temperature / Something',
+    termsAndConditions: 'http://example.com',
+    privacyPolicy: 'http://example.com'
   },
   {
     image: Images.Placeholder,
@@ -55,7 +61,9 @@ const offeredServices = [
       long:
         '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
     },
-    requiredSensors: 'Temperature / Something'
+    requiredSensors: 'Temperature / Something',
+    termsAndConditions: 'http://example.com',
+    privacyPolicy: 'http://example.com'
   }
 ];
 
@@ -73,6 +81,8 @@ const SubscriptionsPage = () => (
           price={service.price}
           benefit={service.benefit}
           requiredSensors={service.requiredSensors}
+          termsAndConditions={service.termsAndConditions}
+          privacyPolicy={service.privacyPolicy}
         />
       ))}
     </div>
