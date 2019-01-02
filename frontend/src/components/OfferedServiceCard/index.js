@@ -3,13 +3,11 @@ import classnames from 'classnames';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
-import Collapse from '@material-ui/core/Collapse/Collapse';
-import Slide from '@material-ui/core/Slide/Slide';
 import Fade from '@material-ui/core/Fade/Fade';
 
 import './offeredservicecard.styles.css';
 import Icons from '../../assets/Icons';
-import Images from '../../assets/Images';
+import MoreDetailView from './MoreDetailView';
 
 const styles = theme => ({
   expand: {
@@ -108,61 +106,13 @@ class OfferedServiceCard extends Component {
           </div>
         </Fade>
 
-        <Collapse in={expanded} timeout="auto" mountOnEnter unmountOnExit>
-          <Slide
-            direction="up"
-            in={expanded}
-            timeout={500}
-            mountOnEnter
-            unmountOnExit
-          >
-            <div>
-              <div className="offered-service-card__row">
-                <img
-                  className="service-image"
-                  src={Images.Placeholder_Long}
-                  alt="placeholder"
-                />
-              </div>
-
-              <div className="offered-service-card__row offered-service-card__row--detail">
-                <p className="title offered-service-card__text row--detail__title">
-                  DETAIL
-                </p>
-                <p className="body-text offered-service-card__text row--detail__description">
-                  {description}
-                </p>
-              </div>
-
-              <div className="offered-service-card__row offered-service-card__row--detail">
-                <p className="title offered-service-card__text row--detail__title">
-                  BENEFIT
-                </p>
-                <p className="body-text offered-service-card__text row--detail__description">{`${
-                  benefit.long
-                }`}</p>
-              </div>
-
-              <div className="offered-service-card__row offered-service-card__row--detail">
-                <p className="title offered-service-card__text row--detail__title">
-                  PRICE
-                </p>
-                <p className="body-text offered-service-card__text row--detail__description">
-                  {price}
-                </p>
-              </div>
-
-              <div className="offered-service-card__row offered-service-card__row--detail">
-                <p className="title offered-service-card__text row--detail__title">
-                  REQUIRED SENSORS
-                </p>
-                <p className="body-text offered-service-card__text row--detail__description">
-                  {requiredSensors}
-                </p>
-              </div>
-            </div>
-          </Slide>
-        </Collapse>
+        <MoreDetailView
+          expanded={expanded}
+          description={description}
+          benefit={benefit}
+          price={price}
+          requiredSensors={requiredSensors}
+        />
       </div>
     );
   }

@@ -88,3 +88,7 @@ td {
     flex: 2;
   }
 }
+
+.offered-service-card__row--checkboxes {
+  margin: 10px 0;
+}

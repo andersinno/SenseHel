@@ -66,6 +66,7 @@ const SubscriptionsPage = () => (
     <div className="subscriptions-page__content tab-page__content">
       {offeredServices.map(service => (
         <OfferedServiceCard
+          key={service.name}
           image={service.image}
           name={service.name}
           description={service.description}
