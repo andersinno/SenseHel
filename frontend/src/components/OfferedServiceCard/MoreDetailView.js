@@ -3,7 +3,7 @@ import Collapse from '@material-ui/core/Collapse/Collapse';
 import Slide from '@material-ui/core/Slide/Slide';
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import { green } from '@material-ui/core/colors';
+import { green, grey } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core';
 import Images from '../../assets/Images';
 import BottomButton from '../BottomButton';
@@ -16,6 +16,11 @@ const styles = {
   },
   checked: {
     color: green[500]
+  },
+  disabled: {
+    '&$checked': {
+      color: grey[500]
+    }
   }
 };
 
@@ -23,6 +28,7 @@ const CheckBoxes = ({
   termsChecked,
   consentChecked,
   handleChange,
+  disabled,
   classes
 }) => (
   <div className="offered-service-card__row--checkboxes">
@@ -33,8 +39,10 @@ const CheckBoxes = ({
           onChange={() => handleChange('termsChecked')}
           classes={{
             root: classes.root,
-            checked: classes.checked
+            checked: classes.checked,
+            disabled: classes.disabled
           }}
+          disabled={disabled}
         />
       }
       label={
@@ -57,8 +65,10 @@ const CheckBoxes = ({
           onChange={() => handleChange('consentChecked')}
           classes={{
             root: classes.root,
-            checked: classes.checked
+            checked: classes.checked,
+            disabled: classes.disabled
           }}
+          disabled={disabled}
         />
       }
       label={
@@ -87,11 +97,24 @@ const DetailItem = ({ title, description }) => (
 class MoreDetailView extends Component {
   state = {
     termsChecked: false,
-    consentChecked: false
+    consentChecked: false,
+    requesting: false,
+    subscribed: false
   };
 
   handleCheckChange = value => {
     this.setState({ [value]: !this.state[value] }); // eslint-disable-line
+  };
+
+  handleSubscribe = () => {
+    const { subscribed } = this.state;
+    // make some API call
+    this.setState({ requesting: true });
+
+    setTimeout(
+      () => this.setState({ requesting: false, subscribed: !subscribed }),
+      2000
+    );
   };
 
   render() {
@@ -103,7 +126,13 @@ class MoreDetailView extends Component {
       requiredSensors,
       classes
     } = this.props;
-    const { termsChecked, consentChecked } = this.state;
+    const { termsChecked, consentChecked, requesting, subscribed } = this.state;
+    let buttonTitle = 'subscribe';
+    if (requesting) {
+      buttonTitle = 'requesting...';
+    } else if (subscribed) {
+      buttonTitle = 'unsubscribe';
+    }
 
     return (
       <Collapse in={expanded} timeout="auto" mountOnEnter unmountOnExit>
@@ -140,14 +169,16 @@ class MoreDetailView extends Component {
                 consentChecked={consentChecked}
                 handleChange={this.handleCheckChange}
                 classes={classes}
+                disabled={subscribed}
               />
             </div>
 
             <BottomButton
-              buttonType="default"
-              title="subscribe"
+              buttonType={subscribed ? 'negative' : 'default'}
+              title={buttonTitle}
               onClick={this.handleSubscribe}
-              disabled={!termsChecked || !consentChecked}
+              disabled={!subscribed && (!termsChecked || !consentChecked)}
+              loading={requesting}
             />
           </div>
         </Slide>

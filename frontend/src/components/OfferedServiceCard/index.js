@@ -11,7 +11,7 @@ import MoreDetailView from './MoreDetailView';
 
 const styles = theme => ({
   expand: {
-    position: 'relative',
+    position: 'absolute',
     right: 0,
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
@@ -103,6 +103,8 @@ class OfferedServiceCard extends Component {
                 </tbody>
               </table>
             </div>
+
+            <div className="offered-service-card__col3" />
           </div>
         </Fade>
 

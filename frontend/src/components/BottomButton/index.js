@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './bottombutton.styles.css';
 
-const BottomButton = ({ title, buttonType, disabled }) => (
+const BottomButton = ({ title, buttonType, disabled, loading, onClick }) => (
   <button
     type="submit"
     className={classNames('bottom-button', {
@@ -10,7 +10,8 @@ const BottomButton = ({ title, buttonType, disabled }) => (
       'bottom-button--negative': buttonType === 'negative',
       'bottom-button--disabled': disabled
     })}
-    disabled={disabled}
+    disabled={disabled || loading}
+    onClick={onClick}
   >
     <p
       className={classNames('title', {
