@@ -12,7 +12,9 @@ const OfferedServiceCard = ({
   description,
   price,
   benefit,
-  requiredSensors
+  requiredSensors,
+  termsAndConditions,
+  privacyPolicy
 }) => (
   <div>
     <Card
@@ -49,6 +51,8 @@ const OfferedServiceCard = ({
           benefit={benefit}
           price={price}
           requiredSensors={requiredSensors}
+          termsAndConditions={termsAndConditions}
+          privacyPolicy={privacyPolicy}
         />
       }
     />

@@ -25,6 +25,8 @@ const CheckboxesSection = ({
   consentChecked,
   handleChange,
   disabled,
+  termsAndConditions,
+  privacyPolicy,
   classes
 }) => (
   <div className="offered-service-card__row--checkboxes">
@@ -44,11 +46,21 @@ const CheckboxesSection = ({
       label={
         <div>
           <span className="body-text">Please read our </span>
-          <a href="/" className="body-text">
+          <a
+            href={termsAndConditions}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="body-text"
+          >
             <b>terms and conditions</b>
           </a>
           <span className="body-text"> and view our </span>
-          <a href="/" className="body-text">
+          <a
+            href={privacyPolicy}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="body-text"
+          >
             <b>privacy policy here *</b>
           </a>
         </div>
