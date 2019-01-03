@@ -1,11 +1,152 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './about.styles.css';
 import AppHeader from '../../components/AppHeader';
+import Images from '../../assets/Images';
+import BottomButton from '../../components/BottomButton';
+import ConfirmDialog from '../../components/ConfirmDialog';
+import CustomizedSnackbar from '../../components/Snackbar';
 
-const AboutPage = () => (
-  <div className="about-page">
-    <AppHeader headline="ABOUT" />
-  </div>
-);
+class AboutPage extends Component {
+  state = {
+    confirmOpen: false,
+    revoking: false,
+    errorMessage: '',
+    successMessage: '',
+    revoked: false
+  };
+
+  onRevokeApartment = () => {
+    this.setState({ confirmOpen: true });
+  };
+
+  onCloseConfirm = () => {
+    this.setState({ confirmOpen: false });
+  };
+
+  onCloseSnackbar = () => {
+    this.setState({ errorMessage: '', successMessage: '' });
+  };
+
+  handleRevokeApartment = () => {
+    this.setState({ revoking: true, confirmOpen: false });
+
+    // make API call
+    setTimeout(() => {
+      this.setState({ revoking: false, revoked: true });
+      this.handleRevokeSuccess();
+    }, 3000);
+  };
+
+  handleRevokeSuccess = () => {
+    this.setState({
+      successMessage: {
+        title: 'Successfully revoked apartment',
+        subtitle:
+          'You can no longer see information about your apartment anymore'
+      },
+      errorMessage: ''
+    });
+  };
+
+  handleRevokeFail = e => {
+    this.setState({
+      errorMessage: {
+        title: 'Revoke Apartment unsuccessful',
+        subtitle: `${e.message}`
+      }
+    });
+  };
+
+  render() {
+    const {
+      confirmOpen,
+      revoking,
+      revoked,
+      errorMessage,
+      successMessage
+    } = this.state;
+
+    return (
+      <div className="about-page">
+        <AppHeader headline="ABOUT" />
+
+        <div className="about-page__content tab-page__content">
+          <div className="section-container">
+            <p className="subheader dark-text">Lorem ipsum</p>
+            <p className="body-text dark-text about-page__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              volutpat enim quis ante lobortis tristique. Pellentesque egestas,
+              arcu vitae hendrerit sagittis, nulla enim varius libero, et
+              viverra lacus magna eu nisi. Nunc ac ullamcorper dui, quis blandit
+              arcu. Praesent aliquam ullamcorper fringilla. Aenean rhoncus purus
+              quis varius fringilla. Pellentesque habitant morbi tristique
+              senectus et netus et malesuada fames ac turpis egestas. Vivamus
+              dui nulla, dapibus vestibulum porttitor et, lacinia eu augue.
+              Integer elit sem, pulvinar id lorem venenatis, euismod tincidunt
+              massa. Aliquam nec sapien a elit posuere placerat. Quisque ac
+              congue augue, et tristique metus.
+            </p>
+            <img
+              src={Images.Banner}
+              alt="logo"
+              className="about-page__img--banner"
+            />
+          </div>
+
+          <div className="section-container">
+            <p className="subheader dark-text">Building Owner</p>
+            <p className="body-text dark-text about-page__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              volutpat enim quis ante lobortis tristique.
+            </p>
+            <p className="body-text dark-text">Call - +358 46 9999999</p>
+            <p className="body-text dark-text">
+              Email -{' '}
+              <a href="mailto:service@forumvirium.fi">service@forumvirium.fi</a>
+            </p>
+          </div>
+
+          <div className="section-container no-border">
+            <p className="subheader dark-text">Revoke Apartment</p>
+            <p className="body-text dark-text about-page__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              volutpat enim quis ante lobortis tristique. Pellentesque egestas.
+            </p>
+          </div>
+
+          <BottomButton
+            title={revoking ? 'revoking' : 'revoke apartment'}
+            onClick={this.onRevokeApartment}
+            variant="negative"
+            loading={revoking}
+            disabled={revoked}
+          />
+        </div>
+
+        <ConfirmDialog
+          title="Are you sure you want to delete your aparment?"
+          description="This will lorem ipsum dolor amet euphi nibh turs"
+          handleConfirm={this.handleRevokeApartment}
+          open={confirmOpen}
+          handleClose={this.onCloseConfirm}
+        />
+
+        <CustomizedSnackbar
+          message={errorMessage}
+          variant="error"
+          handleClose={this.onCloseSnackbar}
+          open={!!errorMessage}
+        />
+
+        <CustomizedSnackbar
+          message={successMessage}
+          variant="success"
+          handleClose={this.onCloseSnackbar}
+          open={!!successMessage}
+        />
+      </div>
+    );
+  }
+}
 
 export default AboutPage;

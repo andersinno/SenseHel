@@ -115,7 +115,7 @@ class CollapsibleComponent extends Component {
         </div>
 
         <BottomButton
-          buttonType={subscribed ? 'negative' : 'default'}
+          variant={subscribed ? 'negative' : 'default'}
           title={buttonTitle}
           onClick={!subscribed ? this.handleSubscribe : this.onUnsubscribe}
           disabled={!subscribed && (!termsChecked || !consentChecked)}
