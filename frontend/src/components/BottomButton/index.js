@@ -8,6 +8,7 @@ const BottomButton = ({ title, buttonType, disabled, loading, onClick }) => (
     className={classNames('bottom-button', {
       'bottom-button--default': buttonType === 'default',
       'bottom-button--negative': buttonType === 'negative',
+      'bottom-button--loading': loading,
       'bottom-button--disabled': disabled
     })}
     disabled={disabled || loading}
