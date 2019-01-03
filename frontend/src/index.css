@@ -17,5 +17,5 @@ code {
 /* Make contents of tabs overlap with AppHeader */
 .tab-page__content {
   position: absolute;
-  top: 20%; /* Since AppHeader height is 25%  */
+  top: 22%; /* Since AppHeader height is 25%  */
 }

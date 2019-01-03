@@ -1,35 +1,42 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
+import '../Card/card.styles.css';
 import './subscribedservicecard.styles.css';
+import BottomButton from '../BottomButton';
 
 const SubscribedServiceCard = ({
+  logo,
   title,
-  icon,
-  value,
-  unit,
-  lastUpdated,
-  refreshing
+  description,
+  serviceImage,
+  url
 }) => (
-  <div className="service-card">
-    <div className="service-card__header">
-      <span className="body-text">{title}</span>
-      <img className="service-card__header__icon" src={icon} alt={title} />
-    </div>
-
-    {!refreshing ? (
-      <div>
-        <span className="large-number">
-          {value}
-          <span className="number">{unit}</span>
-        </span>
+  <div className="card">
+    <div className="card__row">
+      <div className="card__col1">
+        <img src={logo} className="service-logo" alt="service" />
       </div>
-    ) : (
-      <CircularProgress className="service-card__spinner" />
-    )}
 
-    <div className="small-body">
-      {!refreshing ? `Updated ${lastUpdated}` : 'Refreshing'}
+      <div className="card__col2">
+        <p className="headline card__text">{title}</p>
+      </div>
+
+      <div className="card__col3" />
     </div>
+
+    <div className="card__row">
+      <img className="service-image" src={serviceImage} alt="placeholder" />
+    </div>
+
+    <div className="card__row">
+      <p className="body-text dark-text sub-service__text">{description}</p>
+    </div>
+
+    <BottomButton
+      onClick={() => {
+        window.open(url);
+      }}
+      title="Go to service"
+    />
   </div>
 );
 

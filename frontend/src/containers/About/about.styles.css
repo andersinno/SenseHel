@@ -10,6 +10,9 @@
   border-radius: 3px;
   box-shadow: 0 2px 5px 0px var(--lightGrey);
   margin-bottom: 50px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about-page__content .section-container {

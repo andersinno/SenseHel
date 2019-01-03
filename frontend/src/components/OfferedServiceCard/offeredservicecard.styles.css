@@ -15,16 +15,16 @@
 
 .card__row .service-image {
   max-width: 95%;
-  max-height: 100px;
+  max-height: 120px;
   margin: 15px 15px 15px 0;
 }
 
 .offered-service-card__row--checkboxes {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 15px;
 }
 
 .offered-service-card__detail-container {
-  padding: 0 0 5px 15px;
+  padding: 0 0 5px 0;
 }
