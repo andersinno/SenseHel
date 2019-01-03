@@ -1,8 +1,8 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
-import './subscribedservicecard.styles.css';
+import './sensorvaluecard.styles.css';
 
-const SubscribedServiceCard = ({
+const SensorValueCard = ({
   title,
   icon,
   value,
@@ -33,4 +33,4 @@ const SubscribedServiceCard = ({
   </div>
 );
 
-export default SubscribedServiceCard;
+export default SensorValueCard;

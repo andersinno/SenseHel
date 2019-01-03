@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
-import SubscribedServiceCard from '../../components/SubscribedServiceCard';
+import SensorValueCard from '../../components/SensorValueCard';
 import Icons from '../../assets/Icons';
 
 const mockSubscriptions = [
@@ -46,7 +46,7 @@ class HomePage extends Component {
 
         <div className="home-page__cards-container tab-page__content">
           {mockSubscriptions.map(s => (
-            <SubscribedServiceCard
+            <SensorValueCard
               key={s.title}
               title={s.title}
               icon={s.icon}
