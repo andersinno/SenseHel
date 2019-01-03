@@ -46,6 +46,7 @@
 
 .bottom-button--disabled {
   background-color: var(--lightGrey);
+  cursor: default;
 }
 
 .bottom-button--disabled:hover {
