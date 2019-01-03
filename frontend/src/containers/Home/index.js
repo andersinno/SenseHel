@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
 import SubscribedServiceCard from '../../components/SubscribedServiceCard';
@@ -7,7 +7,7 @@ import Icons from '../../assets/Icons';
 const mockSubscriptions = [
   {
     title: 'Temperature',
-    icon: Icons.Temperature,
+    icon: Icons.Temperature_Normal,
     value: 23,
     unit: '℃',
     lastUpdated: '20 seconds ago'
@@ -27,27 +27,39 @@ const mockSubscriptions = [
     lastUpdated: '40 min ago'
   }
 ];
-const HomePage = () => (
-  <div className="home-page">
-    <AppHeader
-      headline="PAULI TOIVONEN"
-      title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
-      hasBgImage
-    />
 
-    <div className="home-page__cards-container tab-page__content">
-      {mockSubscriptions.map(s => (
-        <SubscribedServiceCard
-          key={s.title}
-          title={s.title}
-          icon={s.icon}
-          value={s.value}
-          unit={s.unit}
-          lastUpdated={s.lastUpdated}
+class HomePage extends Component {
+  state = {
+    refreshing: false
+  };
+
+  render() {
+    const { refreshing } = this.state;
+
+    return (
+      <div className="home-page">
+        <AppHeader
+          headline="PAULI TOIVONEN"
+          title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
+          hasBgImage
         />
-      ))}
-    </div>
-  </div>
-);
+
+        <div className="home-page__cards-container tab-page__content">
+          {mockSubscriptions.map(s => (
+            <SubscribedServiceCard
+              key={s.title}
+              title={s.title}
+              icon={s.icon}
+              value={s.value}
+              unit={s.unit}
+              lastUpdated={s.lastUpdated}
+              refreshing={refreshing}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default HomePage;
