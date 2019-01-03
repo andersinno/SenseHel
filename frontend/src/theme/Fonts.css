@@ -82,3 +82,7 @@
 .no-margin {
   margin: 0;
 }
+
+.dark-text {
+  color: var(--darkGrey) !important;
+}
