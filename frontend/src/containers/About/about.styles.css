@@ -9,6 +9,7 @@
   right: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px 0px var(--lightGrey);
+  margin-bottom: 50px;
 }
 
 .about-page__content .section-container {
