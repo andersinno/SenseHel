@@ -8,13 +8,15 @@ import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 import Spinner from '../../components/Spinner';
 import API from '../../services/Api';
+import CustomizedSnackbar from '../../components/Snackbar';
 
 class LoginPage extends Component {
   state = {
     userNumber: '',
     pinCode: '',
     login: false,
-    loading: false
+    loading: false,
+    errorMessage: ''
   };
 
   onChangeInput = e => {
@@ -32,13 +34,28 @@ class LoginPage extends Component {
       this.setState({ login: true, loading: false });
     } catch (error) {
       this.setState({ loading: false });
-      window.alert(_.get(error, 'response.data.error', error));
+      this.handleLoginFail(error);
     }
+  };
+
+  handleLoginFail = error => {
+    const errorMessage = _.get(error, 'response.data.error', error);
+
+    this.setState({
+      errorMessage: {
+        title: 'Login Failed',
+        subtitle: `${errorMessage}`
+      }
+    });
+  };
+
+  handleSnackbarClose = () => {
+    this.setState({ errorMessage: '' });
   };
 
   render() {
     const loggedIn = localStorage.getItem('@AUTH_TOKEN');
-    const { userNumber, pinCode, login, loading } = this.state;
+    const { userNumber, pinCode, login, loading, errorMessage } = this.state;
 
     if (login || loggedIn) return <Redirect to="/" />;
 
@@ -70,6 +87,13 @@ class LoginPage extends Component {
             <LoginButton onClick={this.onLogin} disabled={loading} />
           </div>
         </div>
+
+        <CustomizedSnackbar
+          message={errorMessage}
+          variant="error"
+          handleClose={this.handleSnackbarClose}
+          open={errorMessage}
+        />
       </div>
     );
   }
