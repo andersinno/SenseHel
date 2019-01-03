@@ -14,7 +14,9 @@ const OfferedServiceCard = ({
   benefit,
   requiredSensors,
   termsAndConditions,
-  privacyPolicy
+  privacyPolicy,
+  onRequestFail,
+  onRequestSuccess
 }) => (
   <div>
     <Card
@@ -53,6 +55,8 @@ const OfferedServiceCard = ({
           requiredSensors={requiredSensors}
           termsAndConditions={termsAndConditions}
           privacyPolicy={privacyPolicy}
+          onRequestFail={onRequestFail}
+          onRequestSuccess={onRequestSuccess}
         />
       }
     />

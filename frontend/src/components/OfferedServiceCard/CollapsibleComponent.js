@@ -17,14 +17,42 @@ class CollapsibleComponent extends Component {
   };
 
   handleSubscribe = () => {
-    const { subscribed } = this.state;
+    const { onRequestSuccess } = this.props;
+
     // make some API call
     this.setState({ requesting: true });
 
-    setTimeout(
-      () => this.setState({ requesting: false, subscribed: !subscribed }),
-      2000
-    );
+    setTimeout(() => {
+      onRequestSuccess({
+        title: 'Successfully Subscribed',
+        subtitle: 'You can view your subscriptions in home page'
+      });
+      this.setState({ requesting: false, subscribed: true });
+    }, 2000);
+
+    // setTimeout(
+    //   () => {
+    //     onRequestFail('Subscribe failed!');
+    //     this.setState({ requesting: false, subscribed: false })
+    //   },2000
+    // );
+  };
+
+  handleUnsubscribe = () => {
+    const { onRequestFail, onRequestSuccess } = this.props;
+
+    // make some API call
+    this.setState({ requesting: true });
+
+    setTimeout(() => {
+      onRequestSuccess('Successfully unsubscribed');
+      this.setState({ requesting: false, subscribed: true });
+    }, 2000);
+
+    setTimeout(() => {
+      onRequestFail('Unsubscribe failed!');
+      this.setState({ requesting: false, subscribed: false });
+    }, 2000);
   };
 
   render() {

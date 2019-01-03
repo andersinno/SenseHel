@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './subscriptions.styles.css';
 import AppHeader from '../../components/AppHeader';
 import OfferedServiceCard from '../../components/OfferedServiceCard';
 import Images from '../../assets/Images';
+import CustomizedSnackbar from '../../components/Snackbar';
 
 const offeredServices = [
   {
@@ -67,26 +68,70 @@ const offeredServices = [
   }
 ];
 
-const SubscriptionsPage = () => (
-  <div className="subscriptions-page">
-    <AppHeader headline="SUBSCRIPTION LIST" title="OFFERED SERVICES" />
+class SubscriptionsPage extends Component {
+  state = {
+    successMessage: '',
+    errorMessage: ''
+  };
 
-    <div className="subscriptions-page__content tab-page__content">
-      {offeredServices.map(service => (
-        <OfferedServiceCard
-          key={service.name}
-          image={service.image}
-          name={service.name}
-          description={service.description}
-          price={service.price}
-          benefit={service.benefit}
-          requiredSensors={service.requiredSensors}
-          termsAndConditions={service.termsAndConditions}
-          privacyPolicy={service.privacyPolicy}
+  handleSnackbarClose = () => {
+    this.setState({ errorMessage: '', successMessage: '' });
+  };
+
+  handleSubscribeFail = message => {
+    this.setState({
+      errorMessage: message,
+      successMessage: ''
+    });
+  };
+
+  handleSubscribeSuccess = message => {
+    this.setState({
+      errorMessage: '',
+      successMessage: message
+    });
+  };
+
+  render() {
+    const { errorMessage, successMessage } = this.state;
+
+    return (
+      <div className="subscriptions-page">
+        <AppHeader headline="SUBSCRIPTION LIST" title="OFFERED SERVICES" />
+
+        <div className="subscriptions-page__content tab-page__content">
+          {offeredServices.map(service => (
+            <OfferedServiceCard
+              key={service.name}
+              image={service.image}
+              name={service.name}
+              description={service.description}
+              price={service.price}
+              benefit={service.benefit}
+              requiredSensors={service.requiredSensors}
+              termsAndConditions={service.termsAndConditions}
+              privacyPolicy={service.privacyPolicy}
+              onRequestFail={m => this.handleSubscribeFail(m)}
+              onRequestSuccess={m => this.handleSubscribeSuccess(m)}
+            />
+          ))}
+        </div>
+
+        <CustomizedSnackbar
+          message={errorMessage}
+          variant="error"
+          handleClose={this.handleSnackbarClose}
+          open={errorMessage}
         />
-      ))}
-    </div>
-  </div>
-);
 
+        <CustomizedSnackbar
+          message={successMessage}
+          variant="success"
+          handleClose={this.handleSnackbarClose}
+          open={successMessage}
+        />
+      </div>
+    );
+  }
+}
 export default SubscriptionsPage;
