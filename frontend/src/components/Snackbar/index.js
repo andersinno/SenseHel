@@ -82,13 +82,13 @@ function MySnackbarContent(props) {
 }
 
 MySnackbarContent.propTypes = {
-  message: PropTypes.oneOfType(
+  message: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       subtitle: PropTypes.string
     })
-  ).isRequired,
+  ]).isRequired,
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(['success', 'error']).isRequired
 };
@@ -117,7 +117,13 @@ CustomizedSnackbar.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(['success', 'error']).isRequired,
-  message: PropTypes.node.isRequired
+  message: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      subtitle: PropTypes.string
+    })
+  ]).isRequired
 };
 
 export default CustomizedSnackbar;

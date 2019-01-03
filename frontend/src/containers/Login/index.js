@@ -92,7 +92,7 @@ class LoginPage extends Component {
           message={errorMessage}
           variant="error"
           handleClose={this.handleSnackbarClose}
-          open={errorMessage}
+          open={!!errorMessage}
         />
       </div>
     );

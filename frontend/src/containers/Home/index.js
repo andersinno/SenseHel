@@ -38,6 +38,7 @@ const HomePage = () => (
     <div className="home-page__cards-container tab-page__content">
       {mockSubscriptions.map(s => (
         <SubscribedServiceCard
+          key={s.title}
           title={s.title}
           icon={s.icon}
           value={s.value}

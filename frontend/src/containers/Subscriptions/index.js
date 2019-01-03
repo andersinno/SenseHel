@@ -8,7 +8,7 @@ import CustomizedSnackbar from '../../components/Snackbar';
 const offeredServices = [
   {
     image: Images.Placeholder,
-    name: 'Service name',
+    name: 'Service name 1',
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
@@ -23,7 +23,7 @@ const offeredServices = [
   },
   {
     image: Images.Placeholder,
-    name: 'Service name',
+    name: 'Service name 2',
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
@@ -38,7 +38,7 @@ const offeredServices = [
   },
   {
     image: Images.Placeholder,
-    name: 'Service name',
+    name: 'Service name 3',
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
@@ -53,7 +53,7 @@ const offeredServices = [
   },
   {
     image: Images.Placeholder,
-    name: 'Service name',
+    name: 'Service name 4',
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
     price: 'Free',
@@ -121,14 +121,14 @@ class SubscriptionsPage extends Component {
           message={errorMessage}
           variant="error"
           handleClose={this.handleSnackbarClose}
-          open={errorMessage}
+          open={!!errorMessage}
         />
 
         <CustomizedSnackbar
           message={successMessage}
           variant="success"
           handleClose={this.handleSnackbarClose}
-          open={successMessage}
+          open={!!successMessage}
         />
       </div>
     );
