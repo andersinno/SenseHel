@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.service-card__spinner {
+  margin: 10px 5px;
+}
+
 .service-card__header__icon {
   width: 25px;
   height: auto;

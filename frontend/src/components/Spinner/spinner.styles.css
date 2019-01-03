@@ -1,10 +1,4 @@
 .lds-ring {
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: auto;
-  position: fixed;
-  top: 40%;
 }
 
 .lds-ring div {

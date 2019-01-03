@@ -27,7 +27,5 @@ export default {
   Subscription_Icon: require('./Subscription.png'),
   Subscription_Icon_Active: require('./Subscription_Light grey.png'),
 
-  Arrow_Up: require('./Grey-arrow-up.png'),
-  Arrow_Down: require('./Grey-arrow-down.png'),
   Green_Arrow: require('./Green-arrow.png')
 };
