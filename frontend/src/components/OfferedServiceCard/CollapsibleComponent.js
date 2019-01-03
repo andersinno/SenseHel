@@ -3,13 +3,15 @@ import Images from '../../assets/Images';
 import BottomButton from '../BottomButton';
 import CheckboxesSection from './CheckboxesSection';
 import DetailItem from '../Card/DetailItem';
+import ConfirmDialog from '../ConfirmDialog';
 
 class CollapsibleComponent extends Component {
   state = {
     termsChecked: false,
     consentChecked: false,
     requesting: false,
-    subscribed: false
+    subscribed: false,
+    confirmOpen: false
   };
 
   handleCheckChange = value => {
@@ -38,21 +40,23 @@ class CollapsibleComponent extends Component {
     // );
   };
 
+  onUnsubscribe = () => this.setState({ confirmOpen: true });
+
   handleUnsubscribe = () => {
-    const { onRequestFail, onRequestSuccess } = this.props;
+    const { onRequestSuccess } = this.props;
 
     // make some API call
-    this.setState({ requesting: true });
+    this.setState({ requesting: true, confirmOpen: false });
 
     setTimeout(() => {
       onRequestSuccess('Successfully unsubscribed');
-      this.setState({ requesting: false, subscribed: true });
-    }, 2000);
-
-    setTimeout(() => {
-      onRequestFail('Unsubscribe failed!');
       this.setState({ requesting: false, subscribed: false });
     }, 2000);
+
+    // setTimeout(() => {
+    //   onRequestFail('Unsubscribe failed!');
+    //   this.setState({ requesting: false, subscribed: false });
+    // }, 2000);
   };
 
   render() {
@@ -65,7 +69,13 @@ class CollapsibleComponent extends Component {
       privacyPolicy,
       classes
     } = this.props;
-    const { termsChecked, consentChecked, requesting, subscribed } = this.state;
+    const {
+      termsChecked,
+      consentChecked,
+      requesting,
+      subscribed,
+      confirmOpen
+    } = this.state;
 
     let buttonTitle = 'subscribe';
     if (requesting) {
@@ -107,9 +117,17 @@ class CollapsibleComponent extends Component {
         <BottomButton
           buttonType={subscribed ? 'negative' : 'default'}
           title={buttonTitle}
-          onClick={this.handleSubscribe}
+          onClick={!subscribed ? this.handleSubscribe : this.onUnsubscribe}
           disabled={!subscribed && (!termsChecked || !consentChecked)}
           loading={requesting}
+        />
+
+        <ConfirmDialog
+          title="Confirm Unsubscribe"
+          description="Unsubcribing will revoke all consents given and you will no longer have access to the benefits of this service"
+          handleConfirm={this.handleUnsubscribe}
+          open={confirmOpen}
+          handleClose={() => this.setState({ confirmOpen: false })}
         />
       </div>
     );

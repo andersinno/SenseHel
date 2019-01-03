@@ -56,6 +56,18 @@
   background-color: var(--lightGrey);
 }
 
+.bottom-button--loading {
+  background-color: var(--orange);
+}
+
+.bottom-button--loading:hover {
+  background: var(--orange);
+}
+
+.bottom-button--loading:active {
+  background-color: var(--orange);
+}
+
 .title--disabled {
   color: var(--darkGrey) !important;
 }
