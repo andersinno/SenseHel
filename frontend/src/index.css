@@ -20,7 +20,7 @@ code {
   top: 22%; /* Since AppHeader height is 25%  */
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 375px) {
   .tab-page__content {
     position: absolute;
     top: 23%; /* Since AppHeader height is 25%  */

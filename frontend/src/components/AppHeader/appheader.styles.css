@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 375px) {
   .app-header__content {
     width: 60%;
   }
