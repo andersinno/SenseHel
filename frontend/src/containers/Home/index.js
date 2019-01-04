@@ -62,6 +62,11 @@ class HomePage extends Component {
     refreshing: false
   };
 
+  handleChangeTab = () => {
+    const { changeTab } = this.props;
+    setTimeout(() => changeTab(1), 800);
+  };
+
   render() {
     const { refreshing } = this.state;
 
@@ -105,7 +110,7 @@ class HomePage extends Component {
                 />
               ))
             ) : (
-              <NoSubscriptionsCard />
+              <NoSubscriptionsCard onClick={this.handleChangeTab} />
             )}
           </div>
         </div>

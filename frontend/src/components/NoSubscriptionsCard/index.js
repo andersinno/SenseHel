@@ -3,7 +3,7 @@ import '../Card/card.styles.css';
 import './nosubscard.styles.css';
 import BottomButton from '../BottomButton';
 
-const NoSubscriptionsCard = () => (
+const NoSubscriptionsCard = ({ onClick }) => (
   <div className="card">
     <div className="no-subs-card__block">
       <p className="large-body dark-text centered">
@@ -12,7 +12,7 @@ const NoSubscriptionsCard = () => (
         {`Let's check what subscriptions can benefit you.`}
       </p>
     </div>
-    <BottomButton onClick={() => {}} title="Go to see subscriptions" />
+    <BottomButton onClick={onClick} title="Go to see subscriptions" />
   </div>
 );
 
