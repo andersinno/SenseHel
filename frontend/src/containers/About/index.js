@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import './about.styles.css';
 import AppHeader from '../../components/AppHeader';
 import Images from '../../assets/Images';
@@ -12,7 +13,13 @@ class AboutPage extends Component {
     revoking: false,
     errorMessage: '',
     successMessage: '',
-    revoked: false
+    revoked: false,
+    loggedOut: false
+  };
+
+  onLogout = () => {
+    localStorage.removeItem('@AUTH_TOKEN');
+    this.setState({ loggedOut: true });
   };
 
   onRevokeApartment = () => {
@@ -62,9 +69,12 @@ class AboutPage extends Component {
       confirmOpen,
       revoking,
       revoked,
+      loggedOut,
       errorMessage,
       successMessage
     } = this.state;
+
+    if (loggedOut) return <Redirect to="/login" />;
 
     return (
       <div className="about-page">
@@ -105,6 +115,15 @@ class AboutPage extends Component {
               <a href="mailto:service@forumvirium.fi">service@forumvirium.fi</a>
             </p>
           </div>
+
+          <div className="section-container no-border">
+            <p className="subheader dark-text">Log out</p>
+            <p className="body-text dark-text about-page__text">
+              Log out of this app
+            </p>
+          </div>
+
+          <BottomButton title="Log out" onClick={this.onLogout} />
 
           <div className="section-container no-border">
             <p className="subheader dark-text">Revoke Apartment</p>

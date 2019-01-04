@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://172.19.0.3:8000/api/';
+const URL = 'http://127.0.0.1:8000/api/';
 
 class Api {
   constructor(baseUrl) {

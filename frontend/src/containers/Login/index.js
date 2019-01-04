@@ -6,7 +6,6 @@ import './login.styles.css';
 import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
-import Spinner from '../../components/Spinner';
 import API from '../../services/Api';
 import CustomizedSnackbar from '../../components/Snackbar';
 
@@ -62,8 +61,6 @@ class LoginPage extends Component {
     return (
       <div className="login-page">
         <div className="login-page__content">
-          {loading && <Spinner />}
-
           <img className="content__img-logo" src={Images.Logo} alt="logo" />
 
           <div className="content__input-container">
@@ -84,7 +81,11 @@ class LoginPage extends Component {
           </div>
 
           <div className="content__button-container">
-            <LoginButton onClick={this.onLogin} disabled={loading} />
+            <LoginButton
+              onClick={this.onLogin}
+              disabled={loading}
+              loading={loading}
+            />
           </div>
         </div>
 
