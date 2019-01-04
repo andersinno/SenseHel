@@ -3,8 +3,10 @@ import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
 import SensorValueCard from '../../components/SensorValueCard';
 import Icons from '../../assets/Icons';
+import Images from '../../assets/Images';
 import SubscribedServiceCard from '../../components/SubscribedServiceCard';
 import NoSubscriptionsCard from '../../components/NoSubscriptionsCard';
+import PullToRefresh from '../../components/PullToRefresh';
 
 const mockSensorValues = [
   {
@@ -31,30 +33,30 @@ const mockSensorValues = [
 ];
 
 const mockSubscriptions = [
-  // {
-  //   name: 'Service name 1',
-  //   logo: Images.Placeholder,
-  //   serviceImage: Images.Placeholder_Long,
-  //   description:
-  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-  //   link: 'http://example.com'
-  // },
-  // {
-  //   name: 'Service name 2',
-  //   logo: Images.Placeholder,
-  //   serviceImage: Images.Placeholder_Long,
-  //   description:
-  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-  //   link: 'http://example.com'
-  // },
-  // {
-  //   name: 'Service name 3',
-  //   logo: Images.Placeholder,
-  //   serviceImage: Images.Placeholder_Long,
-  //   description:
-  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-  //   link: 'http://example.com'
-  // }
+  {
+    name: 'Service name 1',
+    logo: Images.Placeholder,
+    serviceImage: Images.Placeholder_Long,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
+    link: 'http://example.com'
+  },
+  {
+    name: 'Service name 2',
+    logo: Images.Placeholder,
+    serviceImage: Images.Placeholder_Long,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
+    link: 'http://example.com'
+  },
+  {
+    name: 'Service name 3',
+    logo: Images.Placeholder,
+    serviceImage: Images.Placeholder_Long,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
+    link: 'http://example.com'
+  }
 ];
 
 class HomePage extends Component {
@@ -67,54 +69,62 @@ class HomePage extends Component {
     setTimeout(() => changeTab(1), 800);
   };
 
+  onRefresh = () =>
+    new Promise(resolve => {
+      // Refetch data
+      setTimeout(resolve, 2000);
+    });
+
   render() {
     const { refreshing } = this.state;
 
     return (
-      <div className="home-page">
-        <AppHeader
-          headline="PAULI TOIVONEN"
-          title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
-          hasBgImage
-        />
+      <PullToRefresh onRefresh={this.onRefresh}>
+        <div className="home-page">
+          <AppHeader
+            headline="PAULI TOIVONEN"
+            title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
+            hasBgImage
+          />
 
-        <div className="home-page__content tab-page__content">
-          <div className="home-page__cards-container">
-            {mockSensorValues.map(s => (
-              <SensorValueCard
-                key={s.title}
-                title={s.title}
-                icon={s.icon}
-                value={s.value}
-                unit={s.unit}
-                lastUpdated={s.lastUpdated}
-                refreshing={refreshing}
-              />
-            ))}
-          </div>
-
-          <div className="home-page__subscriptions-container">
-            <p className="title dark-text left-aligned home-page__subscription-title">
-              subscriptions
-            </p>
-
-            {mockSubscriptions.length > 0 ? (
-              mockSubscriptions.map(s => (
-                <SubscribedServiceCard
-                  key={s.name}
-                  logo={s.logo}
-                  title={s.name}
-                  description={s.description}
-                  serviceImage={s.serviceImage}
-                  url={s.link}
+          <div className="home-page__content tab-page__content">
+            <div className="home-page__cards-container">
+              {mockSensorValues.map(s => (
+                <SensorValueCard
+                  key={s.title}
+                  title={s.title}
+                  icon={s.icon}
+                  value={s.value}
+                  unit={s.unit}
+                  lastUpdated={s.lastUpdated}
+                  refreshing={refreshing}
                 />
-              ))
-            ) : (
-              <NoSubscriptionsCard onClick={this.handleChangeTab} />
-            )}
+              ))}
+            </div>
+
+            <div className="home-page__subscriptions-container">
+              <p className="title dark-text left-aligned home-page__subscription-title">
+                subscriptions
+              </p>
+
+              {mockSubscriptions.length > 0 ? (
+                mockSubscriptions.map(s => (
+                  <SubscribedServiceCard
+                    key={s.name}
+                    logo={s.logo}
+                    title={s.name}
+                    description={s.description}
+                    serviceImage={s.serviceImage}
+                    url={s.link}
+                  />
+                ))
+              ) : (
+                <NoSubscriptionsCard onClick={this.handleChangeTab} />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </PullToRefresh>
     );
   }
 }
