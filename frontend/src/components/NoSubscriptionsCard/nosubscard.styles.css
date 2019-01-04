@@ -1,3 +1,9 @@
 .no-subs-card__block {
   padding: 40px;
 }
+
+@media screen and (max-width: 420px) {
+    .no-subs-card__block {
+        padding: 25px;
+    }
+}
