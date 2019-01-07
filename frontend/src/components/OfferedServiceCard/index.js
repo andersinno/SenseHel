@@ -7,13 +7,16 @@ import CollapsibleComponent from './CollapsibleComponent';
 import Card from '../Card';
 import '../Card/card.styles.css';
 
-const OfferedServiceCard = ({
-  image,
-  service,
-  onRequestFail,
-  onRequestSuccess
-}) => {
-  const { name, description, price, benefit_short: benefit, eula } = service;
+const OfferedServiceCard = ({ service, onRequestFail, onRequestSuccess }) => {
+  const {
+    img_logo_url: logoUrl,
+    img_service_url: serviceImageUrl,
+    name,
+    description,
+    price,
+    benefit_short: benefit,
+    eula_url: eula
+  } = service;
   const collapsibleFields = _.pick(service, [
     'description',
     'price',
@@ -24,7 +27,7 @@ const OfferedServiceCard = ({
   return (
     <div>
       <Card
-        image={image}
+        image={logoUrl}
         name={name}
         description={description}
         AdditionalSummaryRow={
@@ -53,6 +56,7 @@ const OfferedServiceCard = ({
         }
         CollapsibleComponent={
           <CollapsibleComponent
+            serviceImageUrl={serviceImageUrl}
             detailFields={collapsibleFields}
             termsAndConditions={eula}
             privacyPolicy={eula}

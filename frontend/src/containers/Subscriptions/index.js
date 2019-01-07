@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './subscriptions.styles.css';
 import AppHeader from '../../components/AppHeader';
 import OfferedServiceCard from '../../components/OfferedServiceCard';
-import Images from '../../assets/Images';
 import CustomizedSnackbar from '../../components/Snackbar';
 import API from '../../services/Api';
 
@@ -56,7 +55,6 @@ class SubscriptionsPage extends Component {
           {services.map(service => (
             <OfferedServiceCard
               key={service.id}
-              image={Images.Placeholder}
               service={service}
               onRequestFail={m => this.handleSubscribeFail(m)}
               onRequestSuccess={m => this.handleSubscribeSuccess(m)}

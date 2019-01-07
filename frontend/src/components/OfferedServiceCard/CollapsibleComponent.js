@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Images from '../../assets/Images';
 import BottomButton from '../BottomButton';
 import CheckboxesSection from './CheckboxesSection';
 import DetailItem from '../Card/DetailItem';
@@ -62,6 +61,7 @@ class CollapsibleComponent extends Component {
   render() {
     const {
       detailFields,
+      serviceImageUrl,
       termsAndConditions,
       privacyPolicy,
       classes
@@ -94,7 +94,7 @@ class CollapsibleComponent extends Component {
           <div className="card__row">
             <img
               className="service-image"
-              src={Images.Placeholder_Long}
+              src={serviceImageUrl}
               alt="placeholder"
             />
           </div>
