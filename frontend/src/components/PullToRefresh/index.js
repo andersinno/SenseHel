@@ -1,6 +1,6 @@
 import React from 'react';
-import { PullToRefresh as Pull } from 'react-js-pull-to-refresh';
 import './pulltorefresh.styles.css';
+import { PullToRefresh as Pull } from './PullToRefresh';
 
 const PullDownContent = () => <div className="pull-down-content" />;
 
