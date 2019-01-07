@@ -57,6 +57,8 @@ class Service(models.Model):
     benefit_long = models.CharField(max_length=255)
     description = models.TextField(max_length=512)
     eula_url = models.CharField(max_length=255)
+    img_logo_url = models.CharField(max_length=255, null=True)
+    img_service_url = models.CharField(max_length=255, null=True)
     requires = models.ManyToManyField('SensorAttribute', related_name='services')
 
     def __str__(self):
