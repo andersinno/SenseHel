@@ -66,10 +66,10 @@ class Service(models.Model):
 
 
 class Subscription(models.Model):
-    apartment = models.ForeignKey(Apartment, on_delete=models.DO_NOTHING)  # TODO: should change to user?
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.apartment} subscription of {self.service}'
+        return f'{self.user} subscription of {self.service}'

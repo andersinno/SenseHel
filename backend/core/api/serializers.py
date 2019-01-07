@@ -8,7 +8,7 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         model = Service
         fields = (
             'id', 'name', 'description', 'price', 'benefit_short', 'benefit_long',
-            'eula_url', 'img_logo_url', 'img_service_url'
+            'eula_url', 'img_logo_url', 'img_service_url',
         )
 
 
@@ -21,4 +21,4 @@ class ApartmentSerializer(serializers.HyperlinkedModelSerializer):
 class SubscriptionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Subscription
-        fields = ('id', 'created_at', 'updated_at', 'service', 'apartment')
+        fields = ('id', 'created_at', 'updated_at', 'service')

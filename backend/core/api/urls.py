@@ -10,7 +10,8 @@ router.register(r'apartment', views.ApartmentViewSet)
 # APIView does not and should not mix with routers
 urls = [
     url(r'available-services', views.ApartmentServiceList.as_view()),
-    url(r'subscribed-services', views.SubscriptionList.as_view()),
+    url(r'subscribed-services', views.SubscribedServiceList.as_view()),
+    url(r'subscriptions', views.SubscriptionList.as_view()),
 ]
 
 urlpatterns = router.urls + urls

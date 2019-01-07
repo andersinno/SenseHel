@@ -23,9 +23,15 @@ class ApartmentServiceList(generics.ListAPIView):
         return Service.objects.filter(requires__in=available_sensors).distinct()
 
 
+class SubscribedServiceList(generics.ListAPIView):
+    serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        return Service.objects.filter(subscription__user=self.request.user).distinct()
+
+
 class SubscriptionList(generics.ListAPIView):
     serializer_class = SubscriptionSerializer
 
     def get_queryset(self):
-        apartment = Apartment.objects.get(user=self.request.user)
-        return Subscription.objects.filter(apartment=apartment)
+        return Subscription.objects.filter(user=self.request.user)
