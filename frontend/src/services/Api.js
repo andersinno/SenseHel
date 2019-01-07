@@ -10,11 +10,25 @@ class Api {
     });
   }
 
+  async setToken(token) {
+    this.api.interceptors.request.use(config => {
+      config.headers.post.Authorization = `Token ${token}`; // eslint-disable-line
+      config.headers.get.Authorization = `Token ${token}`; // eslint-disable-line
+      return config;
+    });
+  }
+
   async login(username, password) {
     const res = await this.api.post('login', {
       username,
       password
     });
+
+    return res;
+  }
+
+  async getAvailableServices() {
+    const res = await this.api.get('available-services');
 
     return res;
   }

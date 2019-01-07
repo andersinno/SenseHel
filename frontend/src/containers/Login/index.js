@@ -29,7 +29,10 @@ class LoginPage extends Component {
 
     try {
       const res = await API.login(userNumber, pinCode);
+
       localStorage.setItem('@AUTH_TOKEN', res.data.token);
+      await API.setToken(res.data.token);
+
       this.setState({ login: true, loading: false });
     } catch (error) {
       this.setState({ loading: false });

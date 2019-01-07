@@ -61,10 +61,7 @@ class CollapsibleComponent extends Component {
 
   render() {
     const {
-      description,
-      benefit,
-      price,
-      requiredSensors,
+      detailFields,
       termsAndConditions,
       privacyPolicy,
       classes
@@ -76,6 +73,13 @@ class CollapsibleComponent extends Component {
       subscribed,
       confirmOpen
     } = this.state;
+
+    const {
+      description,
+      price,
+      benefit_long: benefit,
+      required_sensors: requiredSensors
+    } = detailFields;
 
     let buttonTitle = 'subscribe';
     if (requesting) {
@@ -97,7 +101,7 @@ class CollapsibleComponent extends Component {
 
           <DetailItem title="DETAIL" description={description} />
 
-          <DetailItem title="BENEFIT" description={benefit.long} />
+          <DetailItem title="BENEFIT" description={benefit} />
 
           <DetailItem title="PRICE" description={price} />
 
