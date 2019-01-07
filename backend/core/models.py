@@ -33,7 +33,7 @@ class Apartment(models.Model):
 
 class Sensor(models.Model):
     description = models.TextField(max_length=512)
-    provides = models.ManyToManyField('SensorAttribute')
+    provides = models.ManyToManyField('SensorAttribute', related_name='sensors')
 
     def __str__(self):
         return f'{self.description}'
@@ -57,14 +57,14 @@ class Service(models.Model):
     benefit_long = models.CharField(max_length=255)
     description = models.TextField(max_length=512)
     eula_url = models.CharField(max_length=255)
-    requires = models.ManyToManyField('SensorAttribute')
+    requires = models.ManyToManyField('SensorAttribute', related_name='services')
 
     def __str__(self):
         return f'{self.name}'
 
 
 class Subscription(models.Model):
-    apartment = models.ForeignKey(Apartment, on_delete=models.DO_NOTHING)
+    apartment = models.ForeignKey(Apartment, on_delete=models.DO_NOTHING)  # TODO: should change to user?
     service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

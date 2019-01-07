@@ -40,3 +40,27 @@ Example with curl:
 ```bash
 curl -H "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/apartment/1/"
 ```
+
+## Available services
+
+Return all available services for apartment. This takes into account following
+
+- What sensor values are available in apartment
+- Which sensor values are required by services
+
+URL: /api/available-services/
+
+```bash
+curl -sH "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/available-services/"
+```
+
+## Currently subscribed services
+
+Return all services user is currently subscribed to
+
+URL: /api/subscribed-services/
+
+
+```bash
+curl -sH "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/subscribed-services/"
+```
