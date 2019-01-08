@@ -8,9 +8,10 @@ import './theme/Colors.css';
 import LoginPage from './containers/Login';
 import Tabs from './containers/Tabs';
 import API from './services/Api';
+import LocalStorageKeys from './config/LocalStorageKeys';
 
 const ProtectedRoute = ({ component, ...rest }) => {
-  const authToken = localStorage.getItem('@AUTH_TOKEN');
+  const authToken = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
 
   if (authToken) {
     return <Route component={component} {...rest} />;
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ component, ...rest }) => {
 
 class App extends Component {
   async componentWillMount() {
-    const authToken = localStorage.getItem('@AUTH_TOKEN');
+    const authToken = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
     if (authToken) await API.setToken(authToken);
   }
 

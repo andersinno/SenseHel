@@ -8,6 +8,7 @@ import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
 import API from '../../services/Api';
 import CustomizedSnackbar from '../../components/Snackbar';
+import LocalStorageKeys from '../../config/LocalStorageKeys';
 
 class LoginPage extends Component {
   state = {
@@ -30,7 +31,7 @@ class LoginPage extends Component {
     try {
       const res = await API.login(userNumber, pinCode);
 
-      localStorage.setItem('@AUTH_TOKEN', res.data.token);
+      localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, res.data.token);
       await API.setToken(res.data.token);
 
       this.setState({ login: true, loading: false });
@@ -56,7 +57,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const loggedIn = localStorage.getItem('@AUTH_TOKEN');
+    const loggedIn = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
     const { userNumber, pinCode, login, loading, errorMessage } = this.state;
 
     if (login || loggedIn) return <Redirect to="/" />;

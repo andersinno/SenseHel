@@ -6,6 +6,7 @@ import Images from '../../assets/Images';
 import BottomButton from '../../components/BottomButton';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import CustomizedSnackbar from '../../components/Snackbar';
+import LocalStorageKeys from '../../config/LocalStorageKeys';
 
 class AboutPage extends Component {
   state = {
@@ -35,7 +36,7 @@ class AboutPage extends Component {
   };
 
   handleLogout = () => {
-    localStorage.removeItem('@AUTH_TOKEN');
+    localStorage.removeItem(LocalStorageKeys.AUTH_TOKEN);
     this.setState({ loggedOut: true });
   };
 

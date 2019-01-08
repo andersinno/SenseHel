@@ -1,0 +1,4 @@
+export default {
+  AUTH_TOKEN: '@AUTH_TOKEN',
+  AVAILABLE_SERVICES: '@AVAILABLE_SERVICES'
+};
