@@ -21,7 +21,6 @@ Response:
 
 All resources are accessed via GET request and require authentication via token available through login.
 
-
 ## Services
 
 URL: /api/services/
@@ -65,7 +64,6 @@ curl -sH "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http:/
 Return all services user is currently subscribed to
 
 URL: /api/subscribed-services/
-
 
 ```bash
 curl -sH "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/subscribed-services/"
