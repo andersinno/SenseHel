@@ -9,7 +9,8 @@ import CustomizedSnackbar from '../../components/Snackbar';
 
 class AboutPage extends Component {
   state = {
-    confirmOpen: false,
+    logoutConfirmOpen: false,
+    revokeConfirmOpen: false,
     revoking: false,
     errorMessage: '',
     successMessage: '',
@@ -18,24 +19,28 @@ class AboutPage extends Component {
   };
 
   onLogout = () => {
-    localStorage.removeItem('@AUTH_TOKEN');
-    this.setState({ loggedOut: true });
+    this.setState({ logoutConfirmOpen: true });
   };
 
   onRevokeApartment = () => {
-    this.setState({ confirmOpen: true });
+    this.setState({ revokeConfirmOpen: true });
   };
 
   onCloseConfirm = () => {
-    this.setState({ confirmOpen: false });
+    this.setState({ logoutConfirmOpen: false, revokeConfirmOpen: false });
   };
 
   onCloseSnackbar = () => {
     this.setState({ errorMessage: '', successMessage: '' });
   };
 
+  handleLogout = () => {
+    localStorage.removeItem('@AUTH_TOKEN');
+    this.setState({ loggedOut: true });
+  };
+
   handleRevokeApartment = () => {
-    this.setState({ revoking: true, confirmOpen: false });
+    this.setState({ revoking: true, revokeConfirmOpen: false });
 
     // make API call
     setTimeout(() => {
@@ -66,7 +71,8 @@ class AboutPage extends Component {
 
   render() {
     const {
-      confirmOpen,
+      revokeConfirmOpen,
+      logoutConfirmOpen,
       revoking,
       revoked,
       loggedOut,
@@ -146,7 +152,15 @@ class AboutPage extends Component {
           title="Are you sure you want to delete your aparment?"
           description="This will lorem ipsum dolor amet euphi nibh turs"
           handleConfirm={this.handleRevokeApartment}
-          open={confirmOpen}
+          open={revokeConfirmOpen}
+          handleClose={this.onCloseConfirm}
+        />
+
+        <ConfirmDialog
+          title="Are you sure you want to logout?"
+          description="You will be redirected to login screen"
+          handleConfirm={this.handleLogout}
+          open={logoutConfirmOpen}
           handleClose={this.onCloseConfirm}
         />
 
