@@ -3,10 +3,11 @@ import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
 import SensorValueCard from '../../components/SensorValueCard';
 import Icons from '../../assets/Icons';
-import Images from '../../assets/Images';
 import SubscribedServiceCard from '../../components/SubscribedServiceCard';
 import NoSubscriptionsCard from '../../components/NoSubscriptionsCard';
 import PullToRefresh from '../../components/PullToRefresh';
+import API from '../../services/Api';
+import CustomizedSnackbar from '../../components/Snackbar';
 
 const mockSensorValues = [
   {
@@ -32,36 +33,29 @@ const mockSensorValues = [
   }
 ];
 
-const mockSubscriptions = [
-  {
-    name: 'Service name 1',
-    logo: Images.Placeholder,
-    serviceImage: Images.Placeholder_Long,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-    link: 'http://example.com'
-  },
-  {
-    name: 'Service name 2',
-    logo: Images.Placeholder,
-    serviceImage: Images.Placeholder_Long,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-    link: 'http://example.com'
-  },
-  {
-    name: 'Service name 3',
-    logo: Images.Placeholder,
-    serviceImage: Images.Placeholder_Long,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mi enim, vestibulum nec mollis non, ultrices at elit consectetur semper. Proin auctor metus risus, at cursus magna tempor eu. Nulla ac ornare elit, in vulputate.',
-    link: 'http://example.com'
-  }
-];
-
 class HomePage extends Component {
   state = {
-    refreshing: false
+    subscribedServices: [],
+    refreshing: false,
+    errorMessage: ''
+  };
+
+  async componentDidMount() {
+    await this.fetchSubscribedServices();
+  }
+
+  fetchSubscribedServices = async () => {
+    try {
+      const res = await API.getSubscribedServices();
+      this.setState({ subscribedServices: res.data });
+    } catch (e) {
+      this.setState({
+        errorMessage: {
+          title: 'Could not fetch subscribed services',
+          subtitle: `${e.message}`
+        }
+      });
+    }
   };
 
   handleChangeTab = () => {
@@ -70,13 +64,13 @@ class HomePage extends Component {
   };
 
   onRefresh = () =>
-    new Promise(resolve => {
-      // Refetch data
+    new Promise(async resolve => {
+      await this.fetchSubscribedServices();
       setTimeout(resolve, 2000);
     });
 
   render() {
-    const { refreshing } = this.state;
+    const { subscribedServices, refreshing, errorMessage } = this.state;
 
     return (
       <PullToRefresh onRefresh={this.onRefresh}>
@@ -107,14 +101,14 @@ class HomePage extends Component {
                 subscriptions
               </p>
 
-              {mockSubscriptions.length > 0 ? (
-                mockSubscriptions.map(s => (
+              {subscribedServices.length > 0 ? (
+                subscribedServices.map(s => (
                   <SubscribedServiceCard
                     key={s.name}
-                    logo={s.logo}
+                    logo={s.img_logo_url}
                     title={s.name}
                     description={s.description}
-                    serviceImage={s.serviceImage}
+                    serviceImage={s.img_service_url}
                     url={s.link}
                   />
                 ))
@@ -123,6 +117,13 @@ class HomePage extends Component {
               )}
             </div>
           </div>
+
+          <CustomizedSnackbar
+            message={errorMessage}
+            variant="error"
+            handleClose={() => this.setState({ errorMessage: '' })}
+            open={!!errorMessage}
+          />
         </div>
       </PullToRefresh>
     );

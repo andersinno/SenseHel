@@ -23,7 +23,7 @@ const ProtectedRoute = ({ component, ...rest }) => {
 };
 
 class App extends Component {
-  async componentDidMount() {
+  async componentWillMount() {
     const authToken = localStorage.getItem('@AUTH_TOKEN');
     if (authToken) await API.setToken(authToken);
   }

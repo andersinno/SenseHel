@@ -19,18 +19,18 @@ class Api {
   }
 
   async login(username, password) {
-    const res = await this.api.post('login', {
+    return this.api.post('login', {
       username,
       password
     });
-
-    return res;
   }
 
   async getAvailableServices() {
-    const res = await this.api.get('available-services');
+    return this.api.get('available-services');
+  }
 
-    return res;
+  async getSubscribedServices() {
+    return this.api.get('subscribed-services');
   }
 }
 
