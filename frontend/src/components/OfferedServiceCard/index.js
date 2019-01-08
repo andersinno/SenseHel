@@ -9,6 +9,7 @@ import '../Card/card.styles.css';
 
 const OfferedServiceCard = ({ service, onRequestFail, onRequestSuccess }) => {
   const {
+    id,
     img_logo_url: logoUrl,
     img_service_url: serviceImageUrl,
     name,
@@ -56,6 +57,7 @@ const OfferedServiceCard = ({ service, onRequestFail, onRequestSuccess }) => {
         }
         CollapsibleComponent={
           <CollapsibleComponent
+            serviceId={id}
             serviceImageUrl={serviceImageUrl}
             detailFields={collapsibleFields}
             termsAndConditions={eula}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 const URL = 'http://127.0.0.1:8000/api/';
 
@@ -31,6 +32,17 @@ class Api {
 
   async getSubscribedServices() {
     return this.api.get('subscribed-services');
+  }
+
+  async getSubscribedServicesIds() {
+    try {
+      const res = await this.api.get('subscriptions');
+      const subscriptions = res.data;
+
+      return _.map(subscriptions, 'id');
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
