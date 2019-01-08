@@ -9,7 +9,7 @@ import AboutPage from '../About';
 const tabOptions = [
   {
     name: 'home',
-    component: () => <HomePage />,
+    component: changeTab => <HomePage changeTab={changeTab} />,
     icon: Icons.Home_Icon,
     activeIcon: Icons.Home_Icon_Active
   },
@@ -38,7 +38,8 @@ class Tabs extends Component {
     activeTab: tabOptions[0]
   };
 
-  onTabChange = selectedTab => {
+  onTabChange = selectedTabIndex => {
+    const selectedTab = tabOptions[selectedTabIndex];
     this.setState({ activeTab: selectedTab });
   };
 
@@ -47,7 +48,9 @@ class Tabs extends Component {
 
     return (
       <div className="tabs-page">
-        <div className="tabs-page__page">{activeTab.component()}</div>
+        <div className="tabs-page__page">
+          {activeTab.component(this.onTabChange)}
+        </div>
 
         <BottomTabNavigator
           tabs={tabOptions}
@@ -61,14 +64,14 @@ class Tabs extends Component {
 
 const BottomTabNavigator = ({ tabs, activeTab, onTabChange }) => (
   <div className="bottom-tab-navigator">
-    {tabs.map(t => (
+    {tabs.map((t, i) => (
       <div className="icon-container" key={t.name}>
         <img
           className="icon-container__img"
           src={activeTab.name === t.name ? t.activeIcon : t.icon}
-          onClick={() => onTabChange(t)}
+          onClick={() => onTabChange(i)}
           alt={t.name}
-          onKeyDown={() => this.onTabChange(t)}
+          onKeyDown={() => this.onTabChange(i)}
         />
       </div>
     ))}

@@ -6,15 +6,16 @@ import './login.styles.css';
 import Images from '../../assets/Images';
 import TextInput from '../../components/TextInput';
 import LoginButton from '../../components/LoginButton';
-import Spinner from '../../components/Spinner';
 import API from '../../services/Api';
+import CustomizedSnackbar from '../../components/Snackbar';
 
 class LoginPage extends Component {
   state = {
     userNumber: '',
     pinCode: '',
     login: false,
-    loading: false
+    loading: false,
+    errorMessage: ''
   };
 
   onChangeInput = e => {
@@ -28,25 +29,41 @@ class LoginPage extends Component {
 
     try {
       const res = await API.login(userNumber, pinCode);
+
       localStorage.setItem('@AUTH_TOKEN', res.data.token);
+      await API.setToken(res.data.token);
+
       this.setState({ login: true, loading: false });
     } catch (error) {
       this.setState({ loading: false });
-      window.alert(_.get(error, 'response.data.error', error));
+      this.handleLoginFail(error);
     }
+  };
+
+  handleLoginFail = error => {
+    const errorMessage = _.get(error, 'response.data.error', error);
+
+    this.setState({
+      errorMessage: {
+        title: 'Login Failed',
+        subtitle: `${errorMessage}`
+      }
+    });
+  };
+
+  handleSnackbarClose = () => {
+    this.setState({ errorMessage: '' });
   };
 
   render() {
     const loggedIn = localStorage.getItem('@AUTH_TOKEN');
-    const { userNumber, pinCode, login, loading } = this.state;
+    const { userNumber, pinCode, login, loading, errorMessage } = this.state;
 
     if (login || loggedIn) return <Redirect to="/" />;
 
     return (
       <div className="login-page">
         <div className="login-page__content">
-          {loading && <Spinner />}
-
           <img className="content__img-logo" src={Images.Logo} alt="logo" />
 
           <div className="content__input-container">
@@ -67,9 +84,20 @@ class LoginPage extends Component {
           </div>
 
           <div className="content__button-container">
-            <LoginButton onClick={this.onLogin} disabled={loading} />
+            <LoginButton
+              onClick={this.onLogin}
+              disabled={loading}
+              loading={loading}
+            />
           </div>
         </div>
+
+        <CustomizedSnackbar
+          message={errorMessage}
+          variant="error"
+          handleClose={this.handleSnackbarClose}
+          open={!!errorMessage}
+        />
       </div>
     );
   }

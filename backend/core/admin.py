@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import (Apartment, Sensor, SensorAttribute, Service, User)
+from .models import (Apartment, Sensor, SensorAttribute, Service, User, Subscription)
 
 
 class MyUserAdmin(UserAdmin):
@@ -15,5 +15,6 @@ class MyUserAdmin(UserAdmin):
 admin.site.register(Apartment)
 admin.site.register(Sensor)
 admin.site.register(Service)
+admin.site.register(Subscription)
 admin.site.register(SensorAttribute)
 admin.site.register(User, MyUserAdmin)

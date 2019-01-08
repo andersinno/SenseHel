@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import Slide from '@material-ui/core/Slide/Slide';
 import Collapse from '@material-ui/core/Collapse/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade/Fade';
+import Images from '../../assets/Images';
 
 import './card.styles.css';
 
@@ -97,5 +99,20 @@ class Card extends Component {
     );
   }
 }
+
+Card.propTypes = {
+  image: PropTypes.any, // eslint-disable-line
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  AdditionalSummaryRow: PropTypes.node,
+  CollapsibleComponent: PropTypes.node
+};
+
+Card.defaultProps = {
+  image: Images.Placeholder,
+  description: '',
+  AdditionalSummaryRow: null,
+  CollapsibleComponent: null
+};
 
 export default withStyles(styles)(Card);

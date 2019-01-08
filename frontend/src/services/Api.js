@@ -1,6 +1,7 @@
 import axios from 'axios';
+import _ from 'lodash';
 
-const URL = 'http://172.19.0.3:8000/api/';
+const URL = 'http://127.0.0.1:8000/api/';
 
 class Api {
   constructor(baseUrl) {
@@ -10,13 +11,38 @@ class Api {
     });
   }
 
+  async setToken(token) {
+    this.api.interceptors.request.use(config => {
+      config.headers.post.Authorization = `Token ${token}`; // eslint-disable-line
+      config.headers.get.Authorization = `Token ${token}`; // eslint-disable-line
+      return config;
+    });
+  }
+
   async login(username, password) {
-    const res = await this.api.post('login', {
+    return this.api.post('login', {
       username,
       password
     });
+  }
 
-    return res;
+  async getAvailableServices() {
+    return this.api.get('available-services');
+  }
+
+  async getSubscribedServices() {
+    return this.api.get('subscribed-services');
+  }
+
+  async getSubscribedServicesIds() {
+    try {
+      const res = await this.api.get('subscriptions');
+      const subscriptions = res.data;
+
+      return _.map(subscriptions, 'id');
+    } catch (e) {
+      throw e;
+    }
   }
 }
 

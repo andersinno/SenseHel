@@ -1,92 +1,82 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './subscriptions.styles.css';
 import AppHeader from '../../components/AppHeader';
 import OfferedServiceCard from '../../components/OfferedServiceCard';
-import Images from '../../assets/Images';
+import CustomizedSnackbar from '../../components/Snackbar';
+import API from '../../services/Api';
 
-const offeredServices = [
-  {
-    image: Images.Placeholder,
-    name: 'Service name',
-    description:
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
-    price: 'Free',
-    benefit: {
-      short: 5,
-      long:
-        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
-    },
-    requiredSensors: 'Temperature / Something',
-    termsAndConditions: 'http://example.com',
-    privacyPolicy: 'http://example.com'
-  },
-  {
-    image: Images.Placeholder,
-    name: 'Service name',
-    description:
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
-    price: 'Free',
-    benefit: {
-      short: 5,
-      long:
-        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
-    },
-    requiredSensors: 'Temperature / Something',
-    termsAndConditions: 'http://example.com',
-    privacyPolicy: 'http://example.com'
-  },
-  {
-    image: Images.Placeholder,
-    name: 'Service name',
-    description:
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
-    price: 'Free',
-    benefit: {
-      short: 5,
-      long:
-        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
-    },
-    requiredSensors: 'Temperature / Something',
-    termsAndConditions: 'http://example.com',
-    privacyPolicy: 'http://example.com'
-  },
-  {
-    image: Images.Placeholder,
-    name: 'Service name',
-    description:
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod',
-    price: 'Free',
-    benefit: {
-      short: 5,
-      long:
-        '5% Increase in energy saving\nLorem ipsum dolarament huyg the shutg saudt hut'
-    },
-    requiredSensors: 'Temperature / Something',
-    termsAndConditions: 'http://example.com',
-    privacyPolicy: 'http://example.com'
+class SubscriptionsPage extends Component {
+  state = {
+    services: [],
+    successMessage: '',
+    errorMessage: ''
+  };
+
+  async componentDidMount() {
+    try {
+      const services = await API.getAvailableServices();
+      this.setState({ services: services.data });
+    } catch (e) {
+      this.setState({
+        errorMessage: {
+          title: 'Fetching services failed',
+          subtitle: `${e.message}`
+        }
+      });
+    }
   }
-];
 
-const SubscriptionsPage = () => (
-  <div className="subscriptions-page">
-    <AppHeader headline="SUBSCRIPTION LIST" title="OFFERED SERVICES" />
+  handleSnackbarClose = () => {
+    this.setState({ errorMessage: '', successMessage: '' });
+  };
 
-    <div className="subscriptions-page__content tab-page__content">
-      {offeredServices.map(service => (
-        <OfferedServiceCard
-          key={service.name}
-          image={service.image}
-          name={service.name}
-          description={service.description}
-          price={service.price}
-          benefit={service.benefit}
-          requiredSensors={service.requiredSensors}
-          termsAndConditions={service.termsAndConditions}
-          privacyPolicy={service.privacyPolicy}
+  handleSubscribeFail = message => {
+    this.setState({
+      errorMessage: message,
+      successMessage: ''
+    });
+  };
+
+  handleSubscribeSuccess = message => {
+    this.setState({
+      errorMessage: '',
+      successMessage: message
+    });
+  };
+
+  render() {
+    const { services, errorMessage, successMessage } = this.state;
+
+    return (
+      <div className="subscriptions-page">
+        <AppHeader headline="SUBSCRIPTION LIST" title="OFFERED SERVICES" />
+
+        <div className="subscriptions-page__content tab-page__content">
+          {services.map(service => (
+            <OfferedServiceCard
+              key={service.id}
+              service={service}
+              onRequestFail={m => this.handleSubscribeFail(m)}
+              onRequestSuccess={m => this.handleSubscribeSuccess(m)}
+            />
+          ))}
+        </div>
+
+        <CustomizedSnackbar
+          message={errorMessage}
+          variant="error"
+          handleClose={this.handleSnackbarClose}
+          open={!!errorMessage}
         />
-      ))}
-    </div>
-  </div>
-);
 
+        <CustomizedSnackbar
+          message={successMessage}
+          variant="success"
+          handleClose={this.handleSnackbarClose}
+          open={!!successMessage}
+        />
+      </div>
+    );
+  }
+}
 export default SubscriptionsPage;

@@ -1,24 +1,4 @@
-.service-card {
-  height: 100px;
-  width: 140px;
-  box-shadow: 0 2px 5px 0px var(--lightGrey);
-  border-radius: 3px;
+.sub-service__text {
+  text-align: justify;
   margin-right: 15px;
-  flex: 0 0 auto;
-  background-color: var(--white);
-  padding: 10px;
-  border: 1px solid var(--lightGrey);
-  text-align: left;
-}
-
-.service-card__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.service-card__header__icon {
-  width: 25px;
-  height: auto;
 }

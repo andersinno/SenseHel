@@ -15,8 +15,17 @@ const mockSensors = [
     associatedSubscriptions: ['SERVICE NAME 1', 'SERVICE NAME 2']
   },
   {
-    image: Icons.Temperature,
-    name: 'Temperature',
+    image: Icons.Humidity,
+    name: 'Humidity',
+    description:
+      'Lorem ipsum dolor sit amet, consecteurt adipilohjs elit, sed diam nonummy nibh eusimod',
+    deviceName: 'AAAAAA',
+    serialNumber: '123HHD87377',
+    associatedSubscriptions: ['SERVICE NAME 1', 'SERVICE NAME 2']
+  },
+  {
+    image: Icons.CO2,
+    name: 'Carbon Dioxide',
     description:
       'Lorem ipsum dolor sit amet, consecteurt adipilohjs elit, sed diam nonummy nibh eusimod',
     deviceName: 'AAAAAA',
@@ -25,16 +34,7 @@ const mockSensors = [
   },
   {
     image: Icons.Temperature,
-    name: 'Temperature',
-    description:
-      'Lorem ipsum dolor sit amet, consecteurt adipilohjs elit, sed diam nonummy nibh eusimod',
-    deviceName: 'AAAAAA',
-    serialNumber: '123HHD87377',
-    associatedSubscriptions: ['SERVICE NAME 1', 'SERVICE NAME 2']
-  },
-  {
-    image: Icons.Temperature,
-    name: 'Temperature',
+    name: 'Light',
     description:
       'Lorem ipsum dolor sit amet, consecteurt adipilohjs elit, sed diam nonummy nibh eusimod',
     deviceName: 'AAAAAA',
@@ -50,6 +50,7 @@ const SensorsPage = () => (
     <div className="sensors-page__content tab-page__content">
       {mockSensors.map(sensor => (
         <SensorListCard
+          key={sensor.name}
           image={sensor.image}
           name={sensor.name}
           description={sensor.description}

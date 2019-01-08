@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--white);
 }
 
 code {
@@ -16,5 +17,12 @@ code {
 /* Make contents of tabs overlap with AppHeader */
 .tab-page__content {
   position: absolute;
-  top: 20%; /* Since AppHeader height is 25%  */
+  top: 22%; /* Since AppHeader height is 25%  */
+}
+
+@media screen and (max-width: 375px) {
+  .tab-page__content {
+    position: absolute;
+    top: 23%; /* Since AppHeader height is 25%  */
+  }
 }
