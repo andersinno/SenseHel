@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
 
-from ..models import Service, Apartment, SensorAttribute, Sensor, Subscription
+from ..models import Service, Apartment, SensorAttribute, Subscription
 from .serializers import ServiceSerializer, ApartmentSerializer, SubscriptionSerializer
 
 
@@ -10,11 +10,21 @@ class ServiceViewSet(viewsets.ModelViewSet):
 
 
 class ApartmentViewSet(viewsets.ModelViewSet):
-    queryset = Apartment.objects.all()
+    """
+    Serialize Apartments current authenticated user belongs to.
+    """
     serializer_class = ApartmentSerializer
+
+    def get_queryset(self):
+        return Apartment.objects.filter(user=self.request.user)
 
 
 class ApartmentServiceList(generics.ListAPIView):
+    """
+    Serialize all services current authenticated user could
+    subscribe to considering what sensors are available and what
+    requirements services have.
+    """
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
@@ -24,6 +34,9 @@ class ApartmentServiceList(generics.ListAPIView):
 
 
 class SubscribedServiceList(generics.ListAPIView):
+    """
+    Serialize Services current authenticated user is subscribed to
+    """
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
@@ -31,6 +44,10 @@ class SubscribedServiceList(generics.ListAPIView):
 
 
 class SubscriptionList(generics.ListAPIView):
+    """
+    Serialize Subscriptions current authenticated has.
+    SubscriptionSerializer inlines Service
+    """
     serializer_class = SubscriptionSerializer
 
     def get_queryset(self):

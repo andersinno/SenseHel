@@ -21,9 +21,11 @@ Response:
 
 All resources are accessed via GET request and require authentication via token available through login.
 
+
 ## Services
 
-URL: /api/service/<id>
+URL: /api/services/
+URL: /api/services/<id>
 
 Example with curl:
 
@@ -31,14 +33,18 @@ Example with curl:
 curl -H "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/service/1/"
 ```
 
-## Apartment
+## Apartment(s)
 
-URL: /api/service/<id>
+URL: /api/apartments/
+URL: /api/apartments/<id>
+
+Without <id> all apartments user belongs to are returned.
 
 Example with curl:
 
 ```bash
-curl -H "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/apartment/1/"
+curl -H "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/apartments/"
+curl -H "Authorization: Token 750ab3c6ecba2ee406a7516799f2449ff5506bf2" "http://127.0.0.1:8000/api/apartments/1/"
 ```
 
 ## Available services

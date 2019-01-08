@@ -27,6 +27,7 @@ class PinCodeValidator:
             "Your pincode must contain exactly %(length)d digit(s), 0-9." % {'length': self.length}
         )
 
+
 class LoginTokenAPIView(APIView):
     authentication_classes = ()
     permission_classes = ()
@@ -39,5 +40,12 @@ class LoginTokenAPIView(APIView):
             return Response({'error': 'Invalid Credentials'},
                             status=HTTP_400_BAD_REQUEST)
         token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key},
-                        status=HTTP_200_OK)
+        return Response(
+            {
+                'token': token.key,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'phone': user.phone,
+            },
+            status=HTTP_200_OK
+        )
