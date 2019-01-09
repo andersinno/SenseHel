@@ -100,11 +100,7 @@ if 'test' in sys.argv:
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'api.login.PinCodeValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = [{'NAME': 'core.utils.password_policy.PinCodeValidator'}]
 
 AUTH_USER_MODEL = 'core.User'
 
