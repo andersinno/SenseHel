@@ -1,3 +1,7 @@
+# Browsable API
+
+Please see `/api/schema/` in browser for full documentation of available endpoints and methods.
+
 # Login
 
 URL: /api/login
@@ -14,7 +18,14 @@ curl -d "username=admin&password=pwd" -X POST http://localhost:8000/api/login
 Response:
 
 ```json
-{ "token": "750ab3c6ecba2ee406a7516799f2449ff5506bf2" }
+{
+  "token": "750ab3c6ecba2ee406a7516799f2449ff5506bf2",
+  "first_name": "FirstName",
+  "last_name": "LastName",
+  "phone": 12345678,
+  "email": "email@localhost"
+}
+
 ```
 
 # Resources
