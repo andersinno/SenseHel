@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
 import SensorValueCard from '../../components/SensorValueCard';
-import Icons from '../../assets/Icons';
 import SubscribedServiceCard from '../../components/SubscribedServiceCard';
 import NoSubscriptionsCard from '../../components/NoSubscriptionsCard';
 import PullToRefresh from '../../components/PullToRefresh';
@@ -13,22 +12,22 @@ import LocalStorageKeys from '../../config/LocalStorageKeys';
 const mockSensorValues = [
   {
     title: 'Temperature',
-    icon: Icons.Temperature_Normal,
-    value: 23,
+    type: 'temperature',
+    value: Math.floor(Math.random() * (50 + 25 + 1)) - 25,
     unit: '℃',
     lastUpdated: '20 seconds ago'
   },
   {
     title: 'Humidity',
-    icon: Icons.Humidity_Normal,
-    value: 40,
+    type: 'humidity',
+    value: Math.floor(Math.random() * (100 - 20 + 1)) + 20,
     unit: '%',
     lastUpdated: '10 min ago'
   },
   {
     title: 'Carbon Dioxide',
-    icon: Icons.CO2_Normal,
-    value: 300,
+    type: 'carbon_dioxide',
+    value: Math.floor(Math.random() * (2500 + 1)),
     unit: 'ppm',
     lastUpdated: '40 min ago'
   }
@@ -117,7 +116,7 @@ class HomePage extends Component {
                 <SensorValueCard
                   key={s.title}
                   title={s.title}
-                  icon={s.icon}
+                  type={s.type}
                   value={s.value}
                   unit={s.unit}
                   lastUpdated={s.lastUpdated}
