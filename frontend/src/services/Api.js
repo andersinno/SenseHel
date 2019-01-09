@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import LocalStorageKeys from '../config/LocalStorageKeys';
 
 const URL = 'http://127.0.0.1:8000/api/';
 
@@ -20,10 +21,29 @@ class Api {
   }
 
   async login(username, password) {
-    return this.api.post('login', {
-      username,
-      password
-    });
+    try {
+      const res = await this.api.post('login', {
+        username,
+        password
+      });
+
+      localStorage.setItem(
+        LocalStorageKeys.CURRENT_USER,
+        JSON.stringify(res.data)
+      );
+      await this.setToken(res.data.token);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async getApartment() {
+    try {
+      const res = await this.api.get('apartments');
+      return res.data[0];
+    } catch (e) {
+      throw e;
+    }
   }
 
   async getAvailableServices() {

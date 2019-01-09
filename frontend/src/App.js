@@ -11,9 +11,9 @@ import API from './services/Api';
 import LocalStorageKeys from './config/LocalStorageKeys';
 
 const ProtectedRoute = ({ component, ...rest }) => {
-  const authToken = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
+  const currentUser = localStorage.getItem(LocalStorageKeys.CURRENT_USER);
 
-  if (authToken) {
+  if (currentUser && currentUser !== 'undefined') {
     return <Route component={component} {...rest} />;
   }
 
@@ -25,8 +25,9 @@ const ProtectedRoute = ({ component, ...rest }) => {
 
 class App extends Component {
   async componentWillMount() {
-    const authToken = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
-    if (authToken) await API.setToken(authToken);
+    const currentUser = localStorage.getItem(LocalStorageKeys.CURRENT_USER);
+    if (currentUser && currentUser !== 'undefined')
+      await API.setToken(JSON.parse(currentUser).token);
   }
 
   render() {

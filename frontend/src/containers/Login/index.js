@@ -29,10 +29,7 @@ class LoginPage extends Component {
     this.setState({ loading: true });
 
     try {
-      const res = await API.login(userNumber, pinCode);
-
-      localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, res.data.token);
-      await API.setToken(res.data.token);
+      await API.login(userNumber, pinCode);
 
       this.setState({ login: true, loading: false });
     } catch (error) {
@@ -57,10 +54,11 @@ class LoginPage extends Component {
   };
 
   render() {
-    const loggedIn = localStorage.getItem(LocalStorageKeys.AUTH_TOKEN);
+    const currentUser = localStorage.getItem(LocalStorageKeys.CURRENT_USER);
     const { userNumber, pinCode, login, loading, errorMessage } = this.state;
 
-    if (login || loggedIn) return <Redirect to="/" />;
+    if (login || (currentUser && currentUser !== 'undefined'))
+      return <Redirect to="/" />;
 
     return (
       <div className="login-page">

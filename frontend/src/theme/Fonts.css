@@ -15,6 +15,7 @@
   font-size: 14px;
   text-align: center;
   text-transform: uppercase;
+  white-space: pre-line;
 }
 
 .subheader {
@@ -45,6 +46,7 @@
   font-family: Avenir, sans-serif;
   font-weight: normal;
   font-size: 14px; /* was 10px */
+  white-space: pre-line !important;
 }
 
 .small-body {
@@ -89,4 +91,8 @@
 
 .centered {
   text-align: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }

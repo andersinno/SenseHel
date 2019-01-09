@@ -19,7 +19,7 @@
   margin-left: 15px;
   flex: 6;
   margin-top: 0;
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 
 @media screen and (max-width: 500px) {

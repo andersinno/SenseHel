@@ -36,7 +36,7 @@ class AboutPage extends Component {
   };
 
   handleLogout = () => {
-    localStorage.removeItem(LocalStorageKeys.AUTH_TOKEN);
+    localStorage.removeItem(LocalStorageKeys.CURRENT_USER);
     this.setState({ loggedOut: true });
   };
 

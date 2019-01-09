@@ -8,6 +8,7 @@ import NoSubscriptionsCard from '../../components/NoSubscriptionsCard';
 import PullToRefresh from '../../components/PullToRefresh';
 import API from '../../services/Api';
 import CustomizedSnackbar from '../../components/Snackbar';
+import LocalStorageKeys from '../../config/LocalStorageKeys';
 
 const mockSensorValues = [
   {
@@ -37,12 +38,24 @@ class HomePage extends Component {
   state = {
     subscribedServices: [],
     refreshing: false,
-    errorMessage: ''
+    errorMessage: '',
+    name: '',
+    address: ''
   };
 
   async componentDidMount() {
+    this.updateName();
     await this.fetchSubscribedServices();
+    await this.fetchApartment();
   }
+
+  updateName = () => {
+    const currentUser = JSON.parse(
+      localStorage.getItem(LocalStorageKeys.CURRENT_USER)
+    );
+    const name = `${currentUser.first_name} ${currentUser.last_name}`;
+    this.setState({ name });
+  };
 
   fetchSubscribedServices = async () => {
     try {
@@ -52,6 +65,21 @@ class HomePage extends Component {
       this.setState({
         errorMessage: {
           title: 'Could not fetch subscribed services',
+          subtitle: `${e.message}`
+        }
+      });
+    }
+  };
+
+  fetchApartment = async () => {
+    try {
+      const apartment = await API.getApartment();
+      const address = `${apartment.street}\n${apartment.city}`;
+      this.setState({ address });
+    } catch (e) {
+      this.setState({
+        errorMessage: {
+          title: 'Could not fetch address',
           subtitle: `${e.message}`
         }
       });
@@ -70,16 +98,18 @@ class HomePage extends Component {
     });
 
   render() {
-    const { subscribedServices, refreshing, errorMessage } = this.state;
+    const {
+      subscribedServices,
+      refreshing,
+      errorMessage,
+      name,
+      address
+    } = this.state;
 
     return (
       <PullToRefresh onRefresh={this.onRefresh}>
         <div className="home-page">
-          <AppHeader
-            headline="PAULI TOIVONEN"
-            title={`URHO KEKKOSEN KATU 7B,\nHELSINKI`}
-            hasBgImage
-          />
+          <AppHeader headline={name} title={address} hasBgImage />
 
           <div className="home-page__content tab-page__content">
             <div className="home-page__cards-container">

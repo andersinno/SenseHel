@@ -96,7 +96,7 @@ export class PullToRefresh extends React.Component {
       return;
     }
 
-    e.preventDefault();
+    // e.preventDefault();
 
     if (this.currentY - this.startY >= this.props.pullDownThreshold) {
       this.setState({
