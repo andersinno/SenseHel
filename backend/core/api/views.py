@@ -1,7 +1,8 @@
-from rest_framework import viewsets, generics, mixins
+from rest_framework import generics, mixins, viewsets
 
-from ..models import Service, Apartment, SensorAttribute, Subscription
-from .serializers import ServiceSerializer, ApartmentSerializer, SubscriptionSerializer
+from ..models import Apartment, SensorAttribute, Service, Subscription
+from .serializers import (ApartmentSerializer, ServiceSerializer,
+                          SubscriptionSerializer)
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -13,6 +14,7 @@ class ApartmentViewSet(viewsets.ModelViewSet):
     """
     Serialize Apartments current authenticated user belongs to.
     """
+
     serializer_class = ApartmentSerializer
 
     def get_queryset(self):
@@ -25,13 +27,15 @@ class ApartmentServiceList(generics.ListAPIView):
     subscribe to considering what sensors are available and what
     requirements services have.
     """
+
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         apartment = Apartment.objects.get(user=self.request.user)
-        available_sensors = SensorAttribute.objects.filter(sensors__in=apartment.sensors.all())
+        available_sensors = SensorAttribute.objects.filter(
+            sensors__in=apartment.sensors.all()
+        )
         return Service.objects.filter(requires__in=available_sensors).distinct()
-
 
 
 # class SubscriptionList(generics.ListAPIView,
@@ -51,10 +55,12 @@ class ApartmentServiceList(generics.ListAPIView):
 #         return super().delete(request, *args, **kwargs)
 
 
-class SubscriptionViewSet(viewsets.mixins.ListModelMixin,
-                          viewsets.mixins.CreateModelMixin,
-                          viewsets.mixins.DestroyModelMixin,
-                          viewsets.GenericViewSet):
+class SubscriptionViewSet(
+    viewsets.mixins.ListModelMixin,
+    viewsets.mixins.CreateModelMixin,
+    viewsets.mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
 
     serializer_class = SubscriptionSerializer
 
@@ -67,4 +73,3 @@ class SubscriptionViewSet(viewsets.mixins.ListModelMixin,
 
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
-

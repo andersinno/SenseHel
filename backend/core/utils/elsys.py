@@ -13,14 +13,14 @@ TYPE_PULSE1 = 0x0A  # 2bytes relative pulse count
 def bin16dec(value):
     num = value & 0xFFFF
     if 0x8000 & num:
-        num = - (0x010000 - num)
+        num = -(0x010000 - num)
     return num
 
 
 def bin8dec(value):
     num = value & 0xFF
     if 0x80 & num:
-        num = - (0x0100 - num)
+        num = -(0x0100 - num)
     return num
 
 
@@ -37,7 +37,7 @@ def decode_elsys_payload(data):
             obj['temperature'] = temp / 10
             i += 2
         elif val == TYPE_RH:
-            rh = (data[i + 1])
+            rh = data[i + 1]
             obj['humidity'] = rh
             i += 1
         elif val == TYPE_ACC:
@@ -50,7 +50,7 @@ def decode_elsys_payload(data):
             obj['light'] = light
             i += 2
         elif val == TYPE_MOTION:
-            motion = (data[i + 1])
+            motion = data[i + 1]
             obj['motion'] = motion
             i += 1
         elif val == TYPE_CO2:

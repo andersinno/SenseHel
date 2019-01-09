@@ -1,15 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import (Apartment, Sensor, SensorAttribute, Service, User, Subscription)
+from .models import (Apartment, Sensor, SensorAttribute, Service, Subscription,
+                     User)
 
 
 class MyUserAdmin(UserAdmin):
     model = User
 
-    fieldsets = UserAdmin.fieldsets + (
-        ('Contact', {'fields': ('phone', )}),
-    )
+    fieldsets = UserAdmin.fieldsets + (('Contact', {'fields': ('phone',)}),)
 
 
 admin.site.register(Apartment)

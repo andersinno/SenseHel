@@ -13,6 +13,7 @@ class User(AbstractUser):
 
     See baseclass for full details
     """
+
     phone = models.IntegerField(null=True)
     invite_code = models.CharField(max_length=64)
 
