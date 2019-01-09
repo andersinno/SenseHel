@@ -74,3 +74,8 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.user} subscription of {self.service}'
+
+    class Meta:
+        unique_together = (
+            ('user', 'service')
+        )
