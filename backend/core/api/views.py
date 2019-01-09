@@ -1,4 +1,5 @@
-from rest_framework import generics, mixins, viewsets
+from rest_framework import generics, mixins, viewsets, status
+from rest_framework.response import Response
 
 from ..models import Apartment, SensorAttribute, Service, Subscription
 from .serializers import (ApartmentSerializer, ServiceSerializer,
@@ -38,23 +39,6 @@ class ApartmentServiceList(generics.ListAPIView):
         return Service.objects.filter(requires__in=available_sensors).distinct()
 
 
-# class SubscriptionList(generics.ListAPIView,
-#                        generics.DestroyAPIView):
-#     """
-#     Serialize Subscriptions current authenticated has.
-#     SubscriptionSerializer inlines Service
-#     """
-#     serializer_class = SubscriptionSerializer
-#
-#     def get_queryset(self):
-#         return Subscription.objects.filter(user=self.request.user)
-#
-#     def delete(self, request, *args, **kwargs):
-#         import IPython; IPython.embed()
-#         print("DESTROY CALLED " * 20)
-#         return super().delete(request, *args, **kwargs)
-
-
 class SubscriptionViewSet(
     viewsets.mixins.ListModelMixin,
     viewsets.mixins.CreateModelMixin,
@@ -68,8 +52,22 @@ class SubscriptionViewSet(
         return Subscription.objects.filter(user=self.request.user)
 
     def destroy(self, request, *args, **kwargs):
-        print("DESTROY CALLED " * 20)
         return super().destroy(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        # TODO: using serializers would be the right way ..
+
+        # serializer = self.get_serializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+
+        # headers = self.get_success_headers(serializer.data)
+        # return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+        service_id = int(request.data['service'])
+        if Subscription.objects.filter(user=self.request.user, service_id=service_id).exists():
+            return Response({"detail": "Subscription for this service exists"},
+                            status=status.HTTP_409_CONFLICT)
+
+        Subscription.objects.create(user=self.request.user, service_id=service_id)
+
+        return Response({}, status=status.HTTP_201_CREATED)
