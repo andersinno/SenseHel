@@ -7,7 +7,12 @@ import CollapsibleComponent from './CollapsibleComponent';
 import Card from '../Card';
 import '../Card/card.styles.css';
 
-const OfferedServiceCard = ({ service, onRequestFail, onRequestSuccess }) => {
+const OfferedServiceCard = ({
+  service,
+  onRequestFail,
+  onRequestSuccess,
+  subscribed
+}) => {
   const {
     id,
     img_logo_url: logoUrl,
@@ -64,6 +69,7 @@ const OfferedServiceCard = ({ service, onRequestFail, onRequestSuccess }) => {
             privacyPolicy={eula}
             onRequestFail={onRequestFail}
             onRequestSuccess={onRequestSuccess}
+            subscribed={subscribed}
           />
         }
       />

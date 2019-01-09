@@ -46,8 +46,8 @@ class HomePage extends Component {
 
   fetchSubscribedServices = async () => {
     try {
-      const res = await API.getSubscribedServices();
-      this.setState({ subscribedServices: res.data });
+      const subscribedServices = await API.getSubscribedServices();
+      this.setState({ subscribedServices });
     } catch (e) {
       this.setState({
         errorMessage: {

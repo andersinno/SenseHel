@@ -31,7 +31,12 @@ class Api {
   }
 
   async getSubscribedServices() {
-    return this.api.get('subscribed-services');
+    try {
+      const res = await this.api.get('subscriptions');
+      return _.map(res.data, 'service');
+    } catch (e) {
+      throw e;
+    }
   }
 
   async getSubscribedServicesIds() {

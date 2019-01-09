@@ -10,12 +10,14 @@ class SubscriptionsPage extends Component {
   state = {
     services: [],
     successMessage: '',
-    errorMessage: ''
+    errorMessage: '',
+    subscribedServicesIds: []
   };
 
   async componentDidMount() {
     this.updateWithPersistedServices();
     await this.fetchServices();
+    await this.fetchSubscribedServiceIds();
   }
 
   updateWithPersistedServices = () => {
@@ -45,18 +47,37 @@ class SubscriptionsPage extends Component {
     }
   };
 
+  fetchSubscribedServiceIds = async () => {
+    try {
+      const subscribedServicesIds = await API.getSubscribedServicesIds();
+
+      this.setState({ subscribedServicesIds });
+    } catch (e) {
+      this.handleRequestFail({
+        title: 'Failed to fetch subscribed services',
+        subtitle: `${e.message}`
+      });
+    }
+  };
+
+  isSubscribed = serviceId => {
+    const { subscribedServicesIds } = this.state;
+
+    return subscribedServicesIds.includes(serviceId);
+  };
+
   handleSnackbarClose = () => {
     this.setState({ errorMessage: '', successMessage: '' });
   };
 
-  handleSubscribeFail = message => {
+  handleRequestFail = message => {
     this.setState({
       errorMessage: message,
       successMessage: ''
     });
   };
 
-  handleSubscribeSuccess = message => {
+  handleRequestSuccess = message => {
     this.setState({
       errorMessage: '',
       successMessage: message
@@ -75,8 +96,9 @@ class SubscriptionsPage extends Component {
             <OfferedServiceCard
               key={service.id}
               service={service}
-              onRequestFail={m => this.handleSubscribeFail(m)}
-              onRequestSuccess={m => this.handleSubscribeSuccess(m)}
+              onRequestFail={m => this.handleRequestFail(m)}
+              onRequestSuccess={m => this.handleRequestSuccess(m)}
+              subscribed={this.isSubscribed(service.id)}
             />
           ))}
         </div>

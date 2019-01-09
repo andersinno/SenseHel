@@ -3,7 +3,6 @@ import BottomButton from '../BottomButton';
 import CheckboxesSection from './CheckboxesSection';
 import DetailItem from '../Card/DetailItem';
 import ConfirmDialog from '../ConfirmDialog';
-import API from '../../services/Api';
 
 class CollapsibleComponent extends Component {
   state = {
@@ -12,26 +11,6 @@ class CollapsibleComponent extends Component {
     requesting: false,
     subscribed: false,
     confirmOpen: false
-  };
-
-  async componentDidMount() {
-    await this.updateSubscribedStateFromServer();
-  }
-
-  updateSubscribedStateFromServer = async () => {
-    const { onRequestFail, serviceId } = this.props;
-    try {
-      const subscribedServicesIds = await API.getSubscribedServicesIds();
-
-      const subscribed = subscribedServicesIds.includes(serviceId);
-
-      this.setState({ subscribed });
-    } catch (e) {
-      onRequestFail({
-        title: 'Failed to fetch subscribed services',
-        subtitle: `${e.message}`
-      });
-    }
   };
 
   handleCheckChange = value => {
@@ -85,13 +64,13 @@ class CollapsibleComponent extends Component {
       serviceImageUrl,
       termsAndConditions,
       privacyPolicy,
+      subscribed,
       classes
     } = this.props;
     const {
       termsChecked,
       consentChecked,
       requesting,
-      subscribed,
       confirmOpen
     } = this.state;
 
