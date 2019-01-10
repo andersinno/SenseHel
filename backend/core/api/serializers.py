@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Apartment, Service, Subscription, User
+from ..models import Apartment, Service, Subscription, User, ApartmentSensor, ApartmentSensorValue
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,10 +27,28 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = fields
 
 
+class ApartmentSensorValueSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ApartmentSensorValue
+        fields = ('id', 'value', 'updated_at')
+
+
+class ApartmentSensorSerializer(serializers.HyperlinkedModelSerializer):
+    # TODO: nesting resources ?
+    # apartment_sensor_values = ApartmentSensorValueSerializer()
+
+    class Meta:
+        model = ApartmentSensor
+        fields = ('id', 'apartment_sensor_values')
+
+
 class ApartmentSerializer(serializers.HyperlinkedModelSerializer):
+    # TODO: nesting resources ?
+    # apartment_sensors = ApartmentSensorSerializer()
+
     class Meta:
         model = Apartment
-        fields = ('id', 'street', 'city', 'postal_code')
+        fields = ('id', 'street', 'city', 'postal_code', 'apartment_sensors')
         read_only_fields = fields
 
 

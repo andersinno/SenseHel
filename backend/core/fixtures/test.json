@@ -1,89 +1,162 @@
 [
-  {
+{
+    "model": "core.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$Z87ODYjPNBqw$Kks7MedX7Ma4mGoZclYifEo/somHzBkm9OqrkdWD8rw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "test",
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john.doe@localhost",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-01-10T16:31:48Z",
+        "phone": 123456789,
+        "invite_code": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
     "model": "core.apartment",
     "pk": 1,
     "fields": {
-      "street": "Street",
-      "city": "City",
-      "postal_code": 1234,
-      "user_id": 1,
-      "sensors": [
-          1
-      ]
+        "user": 2,
+        "street": "Bulevardi 1",
+        "city": "Helsinki",
+        "postal_code": "00100"
     }
-  },
-  {
+},
+{
+    "model": "core.apartmentsensor",
+    "pk": 1,
+    "fields": {
+        "apartment": 1,
+        "sensor": 1
+    }
+},
+{
+    "model": "core.apartmentsensorvalue",
+    "pk": 1,
+    "fields": {
+        "apartment_sensor": 1,
+        "attribute": 1,
+        "value": 22,
+        "updated_at": "2019-01-10T16:35:06.813Z"
+    }
+},
+{
+    "model": "core.apartmentsensorvalue",
+    "pk": 2,
+    "fields": {
+        "apartment_sensor": 1,
+        "attribute": 4,
+        "value": 400,
+        "updated_at": "2019-01-10T16:36:13.121Z"
+    }
+},
+{
+    "model": "core.apartmentsensorvalue",
+    "pk": 3,
+    "fields": {
+        "apartment_sensor": 1,
+        "attribute": 2,
+        "value": 40,
+        "updated_at": "2019-01-10T16:36:33.308Z"
+    }
+},
+{
     "model": "core.sensor",
     "pk": 1,
     "fields": {
-      "description": "Elsys ERS-CO2",
-      "provides": [1, 2, 4]
+        "description": "Elsys ERS-CO2",
+        "provides": [
+            1,
+            2,
+            4
+        ]
     }
-  },
-  {
+},
+{
     "model": "core.sensor",
     "pk": 2,
     "fields": {
-      "description": "Mock, Temperature only",
-      "provides": [1]
+        "description": "Mock, Temperature only",
+        "provides": [
+            1
+        ]
     }
-  },
-  {
+},
+{
+    "model": "core.sensor",
+    "pk": 3,
+    "fields": {
+        "description": "Mock, Presence only",
+        "provides": [
+            3
+        ]
+    }
+},
+{
     "model": "core.sensorattribute",
     "pk": 1,
     "fields": {
-      "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
-      "description": "Temperature, Celcius"
+        "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
+        "description": "Temperature, Celcius"
     }
-  },
-  {
+},
+{
     "model": "core.sensorattribute",
     "pk": 2,
     "fields": {
-      "uri": "http://www.yso.fi/onto/yso/p6453",
-      "description": "Humidity, Percentage"
+        "uri": "http://www.yso.fi/onto/yso/p6453",
+        "description": "Humidity, Percentage"
     }
-  },
-  {
+},
+{
     "model": "core.sensorattribute",
     "pk": 3,
     "fields": {
-      "uri": "http://finto.fi/yso/en/page/p9266",
-      "description": "Presence"
+        "uri": "http://finto.fi/yso/en/page/p9266",
+        "description": "Presence"
     }
-  },
-  {
+},
+{
     "model": "core.sensorattribute",
     "pk": 4,
     "fields": {
-      "uri": "http://finto.fi/afo/en/page/p4770",
-      "description": "Co2, PPM"
+        "uri": "http://finto.fi/afo/en/page/p4770",
+        "description": "Co2, PPM"
     }
-  },
-  {
+},
+{
     "model": "core.service",
     "pk": 1,
     "fields": {
-      "name": "Mock 1 (temp, co2)",
-      "price": "Free",
-      "benefit_short": "Energy savings",
-      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "description": "Requires temperature and co2",
-      "eula_url": "https://google.com",
-      "requires": [1, 4]
+        "name": "Energy Saver",
+        "price": "Free",
+        "benefit_short": "Save energy",
+        "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus mauris a diam maecenas sed enim ut sem. Sagittis vitae et leo duis ut. Ut pharetra sit amet aliquam id diam maecenas. Risus nullam eget felis eget nunc lobortis mattis.",
+        "eula_url": "http://localhost/eula",
+        "img_logo_url": "http://localhost/img_logo",
+        "img_service_url": "http://localhost/img_service",
+        "requires": [
+            1,
+            4
+        ]
     }
-  },
-  {
-    "model": "core.service",
-    "pk": 2,
+},
+{
+    "model": "core.subscription",
+    "pk": 1,
     "fields": {
-      "name": "Mock 2 (presence)",
-      "price": "Free",
-      "benefit_short": "Energy savings",
-      "benefit_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "description": "Requires presence",
-      "eula_url": "https://google.com",
-      "requires": [3]
+        "user": 2,
+        "service": 1,
+        "created_at": "2019-01-10T16:34:45.436Z",
+        "updated_at": "2019-01-10T16:34:45.436Z"
     }
-  }
+}
 ]

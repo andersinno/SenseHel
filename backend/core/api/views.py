@@ -1,9 +1,9 @@
 from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 
-from ..models import Apartment, SensorAttribute, Service, Subscription
+from ..models import Apartment, Service, Subscription, ApartmentSensor, ApartmentSensorValue
 from .serializers import (ApartmentSerializer, ServiceSerializer,
-                          SubscriptionSerializer)
+                          SubscriptionSerializer, ApartmentSensorSerializer, ApartmentSensorValueSerializer)
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -15,11 +15,20 @@ class ApartmentViewSet(viewsets.ModelViewSet):
     """
     Serialize Apartments current authenticated user belongs to.
     """
-
     serializer_class = ApartmentSerializer
 
     def get_queryset(self):
         return Apartment.objects.filter(user=self.request.user)
+
+
+class ApartmentSensorViewSet(viewsets.ModelViewSet):
+    queryset = ApartmentSensor.objects.all()  # TODO: require user has access for this resource
+    serializer_class = ApartmentSensorSerializer
+
+
+class ApartmentSensorValueViewSet(viewsets.ModelViewSet):
+    queryset = ApartmentSensorValue.objects.all()  # TODO: require user has access for this resource
+    serializer_class = ApartmentSensorValueSerializer
 
 
 class ApartmentServiceList(generics.ListAPIView):
@@ -28,15 +37,14 @@ class ApartmentServiceList(generics.ListAPIView):
     subscribe to considering what sensors are available and what
     requirements services have.
     """
-
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         apartment = Apartment.objects.get(user=self.request.user)
-        available_sensors = SensorAttribute.objects.filter(
-            sensors__in=apartment.sensors.all()
-        )
-        return Service.objects.filter(requires__in=available_sensors).distinct()
+        available_attributes = []
+        for sensor in [apartment_sensor.sensor for apartment_sensor in apartment.apartment_sensors.all()]:
+            available_attributes.extend(sensor.provides.all())
+        return Service.objects.filter(requires__in=available_attributes).distinct()
 
 
 class SubscriptionViewSet(
@@ -45,7 +53,10 @@ class SubscriptionViewSet(
     viewsets.mixins.DestroyModelMixin,
     viewsets.GenericViewSet,
 ):
-
+    """
+    Serialize all subscriptions and provide methods to create new
+    subscriptions and terminate old ones.
+    """
     serializer_class = SubscriptionSerializer
 
     def get_queryset(self):
