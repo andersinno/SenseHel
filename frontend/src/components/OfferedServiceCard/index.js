@@ -9,9 +9,9 @@ import '../Card/card.styles.css';
 
 const OfferedServiceCard = ({
   service,
-  onRequestFail,
-  onRequestSuccess,
-  subscribed
+  subscribed,
+  handleSubscribe,
+  handleUnsubscribe
 }) => {
   const {
     id,
@@ -67,9 +67,9 @@ const OfferedServiceCard = ({
             detailFields={collapsibleFields}
             termsAndConditions={eula}
             privacyPolicy={eula}
-            onRequestFail={onRequestFail}
-            onRequestSuccess={onRequestSuccess}
             subscribed={subscribed}
+            handleSubscribe={handleSubscribe}
+            handleUnsubscribe={handleUnsubscribe}
           />
         }
       />

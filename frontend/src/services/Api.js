@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'lodash';
 import LocalStorageKeys from '../config/LocalStorageKeys';
 
 const URL = 'http://127.0.0.1:8000/api/';
@@ -16,6 +15,8 @@ class Api {
     this.api.interceptors.request.use(config => {
       config.headers.post.Authorization = `Token ${token}`; // eslint-disable-line
       config.headers.get.Authorization = `Token ${token}`; // eslint-disable-line
+      config.headers.delete.Authorization = `Token ${token}`; // eslint-disable-line
+
       return config;
     });
   }
@@ -53,21 +54,19 @@ class Api {
   async getSubscribedServices() {
     try {
       const res = await this.api.get('subscriptions');
-      return _.map(res.data, 'service');
+      localStorage.setItem(
+        LocalStorageKeys.SUBSCRIBED_SERVICES,
+        JSON.stringify(res.data)
+      );
+
+      return res.data;
     } catch (e) {
       throw e;
     }
   }
 
-  async getSubscribedServicesIds() {
-    try {
-      const res = await this.api.get('subscriptions');
-      const subscriptions = res.data;
-
-      return _.map(subscriptions, 'id');
-    } catch (e) {
-      throw e;
-    }
+  deleteSubscribedService(id) {
+    return this.api.delete(`subscriptions/${id}`);
   }
 }
 

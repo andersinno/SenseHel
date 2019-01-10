@@ -59,6 +59,7 @@ class HomePage extends Component {
   fetchSubscribedServices = async () => {
     try {
       const subscribedServices = await API.getSubscribedServices();
+
       this.setState({ subscribedServices });
     } catch (e) {
       this.setState({
@@ -131,7 +132,7 @@ class HomePage extends Component {
               </p>
 
               {subscribedServices.length > 0 ? (
-                subscribedServices.map(s => (
+                subscribedServices.map(({ service: s }) => (
                   <SubscribedServiceCard
                     key={s.name}
                     logo={s.img_logo_url}

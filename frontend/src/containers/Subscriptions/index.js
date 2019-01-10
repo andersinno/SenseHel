@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import './subscriptions.styles.css';
 import AppHeader from '../../components/AppHeader';
 import OfferedServiceCard from '../../components/OfferedServiceCard';
@@ -11,7 +12,7 @@ class SubscriptionsPage extends Component {
     services: [],
     successMessage: '',
     errorMessage: '',
-    subscribedServicesIds: []
+    subscriptions: []
   };
 
   async componentDidMount() {
@@ -47,23 +48,34 @@ class SubscriptionsPage extends Component {
     }
   };
 
-  fetchSubscribedServiceIds = async () => {
-    try {
-      const subscribedServicesIds = await API.getSubscribedServicesIds();
+  fetchSubscribedServiceIds = () => {
+    const subscriptionsStr = localStorage.getItem(
+      LocalStorageKeys.SUBSCRIBED_SERVICES
+    );
+    const subscriptions = _.map(
+      JSON.parse(subscriptionsStr),
+      _.partialRight(_.pick, ['id', 'service.id'])
+    );
 
-      this.setState({ subscribedServicesIds });
-    } catch (e) {
-      this.handleRequestFail({
-        title: 'Failed to fetch subscribed services',
-        subtitle: `${e.message}`
-      });
-    }
+    this.setState({ subscriptions });
   };
 
   isSubscribed = serviceId => {
-    const { subscribedServicesIds } = this.state;
+    const { subscriptions } = this.state;
 
-    return subscribedServicesIds.includes(serviceId);
+    return _.map(subscriptions, 'service.id').includes(serviceId);
+  };
+
+  getSubscriptionId = serviceId => {
+    const { subscriptions } = this.state;
+
+    const subscription = _.find(subscriptions, s => s.service.id === serviceId);
+
+    if (subscription) return subscription.id;
+
+    throw new Error(
+      'Subscription does not exist. Please refresh your browser and try again.'
+    );
   };
 
   handleSnackbarClose = () => {
@@ -84,6 +96,33 @@ class SubscriptionsPage extends Component {
     });
   };
 
+  handleSubscribe = async () => {
+    setTimeout(() => {
+      this.handleRequestSuccess({
+        title: 'Successfully Subscribed',
+        subtitle: 'You can view your subscriptions in home page'
+      });
+    }, 2000);
+  };
+
+  handleUnsubscribe = async id => {
+    try {
+      const subscriptionId = this.getSubscriptionId(id);
+      await API.deleteSubscribedService(subscriptionId);
+
+      this.handleRequestSuccess('Successfully unsubscribed from service');
+
+      // Refetch subscribed services and set state to rerender
+      await API.getSubscribedServices();
+      this.fetchSubscribedServiceIds();
+    } catch (e) {
+      this.handleRequestFail({
+        title: 'Could not unsubscribe from service',
+        subtitle: `${e.message}`
+      });
+    }
+  };
+
   render() {
     const { services, errorMessage, successMessage } = this.state;
 
@@ -96,9 +135,9 @@ class SubscriptionsPage extends Component {
             <OfferedServiceCard
               key={service.id}
               service={service}
-              onRequestFail={m => this.handleRequestFail(m)}
-              onRequestSuccess={m => this.handleRequestSuccess(m)}
               subscribed={this.isSubscribed(service.id)}
+              handleSubscribe={this.handleSubscribe}
+              handleUnsubscribe={() => this.handleUnsubscribe(service.id)}
             />
           ))}
         </div>

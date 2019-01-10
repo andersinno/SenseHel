@@ -8,55 +8,21 @@ class CollapsibleComponent extends Component {
   state = {
     termsChecked: false,
     consentChecked: false,
-    requesting: false,
-    subscribed: false,
-    confirmOpen: false
+    confirmOpen: false,
+    requesting: false
   };
 
   handleCheckChange = value => {
     this.setState({ [value]: !this.state[value] }); // eslint-disable-line
   };
 
-  handleSubscribe = () => {
-    const { onRequestSuccess } = this.props;
-
-    // make some API call
-    this.setState({ requesting: true });
-
-    setTimeout(() => {
-      onRequestSuccess({
-        title: 'Successfully Subscribed',
-        subtitle: 'You can view your subscriptions in home page'
-      });
-      this.setState({ requesting: false, subscribed: true });
-    }, 2000);
-
-    // setTimeout(
-    //   () => {
-    //     onRequestFail('Subscribe failed!');
-    //     this.setState({ requesting: false, subscribed: false })
-    //   },2000
-    // );
-  };
-
-  onUnsubscribe = () => this.setState({ confirmOpen: true });
-
-  handleUnsubscribe = () => {
-    const { onRequestSuccess } = this.props;
-
-    // make some API call
+  onRequest = async requestHandler => {
     this.setState({ requesting: true, confirmOpen: false });
-
-    setTimeout(() => {
-      onRequestSuccess('Successfully unsubscribed');
-      this.setState({ requesting: false, subscribed: false });
-    }, 2000);
-
-    // setTimeout(() => {
-    //   onRequestFail('Unsubscribe failed!');
-    //   this.setState({ requesting: false, subscribed: false });
-    // }, 2000);
+    await requestHandler();
+    this.setState({ requesting: false });
   };
+
+  onUnsubscribeClick = () => this.setState({ confirmOpen: true });
 
   render() {
     const {
@@ -65,13 +31,15 @@ class CollapsibleComponent extends Component {
       termsAndConditions,
       privacyPolicy,
       subscribed,
+      handleSubscribe,
+      handleUnsubscribe,
       classes
     } = this.props;
     const {
       termsChecked,
       consentChecked,
-      requesting,
-      confirmOpen
+      confirmOpen,
+      requesting
     } = this.state;
 
     const {
@@ -121,7 +89,11 @@ class CollapsibleComponent extends Component {
         <BottomButton
           variant={subscribed ? 'negative' : 'default'}
           title={buttonTitle}
-          onClick={!subscribed ? this.handleSubscribe : this.onUnsubscribe}
+          onClick={
+            !subscribed
+              ? () => this.onRequest(handleSubscribe)
+              : this.onUnsubscribeClick
+          }
           disabled={!subscribed && (!termsChecked || !consentChecked)}
           loading={requesting}
         />
@@ -129,7 +101,7 @@ class CollapsibleComponent extends Component {
         <ConfirmDialog
           title="Confirm Unsubscribe"
           description="Unsubcribing will revoke all consents given and you will no longer have access to the benefits of this service"
-          handleConfirm={this.handleUnsubscribe}
+          handleConfirm={() => this.onRequest(handleUnsubscribe)}
           open={confirmOpen}
           handleClose={() => this.setState({ confirmOpen: false })}
         />
