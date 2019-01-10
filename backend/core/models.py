@@ -13,6 +13,7 @@ class User(AbstractUser):
 
     See baseclass for full details
     """
+
     phone = models.IntegerField(null=True)
     invite_code = models.CharField(max_length=64)
 
@@ -73,3 +74,8 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.user} subscription of {self.service}'
+
+    class Meta:
+        unique_together = (
+            ('user', 'service')
+        )

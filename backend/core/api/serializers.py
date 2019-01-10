@@ -1,17 +1,12 @@
 from rest_framework import serializers
 
-from ..models import Service, Apartment, Subscription, User
+from ..models import Apartment, Service, Subscription, User
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            'username',
-            'first_name',
-            'last_name',
-            'phone',
-        )
+        fields = ('username', 'first_name', 'last_name', 'phone')
         read_only_fields = fields
 
 
@@ -19,8 +14,15 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
         fields = (
-            'id', 'name', 'description', 'price', 'benefit_short', 'benefit_long',
-            'eula_url', 'img_logo_url', 'img_service_url',
+            'id',
+            'name',
+            'description',
+            'price',
+            'benefit_short',
+            'benefit_long',
+            'eula_url',
+            'img_logo_url',
+            'img_service_url',
         )
         read_only_fields = fields
 
