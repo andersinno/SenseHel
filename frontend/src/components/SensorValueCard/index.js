@@ -6,27 +6,27 @@ import Icons from '../../assets/Icons';
 const getIcon = (type, value) => {
   switch (type) {
     case 'temperature':
-      if (value > 35 || value < 0) {
+      if (value > 30 || value < 0) {
         return Icons.Temperature_Danger;
       }
 
-      if (value > 25 || value < 10) {
+      if (value > 24 || value < 17) {
         return Icons.Temperature_Warning;
       }
 
       return Icons.Temperature_Normal;
     case 'humidity':
-      if (value > 80 || value < 10) {
+      if (value > 70 || value < 35) {
         return Icons.Humidity_Danger;
       }
 
-      if (value > 60 || value < 45) {
+      if (value > 55 || value < 50) {
         return Icons.Humidity_Warning;
       }
 
       return Icons.Humidity_Normal;
     case 'carbon_dioxide':
-      if (value > 2000 || value < 100) {
+      if (value > 1500 || value < 100) {
         return Icons.CO2_Danger;
       }
 
