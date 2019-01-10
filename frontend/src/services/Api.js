@@ -65,6 +65,12 @@ class Api {
     }
   }
 
+  addSubscribedService(id) {
+    return this.api.post('subscriptions/', {
+      service: id
+    });
+  }
+
   deleteSubscribedService(id) {
     return this.api.delete(`subscriptions/${id}`);
   }

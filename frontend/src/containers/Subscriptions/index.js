@@ -96,13 +96,21 @@ class SubscriptionsPage extends Component {
     });
   };
 
-  handleSubscribe = async () => {
-    setTimeout(() => {
+  handleSubscribe = async id => {
+    try {
+      await API.addSubscribedService(id);
       this.handleRequestSuccess({
-        title: 'Successfully Subscribed',
-        subtitle: 'You can view your subscriptions in home page'
+        title: 'Successfully subscribed!',
+        subtitle: 'You can now view your subscriptions in your home page'
       });
-    }, 2000);
+
+      await this.refetchSubscriptions();
+    } catch (e) {
+      this.handleRequestFail({
+        title: 'Could not subscribe to service',
+        subtitle: `${e.message}`
+      });
+    }
   };
 
   handleUnsubscribe = async id => {
@@ -110,17 +118,21 @@ class SubscriptionsPage extends Component {
       const subscriptionId = this.getSubscriptionId(id);
       await API.deleteSubscribedService(subscriptionId);
 
-      this.handleRequestSuccess('Successfully unsubscribed from service');
+      this.handleRequestSuccess('Successfully unsubscribed');
 
-      // Refetch subscribed services and set state to rerender
-      await API.getSubscribedServices();
-      this.fetchSubscribedServiceIds();
+      await this.refetchSubscriptions();
     } catch (e) {
       this.handleRequestFail({
         title: 'Could not unsubscribe from service',
         subtitle: `${e.message}`
       });
     }
+  };
+
+  refetchSubscriptions = async () => {
+    // Refetch subscribed services and set state to rerender
+    await API.getSubscribedServices();
+    this.fetchSubscribedServiceIds();
   };
 
   render() {
@@ -136,7 +148,7 @@ class SubscriptionsPage extends Component {
               key={service.id}
               service={service}
               subscribed={this.isSubscribed(service.id)}
-              handleSubscribe={this.handleSubscribe}
+              handleSubscribe={() => this.handleSubscribe(service.id)}
               handleUnsubscribe={() => this.handleUnsubscribe(service.id)}
             />
           ))}
