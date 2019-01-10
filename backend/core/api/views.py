@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins, viewsets, status
+from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 
 from ..models import Apartment, SensorAttribute, Service, Subscription
@@ -69,5 +69,4 @@ class SubscriptionViewSet(
                             status=status.HTTP_409_CONFLICT)
 
         Subscription.objects.create(user=self.request.user, service_id=service_id)
-
         return Response({}, status=status.HTTP_201_CREATED)
