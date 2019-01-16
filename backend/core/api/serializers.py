@@ -27,19 +27,22 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = fields
 
 
-class ApartmentSensorValueSerializer(serializers.HyperlinkedModelSerializer):
+class ApartmentSensorValueSerializer(serializers.ModelSerializer):
+    sensor_name = serializers.CharField(source='attribute.name')
+    description = serializers.CharField(source='attribute.description')
+    id = serializers.CharField(source='apartment_sensor.sensor_id')
+
     class Meta:
         model = ApartmentSensorValue
-        fields = ('id', 'value', 'updated_at')
+        fields = ('id', 'value', 'updated_at', 'sensor_name', 'description')
 
 
-class ApartmentSensorSerializer(serializers.HyperlinkedModelSerializer):
-    # TODO: nesting resources ?
-    # apartment_sensor_values = ApartmentSensorValueSerializer()
+class ApartmentSensorSerializer(serializers.ModelSerializer):
+    apartment_sensor_values = ApartmentSensorValueSerializer(many=True, read_only=True)
 
     class Meta:
         model = ApartmentSensor
-        fields = ('id', 'apartment_sensor_values')
+        fields = ('id', 'apartment_sensor_values', 'identifier')
 
 
 class ApartmentSerializer(serializers.HyperlinkedModelSerializer):

@@ -33,11 +33,16 @@ class Apartment(models.Model):
 
 class ApartmentSensor(models.Model):
     """
-    Represent a sensor in a apartment, taking measurements
+    Represent a sensor in a apartment, taking measurements, physical installation
+
+    `identifier`
+        Used to identify physical product to be updated via APIs.
+        Could be device serial number.
     """
     apartment = models.ForeignKey(Apartment, related_name='apartment_sensors',
                                   on_delete=models.CASCADE)
     sensor = models.ForeignKey('Sensor', on_delete=models.DO_NOTHING)
+    identifier = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return f'Sensor in apartment {self.apartment}'
@@ -78,6 +83,9 @@ class SensorAttribute(models.Model):
     """
     uri = models.CharField(max_length=255)
     description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, default='sensor')
+    #serial_number = models.CharField(max_length=128, default='T-800')
+    #sensor_type = models.CharField(max_length=128, default='N/A')
 
     def __str__(self):
         return f'{self.uri} ({self.description})'
