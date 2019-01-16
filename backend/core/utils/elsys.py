@@ -1,3 +1,5 @@
+import binascii
+
 TYPE_TEMP = 0x01  # temp 2 bytes -3276.8°C -->3276.7°C
 TYPE_RH = 0x02  # Humidity 1 byte  0-100%
 TYPE_ACC = 0x03  # acceleration 3 bytes X,Y,Z -128 --> 127 +/-63=1G
@@ -82,6 +84,6 @@ def decode_elsys_payload(data):
 
 
 if __name__ == '__main__':
-    # decoded = decode_elsys_payload(hexlify(b'\x01\x00\xCD'))
-    decoded = decode_elsys_payload(b'\x01\x00\xCD')
+    payload = binascii.unhexlify('0100CD')
+    decoded = decode_elsys_payload(payload)
     print(decoded)
