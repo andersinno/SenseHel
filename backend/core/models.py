@@ -83,9 +83,6 @@ class SensorAttribute(models.Model):
     """
     uri = models.CharField(max_length=255)
     description = models.CharField(max_length=128)
-    name = models.CharField(max_length=128, default='sensor')
-    #serial_number = models.CharField(max_length=128, default='T-800')
-    #sensor_type = models.CharField(max_length=128, default='N/A')
 
     def __str__(self):
         return f'{self.uri} ({self.description})'

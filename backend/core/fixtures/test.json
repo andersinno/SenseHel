@@ -34,7 +34,8 @@
     "pk": 1,
     "fields": {
         "apartment": 1,
-        "sensor": 1
+        "sensor": 1,
+        "identifier": "test-identifier"
     }
 },
 {

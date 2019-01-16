@@ -28,13 +28,12 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ApartmentSensorValueSerializer(serializers.ModelSerializer):
-    sensor_name = serializers.CharField(source='attribute.name')
     description = serializers.CharField(source='attribute.description')
     id = serializers.CharField(source='apartment_sensor.sensor_id')
 
     class Meta:
         model = ApartmentSensorValue
-        fields = ('id', 'value', 'updated_at', 'sensor_name', 'description')
+        fields = ('id', 'value', 'updated_at', 'description')
 
 
 class ApartmentSensorSerializer(serializers.ModelSerializer):
