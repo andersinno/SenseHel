@@ -5,6 +5,7 @@ from rest_framework.schemas import get_schema_view
 from . import views
 
 router = routers.DefaultRouter()
+router.register(r'sensors', views.SensorViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'apartments', views.ApartmentViewSet, base_name='apartment-list')
 router.register(
@@ -19,7 +20,7 @@ schema_view = get_schema_view(title='SenseHel API')
 urls = [
     url(r'schema/', schema_view),
     url(r'available-services', views.ApartmentServiceList.as_view()),
-    # url(r'subscriptions', views.SubscriptionList.as_view()),
+    url(r'update-sensor-by-identifier', views.update_sensor_by_identifier)
 ]
 
 urlpatterns = router.urls + urls

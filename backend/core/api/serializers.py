@@ -1,18 +1,18 @@
 from rest_framework import serializers
 
-from ..models import Apartment, Service, Subscription, User, ApartmentSensor, ApartmentSensorValue
+from .. import models
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = models.User
         fields = ('username', 'first_name', 'last_name', 'phone')
         read_only_fields = fields
 
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Service
+        model = models.Service
         fields = (
             'id',
             'name',
@@ -27,20 +27,36 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = fields
 
 
-class ApartmentSensorValueSerializer(serializers.ModelSerializer):
-    description = serializers.CharField(source='attribute.description')
-    id = serializers.CharField(source='apartment_sensor.sensor_id')
+class SensorSerializer(serializers.HyperlinkedModelSerializer):
+    # Not required by frontend currently
+    # TODO: provides field
 
     class Meta:
-        model = ApartmentSensorValue
-        fields = ('id', 'value', 'updated_at', 'description')
+        model = models.Sensor
+        fields = (
+            'id',
+            'description',
+        )
+        read_only_fields = fields
+
+
+class ApartmentSensorValueSerializer(serializers.ModelSerializer):
+    description = serializers.CharField(source='attribute.description')
+    uri = serializers.CharField(source='attribute.uri')
+
+    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-details', read_only=True)
+    #sensor_id = serializers.CharField(source='apartment_sensor.sensor_id')
+
+    class Meta:
+        model = models.ApartmentSensorValue
+        fields = ('sensor', 'value', 'updated_at', 'description', 'uri')
 
 
 class ApartmentSensorSerializer(serializers.ModelSerializer):
     apartment_sensor_values = ApartmentSensorValueSerializer(many=True, read_only=True)
 
     class Meta:
-        model = ApartmentSensor
+        model = models.ApartmentSensor
         fields = ('id', 'apartment_sensor_values', 'identifier')
 
 
@@ -49,7 +65,7 @@ class ApartmentSerializer(serializers.HyperlinkedModelSerializer):
     # apartment_sensors = ApartmentSensorSerializer()
 
     class Meta:
-        model = Apartment
+        model = models.Apartment
         fields = ('id', 'street', 'city', 'postal_code', 'apartment_sensors')
         read_only_fields = fields
 
@@ -58,5 +74,5 @@ class SubscriptionSerializer(serializers.HyperlinkedModelSerializer):
     service = ServiceSerializer()
 
     class Meta:
-        model = Subscription
+        model = models.Subscription
         fields = ('id', 'created_at', 'updated_at', 'service')
