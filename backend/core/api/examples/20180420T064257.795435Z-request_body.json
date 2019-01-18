@@ -1,1 +1,47 @@
-{"DevEUI_uplink": {"Time": "2018-04-20T08:42:57.000+02:00","DevEUI": "A81758FFFE030CF6","FPort": "5","FCntUp": "90782","ADRbit": "1","MType": "2","FCntDn": "70445","payload_hex": "0100dc021c04004c0500062710070e29","mic_hex": "5c937326","Lrcid": "00000201","LrrRSSI": "-98.000000","LrrSNR": "4.000000","SpFact": "7","SubBand": "G1","Channel": "LC1","DevLrrCnt": "1","Lrrid": "FF017EE8","Late": "0","LrrLAT": "60.165089","LrrLON": "24.946842","Lrrs": {"Lrr": [{"Lrrid": "FF017EE8","Chain": "0","LrrRSSI": "-98.000000","LrrSNR": "4.000000","LrrESP": "-99.455406"}]},"CustomerID": "100002581","CustomerData": {"alr":{"pro":"LORA/Generic","ver":"1"}},"ModelCfg": "0","BatteryLevel": "254","BatteryTime": "2018-04-20T08:42:57.000+02:00","Margin": "13","DevAddr": "FE030CF6"}}
+{
+  "DevEUI_uplink": {
+    "Time": "2018-04-20T08:42:57.000+02:00",
+    "DevEUI": "A81758FFFE030CF6",
+    "FPort": "5",
+    "FCntUp": "90782",
+    "ADRbit": "1",
+    "MType": "2",
+    "FCntDn": "70445",
+    "payload_hex": "0100dc021c04004c0500062710070e29",
+    "mic_hex": "5c937326",
+    "Lrcid": "00000201",
+    "LrrRSSI": "-98.000000",
+    "LrrSNR": "4.000000",
+    "SpFact": "7",
+    "SubBand": "G1",
+    "Channel": "LC1",
+    "DevLrrCnt": "1",
+    "Lrrid": "FF017EE8",
+    "Late": "0",
+    "LrrLAT": "60.165089",
+    "LrrLON": "24.946842",
+    "Lrrs": {
+      "Lrr": [
+        {
+          "Lrrid": "FF017EE8",
+          "Chain": "0",
+          "LrrRSSI": "-98.000000",
+          "LrrSNR": "4.000000",
+          "LrrESP": "-99.455406"
+        }
+      ]
+    },
+    "CustomerID": "100002581",
+    "CustomerData": {
+      "alr": {
+        "pro": "LORA/Generic",
+        "ver": "1"
+      }
+    },
+    "ModelCfg": "0",
+    "BatteryLevel": "254",
+    "BatteryTime": "2018-04-20T08:42:57.000+02:00",
+    "Margin": "13",
+    "DevAddr": "FE030CF6"
+  }
+}

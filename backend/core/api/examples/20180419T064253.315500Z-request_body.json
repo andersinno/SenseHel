@@ -1,1 +1,61 @@
-{"DevEUI_uplink": {"Time": "2018-04-19T08:42:52.000+02:00","DevEUI": "A81758FFFE030CF6","FPort": "5","FCntUp": "82092","ADRbit": "1","MType": "2","FCntDn": "64651","payload_hex": "0100e1021c0400990500062710070e29","mic_hex": "2415cff2","Lrcid": "00000201","LrrRSSI": "-107.000000","LrrSNR": "7.000000","SpFact": "7","SubBand": "G2","Channel": "LC7","DevLrrCnt": "3","Lrrid": "FF017EB7","Late": "0","LrrLAT": "60.183651","LrrLON": "24.971598","Lrrs": {"Lrr": [{"Lrrid": "FF017EB7","Chain": "0","LrrRSSI": "-107.000000","LrrSNR": "7.000000","LrrESP": "-107.790100"},{"Lrrid": "FF017DB2","Chain": "0","LrrRSSI": "-114.000000","LrrSNR": "-5.000000","LrrESP": "-120.193314"},{"Lrrid": "004A085D","Chain": "0","LrrRSSI": "-112.000000","LrrSNR": "-5.250000","LrrESP": "-118.384544"}]},"CustomerID": "100002581","CustomerData": {"alr":{"pro":"LORA/Generic","ver":"1"}},"ModelCfg": "0","BatteryLevel": "254","BatteryTime": "2018-04-19T08:42:52.000+02:00","Margin": "206","DevAddr": "FE030CF6"}}
+{
+  "DevEUI_uplink": {
+    "Time": "2018-04-19T08:42:52.000+02:00",
+    "DevEUI": "A81758FFFE030CF6",
+    "FPort": "5",
+    "FCntUp": "82092",
+    "ADRbit": "1",
+    "MType": "2",
+    "FCntDn": "64651",
+    "payload_hex": "0100e1021c0400990500062710070e29",
+    "mic_hex": "2415cff2",
+    "Lrcid": "00000201",
+    "LrrRSSI": "-107.000000",
+    "LrrSNR": "7.000000",
+    "SpFact": "7",
+    "SubBand": "G2",
+    "Channel": "LC7",
+    "DevLrrCnt": "3",
+    "Lrrid": "FF017EB7",
+    "Late": "0",
+    "LrrLAT": "60.183651",
+    "LrrLON": "24.971598",
+    "Lrrs": {
+      "Lrr": [
+        {
+          "Lrrid": "FF017EB7",
+          "Chain": "0",
+          "LrrRSSI": "-107.000000",
+          "LrrSNR": "7.000000",
+          "LrrESP": "-107.790100"
+        },
+        {
+          "Lrrid": "FF017DB2",
+          "Chain": "0",
+          "LrrRSSI": "-114.000000",
+          "LrrSNR": "-5.000000",
+          "LrrESP": "-120.193314"
+        },
+        {
+          "Lrrid": "004A085D",
+          "Chain": "0",
+          "LrrRSSI": "-112.000000",
+          "LrrSNR": "-5.250000",
+          "LrrESP": "-118.384544"
+        }
+      ]
+    },
+    "CustomerID": "100002581",
+    "CustomerData": {
+      "alr": {
+        "pro": "LORA/Generic",
+        "ver": "1"
+      }
+    },
+    "ModelCfg": "0",
+    "BatteryLevel": "254",
+    "BatteryTime": "2018-04-19T08:42:52.000+02:00",
+    "Margin": "206",
+    "DevAddr": "FE030CF6"
+  }
+}
