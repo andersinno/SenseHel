@@ -88,35 +88,46 @@ class SubscriptionViewSet(
         return Response({}, status=status.HTTP_201_CREATED)
 
 
+# TODO: authentication?
 @api_view(['POST'])
 def update_sensor_by_identifier(request):
     """
     Example payload::
 
         {
-            "sensor": 1,
             "identifier": "ABCDEFGH",
             "attributes": [
                 {
-                    "id": 1,
-                    "value": 20
+                    "URI": "http://finto.fi/afo/en/page/p4770",
+                    "value": 200
                 },
                 {
-                    "id": 2,
-                    "value": 30
+                    "URI": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
+                    "value": 21
                 }
 
             ]
         }
     """
-    # TODO: handle lookup failures
-    apsen = ApartmentSensor.objects.get(
-        sensor__id=request.data['sensor'],
-        identifier=request.data['identifier'])
+    try:
+        apsen = ApartmentSensor.objects.get(
+            identifier=request.data['identifier'])
 
-    for attr in request.data['attributes']:
-        apsenval = apsen.apartment_sensor_values.get(attribute__id=attr['id'])  # type: ApartmentSensorValue
-        apsenval.value = attr['value']
-        apsenval.save()
+        for attr in request.data['attributes']:
+            apsenval = apsen.apartment_sensor_values.get(attribute__uri=attr['URI'])  # type: ApartmentSensorValue
+            apsenval.value = attr['value']
+            apsenval.save()
 
-    return Response({"message": "Updated"})
+        return Response({"message": "Updated successfully"})
+    except ApartmentSensor.DoesNotExist:
+        return Response({"message": "ApartmentSensor does not exists with given identifier"},
+                        status=status.HTTP_404_NOT_FOUND)
+    except ApartmentSensorValue.DoesNotExist:
+        return Response({"message": "ApartmentSensorValue does not exists with given URI"},
+                        status=status.HTTP_404_NOT_FOUND)
+
+
+# TODO: authentication?
+@api_view(['POST'])
+def digita_gw(request):
+    pass
