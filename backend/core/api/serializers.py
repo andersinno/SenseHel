@@ -44,9 +44,7 @@ class ApartmentSensorValueSerializer(serializers.ModelSerializer):
     description = serializers.CharField(source='attribute.description')
     uri = serializers.CharField(source='attribute.uri')
 
-    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-details', read_only=True)
-    #sensor_id = serializers.CharField(source='apartment_sensor.sensor_id')
-
+    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-detail', read_only=True, source='apartment_sensor.sensor')
     class Meta:
         model = models.ApartmentSensorValue
         fields = ('sensor', 'value', 'updated_at', 'description', 'uri')
