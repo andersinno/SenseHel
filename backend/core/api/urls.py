@@ -6,6 +6,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'sensors', views.SensorViewSet)
+router.register(r'sensorattributes', views.SensorAttributeViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'apartments', views.ApartmentViewSet, base_name='apartment-list')
 router.register(

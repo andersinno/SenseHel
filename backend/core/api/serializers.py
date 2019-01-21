@@ -27,15 +27,22 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = fields
 
 
+class SensorAttributeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.SensorAttribute
+        fields = ('uri', 'description')
+        read_only_fields = fields
+
+
 class SensorSerializer(serializers.HyperlinkedModelSerializer):
-    # Not required by frontend currently
-    # TODO: provides field
+    # TODO: Inline provides
 
     class Meta:
         model = models.Sensor
         fields = (
             'id',
             'description',
+            'provides'
         )
         read_only_fields = fields
 
@@ -44,7 +51,10 @@ class ApartmentSensorValueSerializer(serializers.ModelSerializer):
     description = serializers.CharField(source='attribute.description')
     uri = serializers.CharField(source='attribute.uri')
 
-    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-detail', read_only=True, source='apartment_sensor.sensor')
+    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-detail',
+                                                 read_only=True,
+                                                 source='apartment_sensor.sensor')
+
     class Meta:
         model = models.ApartmentSensorValue
         fields = ('sensor', 'value', 'updated_at', 'description', 'uri')
