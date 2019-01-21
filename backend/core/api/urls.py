@@ -21,7 +21,7 @@ schema_view = get_schema_view(title='SenseHel API')
 urls = [
     url(r'schema/', schema_view),
     url(r'available-services', views.ApartmentServiceList.as_view()),
-    url(r'update-sensor-by-identifier', views.update_sensor_by_identifier)
+    url(r'update-sensor-by-identifier', views.update_sensor_by_identifier),
 ]
 
 urlpatterns = router.urls + urls

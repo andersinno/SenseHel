@@ -39,11 +39,7 @@ class SensorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Sensor
-        fields = (
-            'id',
-            'description',
-            'provides'
-        )
+        fields = ('id', 'description', 'provides')
         read_only_fields = fields
 
 
@@ -51,9 +47,9 @@ class ApartmentSensorValueSerializer(serializers.ModelSerializer):
     description = serializers.CharField(source='attribute.description')
     uri = serializers.CharField(source='attribute.uri')
 
-    sensor = serializers.HyperlinkedRelatedField(view_name='sensor-detail',
-                                                 read_only=True,
-                                                 source='apartment_sensor.sensor')
+    sensor = serializers.HyperlinkedRelatedField(
+        view_name='sensor-detail', read_only=True, source='apartment_sensor.sensor'
+    )
 
     class Meta:
         model = models.ApartmentSensorValue

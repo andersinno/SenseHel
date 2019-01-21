@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $# -ne 2 ]; then
+  echo 1>&2 "Usage: $0 <token> <id>"
+  exit 3
+fi
+curl -X DELETE -sH "Authorization: Token $1" "http://127.0.0.1:8000/api/subscriptions/$2/" | jq

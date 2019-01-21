@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import (Apartment, Sensor, SensorAttribute, Service, Subscription,
-                     User, ApartmentSensor, ApartmentSensorValue)
+from .models import (Apartment, ApartmentSensor, ApartmentSensorValue, Sensor,
+                     SensorAttribute, Service, Subscription, User)
 
 
 class MyUserAdmin(UserAdmin):
@@ -16,9 +16,7 @@ class ApartmentSensorInline(admin.TabularInline):
 
 
 class ApartmentAdmin(admin.ModelAdmin):
-    inlines = [
-        ApartmentSensorInline,
-    ]
+    inlines = [ApartmentSensorInline]
 
 
 class ApartmentSensorValueAdmin(admin.ModelAdmin):
@@ -27,7 +25,9 @@ class ApartmentSensorValueAdmin(admin.ModelAdmin):
 
 admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Sensor)
-admin.site.register(ApartmentSensorValue, ApartmentSensorValueAdmin)  # TODO: For testing
+admin.site.register(
+    ApartmentSensorValue, ApartmentSensorValueAdmin
+)  # TODO: For testing
 admin.site.register(Service)
 admin.site.register(Subscription)
 admin.site.register(SensorAttribute)

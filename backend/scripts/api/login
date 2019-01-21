@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $# -ne 2 ]; then
+  echo 1>&2 "Usage: $0 <username> <password>"
+  exit 3
+fi
+curl -sd "username=$1&password=$2" -X POST http://localhost:8000/api/login | jq

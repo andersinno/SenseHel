@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+  echo 1>&2 "Usage: $0 <token>"
+  exit 3
+fi
+#curl -d '{"user_id":"1", "service_id":"1"}' -H "Content-Type: application/json" -X POST -sH "Authorization: Token $1" "http://127.0.0.1:8000/api/subscriptions/" | jq
+curl -d "service=1" -X POST -sH "Authorization: Token $1" "http://127.0.0.1:8000/api/subscriptions/" | jq
+

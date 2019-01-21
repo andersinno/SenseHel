@@ -39,8 +39,10 @@ class ApartmentSensor(models.Model):
         Used to identify physical product to be updated via APIs.
         Could be device serial number.
     """
-    apartment = models.ForeignKey(Apartment, related_name='apartment_sensors',
-                                  on_delete=models.CASCADE)
+
+    apartment = models.ForeignKey(
+        Apartment, related_name='apartment_sensors', on_delete=models.CASCADE
+    )
     sensor = models.ForeignKey('Sensor', on_delete=models.DO_NOTHING)
     identifier = models.CharField(max_length=255, unique=True)
 
@@ -52,11 +54,13 @@ class ApartmentSensorValue(models.Model):
     """
     Stores last measured value from a sensor attribute
     """
-    apartment_sensor = models.ForeignKey(ApartmentSensor,
-                                         related_name='apartment_sensor_values',
-                                         on_delete=models.CASCADE)
-    attribute = models.ForeignKey('SensorAttribute',
-                                  on_delete=models.DO_NOTHING)
+
+    apartment_sensor = models.ForeignKey(
+        ApartmentSensor,
+        related_name='apartment_sensor_values',
+        on_delete=models.CASCADE,
+    )
+    attribute = models.ForeignKey('SensorAttribute', on_delete=models.DO_NOTHING)
     value = models.IntegerField()
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -70,6 +74,7 @@ class Sensor(models.Model):
 
     Further capabilities of the product are defined by attributes.
     """
+
     description = models.TextField(max_length=512)
     provides = models.ManyToManyField('SensorAttribute', related_name='sensors')
 
@@ -81,6 +86,7 @@ class SensorAttribute(models.Model):
     """
     Represent one capability of a sensor, eg. temperature.
     """
+
     uri = models.CharField(max_length=255)
     description = models.CharField(max_length=128)
 
@@ -95,6 +101,7 @@ class Service(models.Model):
     """
     Represent a 3rd party service provider
     """
+
     name = models.CharField(max_length=32)
     price = models.CharField(max_length=8)
     benefit_short = models.CharField(max_length=20)
@@ -113,6 +120,7 @@ class Subscription(models.Model):
     """
     User subscribes to a service
     """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -122,6 +130,4 @@ class Subscription(models.Model):
         return f'User {self.user} subscription for {self.service}'
 
     class Meta:
-        unique_together = (
-            ('user', 'service')
-        )
+        unique_together = ('user', 'service')
