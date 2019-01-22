@@ -94,7 +94,8 @@ class HomePage extends Component {
   onRefresh = () =>
     new Promise(async resolve => {
       await this.fetchSubscribedServices();
-      setTimeout(resolve, 2000);
+      await this.fetchApartment();
+      setTimeout(resolve, 1000);
     });
 
   render() {

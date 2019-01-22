@@ -39,7 +39,7 @@ class LoginPage extends Component {
   };
 
   handleLoginFail = error => {
-    const errorMessage = _.get(error, 'response.data.error', error);
+    const errorMessage = _.get(error, 'response.error', error);
 
     this.setState({
       errorMessage: {

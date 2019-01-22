@@ -16,6 +16,11 @@ export default {
   Temperature_Warning: require('./Temperature_Orange.png'),
   Temperature_Danger: require('./Temperature_Red.png'),
 
+  Sensor: require('./Sensor_Grey.png'),
+  Sensor_Normal: require('./Sensor_Green.png'),
+  Sensor_Warning: require('./Sensor_Orange.png'),
+  Sensor_Danger: require('./Sensor_Red.png'),
+
   Success: require('./Success.png'),
   Failure: require('./Fail.png'),
   About_Icon: require('./About.png'),

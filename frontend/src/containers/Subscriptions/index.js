@@ -35,9 +35,9 @@ class SubscriptionsPage extends Component {
       const services = await API.getAvailableServices();
       localStorage.setItem(
         LocalStorageKeys.AVAILABLE_SERVICES,
-        JSON.stringify(services.data)
+        JSON.stringify(services)
       );
-      this.setState({ services: services.data });
+      this.setState({ services });
     } catch (e) {
       this.setState({
         errorMessage: {

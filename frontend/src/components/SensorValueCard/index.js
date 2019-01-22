@@ -6,6 +6,7 @@ import Icons from '../../assets/Icons';
 const getIcon = (type, value) => {
   switch (type) {
     case 'temperature':
+    default:
       if (value > 24 || value < 17) {
         return Icons.Temperature_Danger;
       }
@@ -35,8 +36,6 @@ const getIcon = (type, value) => {
       }
 
       return Icons.CO2_Normal;
-    default:
-      return Icons.Temperature_Normal;
   }
 };
 
