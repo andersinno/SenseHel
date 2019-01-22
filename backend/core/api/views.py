@@ -1,9 +1,19 @@
+import binascii
+
+import logging
+
+from django.conf import settings
+
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from core.utils.elsys import decode_elsys_payload
 from . import serializers
 from .. import models
+
+
+log = logging.getLogger(__name__)
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -140,7 +150,7 @@ def update_sensor_by_identifier(request):
         for attr in request.data['attributes']:
             apsenval = apsen.apartment_sensor_values.get(
                 attribute__uri=attr['URI']
-            )  # type: ApartmentSensorValue
+            )  # type: models.ApartmentSensorValue
             apsenval.value = attr['value']
             apsenval.save()
 
@@ -157,7 +167,41 @@ def update_sensor_by_identifier(request):
         )
 
 
-# TODO: authentication?
 @api_view(['POST'])
 def digita_gw(request):
-    pass
+    """
+    Digita GW endpoint implementation
+    """
+    print("-="*100)
+    identifier = request.data['DevEUI_uplink']['DevEUI']
+    try:
+        apsen = models.ApartmentSensor.objects.get(
+            identifier=identifier
+        )
+    except models.ApartmentSensor.DoesNotExist:
+        return Response(
+            {"message": f"ApartmentSensor does not exists with given identifier {identifier}"},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    payload = binascii.unhexlify(request.data['DevEUI_uplink']['payload_hex'])
+    decoded_payload = decode_elsys_payload(payload)
+    mapping = settings.DIGITA_GW_PAYLOAD_TO_ATTRIBUTES  # type: dict
+
+    for key, value in decoded_payload.items():
+        try:
+            uri = mapping[key]
+            apsenval = apsen.apartment_sensor_values.get(
+                attribute__uri=uri
+            )  # type: models.ApartmentSensorValue
+        except models.ApartmentSensorValue.DoesNotExist:
+            log.debug("ApartmentSensorValue does not exists with given URI %s (%s)", uri, key)
+        except KeyError:
+            log.debug('No configured mapping to attribute for %s', key)
+            continue
+        else:
+            apsenval.value = value
+            apsenval.save()
+            log.debug('Updated %s', apsenval)
+
+    return Response({"message": "Updated successfully"})

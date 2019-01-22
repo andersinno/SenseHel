@@ -131,3 +131,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
+
+# Digita GW API mapping settings
+# Dict key should match the key from decoding payload
+# Dict value should match the URI for attribute
+DIGITA_GW_PAYLOAD_TO_ATTRIBUTES = {
+    'temperature': 'http://urn.fi/URN:NBN:fi:au:ucum:r73',
+    'humidity': 'http://www.yso.fi/onto/yso/p6453',
+    'motion': 'http://finto.fi/yso/en/page/p9266',
+    'co2': 'http://finto.fi/afo/en/page/p4770',
+}
