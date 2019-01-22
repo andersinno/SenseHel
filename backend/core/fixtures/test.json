@@ -35,7 +35,7 @@
     "fields": {
         "apartment": 1,
         "sensor": 1,
-        "identifier": "test-identifier"
+        "identifier": "ABCDEFGH"
     }
 },
 {
@@ -45,7 +45,7 @@
         "apartment_sensor": 1,
         "attribute": 1,
         "value": 22,
-        "updated_at": "2019-01-10T16:35:06.813Z"
+        "updated_at": "2019-01-22T11:09:28.165Z"
     }
 },
 {
@@ -54,8 +54,8 @@
     "fields": {
         "apartment_sensor": 1,
         "attribute": 4,
-        "value": 400,
-        "updated_at": "2019-01-10T16:36:13.121Z"
+        "value": 10000,
+        "updated_at": "2019-01-22T11:09:28.180Z"
     }
 },
 {
@@ -64,8 +64,8 @@
     "fields": {
         "apartment_sensor": 1,
         "attribute": 2,
-        "value": 40,
-        "updated_at": "2019-01-10T16:36:33.308Z"
+        "value": 28,
+        "updated_at": "2019-01-22T11:09:28.169Z"
     }
 },
 {
@@ -105,7 +105,8 @@
     "pk": 1,
     "fields": {
         "uri": "http://urn.fi/URN:NBN:fi:au:ucum:r73",
-        "description": "Temperature, Celcius"
+        "description": "Temperature, Celcius",
+        "ui_type": "TEMPERATURE"
     }
 },
 {
@@ -113,7 +114,8 @@
     "pk": 2,
     "fields": {
         "uri": "http://www.yso.fi/onto/yso/p6453",
-        "description": "Humidity, Percentage"
+        "description": "Humidity, Percentage",
+        "ui_type": "HUMIDITY"
     }
 },
 {
@@ -121,7 +123,8 @@
     "pk": 3,
     "fields": {
         "uri": "http://finto.fi/yso/en/page/p9266",
-        "description": "Presence"
+        "description": "Presence",
+        "ui_type": null
     }
 },
 {
@@ -129,7 +132,8 @@
     "pk": 4,
     "fields": {
         "uri": "http://finto.fi/afo/en/page/p4770",
-        "description": "Co2, PPM"
+        "description": "Co2, PPM",
+        "ui_type": "CO2"
     }
 },
 {
