@@ -30,7 +30,7 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
 class SensorAttributeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.SensorAttribute
-        fields = ('uri', 'description')
+        fields = ('uri', 'description', 'ui_type')
         read_only_fields = fields
 
 
@@ -46,6 +46,7 @@ class SensorSerializer(serializers.HyperlinkedModelSerializer):
 class ApartmentSensorValueSerializer(serializers.ModelSerializer):
     description = serializers.CharField(source='attribute.description')
     uri = serializers.CharField(source='attribute.uri')
+    ui_type = serializers.CharField(source='attribute.ui_type')
 
     sensor = serializers.HyperlinkedRelatedField(
         view_name='sensor-detail', read_only=True, source='apartment_sensor.sensor'
@@ -53,15 +54,16 @@ class ApartmentSensorValueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.ApartmentSensorValue
-        fields = ('sensor', 'value', 'updated_at', 'description', 'uri')
+        fields = ('sensor', 'value', 'updated_at', 'description', 'uri', 'ui_type')
 
 
 class ApartmentSensorSerializer(serializers.ModelSerializer):
     apartment_sensor_values = ApartmentSensorValueSerializer(many=True, read_only=True)
+    description = serializers.CharField(source='sensor.description')
 
     class Meta:
         model = models.ApartmentSensor
-        fields = ('id', 'apartment_sensor_values', 'identifier')
+        fields = ('id', 'apartment_sensor_values', 'identifier', 'description')
 
 
 class ApartmentSerializer(serializers.HyperlinkedModelSerializer):

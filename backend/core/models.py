@@ -82,6 +82,14 @@ class Sensor(models.Model):
         return f'{self.description}'
 
 
+UI_TYPE_CHOICES = (
+    ('TEMPERATURE', 'Temperature'),
+    ('HUMIDITY', 'Humidity'),
+    ('CO2', 'Co2'),
+    (None, 'Other'),
+)
+
+
 class SensorAttribute(models.Model):
     """
     Represent one capability of a sensor, eg. temperature.
@@ -89,6 +97,7 @@ class SensorAttribute(models.Model):
 
     uri = models.CharField(max_length=255)
     description = models.CharField(max_length=128)
+    ui_type = models.CharField(max_length=128, null=True, choices=UI_TYPE_CHOICES)
 
     def __str__(self):
         return f'{self.uri} ({self.description})'
