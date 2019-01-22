@@ -172,7 +172,6 @@ def digita_gw(request):
     """
     Digita GW endpoint implementation
     """
-    print("-="*100)
     identifier = request.data['DevEUI_uplink']['DevEUI']
     try:
         apsen = models.ApartmentSensor.objects.get(

@@ -72,6 +72,7 @@
     "model": "core.sensor",
     "pk": 1,
     "fields": {
+        "name": "Elsys ERS-CO2",
         "description": "Elsys ERS-CO2",
         "provides": [
             1,
@@ -84,6 +85,7 @@
     "model": "core.sensor",
     "pk": 2,
     "fields": {
+        "name": "Mock - TempOnly",
         "description": "Mock, Temperature only",
         "provides": [
             1
@@ -94,6 +96,7 @@
     "model": "core.sensor",
     "pk": 3,
     "fields": {
+        "name": "Mock - Presence only",
         "description": "Mock, Presence only",
         "provides": [
             3
