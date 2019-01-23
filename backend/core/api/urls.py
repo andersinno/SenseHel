@@ -22,7 +22,7 @@ urls = [
     url(r'schema/', schema_view),
     url(r'available-services', views.ApartmentServiceList.as_view()),
     url(r'update-sensor-by-identifier', views.update_sensor_by_identifier),
-    url(r'digita-gw', views.digita_gw),
+    url(r'digita-gw', views.digita_gw, name='digita-gw'),
 ]
 
 urlpatterns = router.urls + urls
