@@ -60,14 +60,15 @@ class DigitaTest(APITestCase):
                 "DevAddr": "FE030CF6"
             }
         }
-        response = self.client.post(self.url, data, format='json')
 
+        response = self.client.post(self.url, data, format='json')
         self.assertEqual(404, response.status_code)
 
     def test_valid_gw_data(self):
         sensor = Sensor.objects.create(name="T-800")
         apartment = Apartment.objects.create(user=User.objects.get(username="nkha"))
         ApartmentSensor.objects.create(apartment=apartment, sensor=sensor, identifier="A81758FFFE030CF6")
+
         data = {
             "DevEUI_uplink": {
                 "Time": "2018-05-16T08:51:30.438+02:00",
