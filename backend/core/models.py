@@ -22,7 +22,7 @@ class User(AbstractUser):
 
 
 class Apartment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=10)
@@ -131,7 +131,7 @@ class Subscription(models.Model):
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
