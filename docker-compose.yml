@@ -1,7 +1,7 @@
 version: "3.2"
 services:
 
-  app:
+  backend:
     build: ./backend/
     restart: always
     environment:
