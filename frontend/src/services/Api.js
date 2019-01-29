@@ -87,18 +87,26 @@ class Api {
     try {
       const res = await this.api.get('apartmentsensors');
 
-      const apartmentSensors = _.reduce(
+      return _.reduce(
         res,
         (sensors, a) => {
           const s = _.map(
             a.apartment_sensor_values,
-            ({ description, uri, ui_type: uiType }) => ({
+            ({
+              description,
+              uri,
+              ui_type: uiType,
+              value,
+              updated_at: updatedAt
+            }) => ({
               id: `${a.id}-${description.substr(0, 5)}`,
-              name: a.description,
+              name: a.sensor.description,
               identifier: a.identifier,
               uri,
               description,
-              uiType
+              uiType,
+              value,
+              updatedAt
             })
           );
 
@@ -106,8 +114,6 @@ class Api {
         },
         []
       );
-
-      return apartmentSensors;
     } catch (e) {
       throw e;
     }

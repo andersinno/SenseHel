@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import './home.styles.css';
 import AppHeader from '../../components/AppHeader';
 import SensorValueCard from '../../components/SensorValueCard';
@@ -8,30 +9,7 @@ import PullToRefresh from '../../components/PullToRefresh';
 import API from '../../services/Api';
 import CustomizedSnackbar from '../../components/Snackbar';
 import LocalStorageKeys from '../../config/LocalStorageKeys';
-
-const mockSensorValues = [
-  {
-    title: 'Temperature',
-    type: 'temperature',
-    value: Math.floor(Math.random() * (50 + 25 + 1)) - 25,
-    unit: '℃',
-    lastUpdated: '20 seconds ago'
-  },
-  {
-    title: 'Humidity',
-    type: 'humidity',
-    value: Math.floor(Math.random() * (100 - 20 + 1)) + 20,
-    unit: '%',
-    lastUpdated: '10 min ago'
-  },
-  {
-    title: 'Carbon Dioxide',
-    type: 'carbon_dioxide',
-    value: Math.floor(Math.random() * (2500 + 1)),
-    unit: 'ppm',
-    lastUpdated: '40 min ago'
-  }
-];
+import SensorConfig from '../../config/SensorConfig';
 
 class HomePage extends Component {
   state = {
@@ -39,13 +17,24 @@ class HomePage extends Component {
     refreshing: false,
     errorMessage: '',
     name: '',
-    address: ''
+    address: '',
+    sensorValues: []
   };
 
   async componentDidMount() {
     this.updateName();
-    await this.fetchSubscribedServices();
     await this.fetchApartment();
+    await this.fetchSubscribedServices();
+    await this.fetchSensorValues();
+
+    this.sensorValuesInterval = setInterval(
+      this.fetchSensorValues,
+      15 * 60 * 1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.sensorValuesInterval);
   }
 
   updateName = () => {
@@ -86,6 +75,21 @@ class HomePage extends Component {
     }
   };
 
+  fetchSensorValues = async () => {
+    try {
+      const sensorValues = await API.getApartmentSensors();
+
+      this.setState({ sensorValues });
+    } catch (e) {
+      this.setState({
+        errorMessage: {
+          title: 'Could not fetch sensor values',
+          subtitle: `${e.message}`
+        }
+      });
+    }
+  };
+
   handleChangeTab = () => {
     const { changeTab } = this.props;
     setTimeout(() => changeTab(1), 800);
@@ -104,7 +108,8 @@ class HomePage extends Component {
       refreshing,
       errorMessage,
       name,
-      address
+      address,
+      sensorValues
     } = this.state;
 
     return (
@@ -114,17 +119,24 @@ class HomePage extends Component {
 
           <div className="home-page__content tab-page__content">
             <div className="home-page__cards-container">
-              {mockSensorValues.map(s => (
-                <SensorValueCard
-                  key={s.title}
-                  title={s.title}
-                  type={s.type}
-                  value={s.value}
-                  unit={s.unit}
-                  lastUpdated={s.lastUpdated}
-                  refreshing={refreshing}
-                />
-              ))}
+              {sensorValues.map(s => {
+                const sensorConfig =
+                  SensorConfig[s.uiType] || SensorConfig.DEFAULT;
+                const lastUpdated =
+                  s.updatedAt && moment(s.updatedAt).fromNow();
+
+                return (
+                  <SensorValueCard
+                    key={s.id}
+                    title={s.name}
+                    icon={sensorConfig.getSeverityIcon(s.value)}
+                    unit={sensorConfig.unit}
+                    value={s.value}
+                    lastUpdated={lastUpdated}
+                    refreshing={refreshing}
+                  />
+                );
+              })}
             </div>
 
             <div className="home-page__subscriptions-container">

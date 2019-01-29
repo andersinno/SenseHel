@@ -4,6 +4,7 @@ import AppHeader from '../../components/AppHeader';
 import SensorListCard from '../../components/SensorListCard';
 import API from '../../services/Api';
 import CustomizedSnackbar from '../../components/Snackbar';
+import SensorConfig from '../../config/SensorConfig';
 
 class SensorsPage extends Component {
   state = {
@@ -15,7 +16,6 @@ class SensorsPage extends Component {
     try {
       const sensors = await API.getApartmentSensors();
 
-      console.log(sensors);
       this.setState({ sensors });
     } catch (e) {
       this.setState({
@@ -35,16 +35,19 @@ class SensorsPage extends Component {
         <AppHeader headline="MY SENSORS" title="DEVICES INFORMATION" />
 
         <div className="sensors-page__content tab-page__content">
-          {sensors.map(sensor => (
-            <SensorListCard
-              key={sensor.id}
-              type={sensor.uiType}
-              name={sensor.name}
-              description={sensor.description}
-              identifier={sensor.identifier}
-              uri={sensor.uri}
-            />
-          ))}
+          {sensors.map(sensor => {
+            const sensorConfig =
+              SensorConfig[sensor.uiType] || SensorConfig.DEFAULT;
+            return (
+              <SensorListCard
+                key={sensor.id}
+                icon={sensorConfig.icon}
+                name={sensor.name}
+                description={sensor.description}
+                identifier={sensor.identifier}
+              />
+            );
+          })}
         </div>
 
         <CustomizedSnackbar
