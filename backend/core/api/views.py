@@ -5,7 +5,8 @@ import logging
 from django.conf import settings
 
 from rest_framework import generics, status, viewsets
-from rest_framework.decorators import api_view
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 
 from core.utils.elsys import decode_elsys_payload
@@ -121,8 +122,8 @@ class SubscriptionViewSet(
         return Response({}, status=status.HTTP_201_CREATED)
 
 
-# TODO: authentication?
 @api_view(['POST'])
+@authentication_classes((BasicAuthentication,))
 def update_sensor_by_identifier(request):
     """
     Example payload::
@@ -168,6 +169,7 @@ def update_sensor_by_identifier(request):
 
 
 @api_view(['POST'])
+@authentication_classes((BasicAuthentication,))
 def digita_gw(request):
     """
     Digita GW endpoint implementation
