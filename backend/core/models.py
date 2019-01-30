@@ -22,7 +22,7 @@ class User(AbstractUser):
 
 
 class Apartment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=10)

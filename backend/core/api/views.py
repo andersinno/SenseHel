@@ -33,6 +33,27 @@ class ApartmentViewSet(viewsets.ModelViewSet):
         return models.Apartment.objects.filter(user=self.request.user)
 
 
+class UserViewSet(
+    viewsets.mixins.ListModelMixin,
+    viewsets.mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
+    """
+    Serialize all subscriptions and provide methods to create new
+    subscriptions and terminate old ones.
+    """
+
+    serializer_class = serializers.UserSerializer
+
+    def get_queryset(self):
+        return models.User.objects.filter(user=self.request.user)
+
+    def destroy(self, request, *args, **kwargs):
+        print('-'*100)
+        self.request.user.delete()
+        return Response({'message': 'Removed'}, status=status.HTTP_202_ACCEPTED)
+
+
 class ApartmentSensorViewSet(viewsets.ModelViewSet):
     queryset = (
         models.ApartmentSensor.objects.all()

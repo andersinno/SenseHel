@@ -9,6 +9,7 @@ router.register(r'sensors', views.SensorViewSet)
 router.register(r'sensorattributes', views.SensorAttributeViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'apartments', views.ApartmentViewSet, base_name='apartment-list')
+router.register(r'users', views.UserViewSet, base_name='user-list')
 router.register(
     r'subscriptions', views.SubscriptionViewSet, base_name='subscriptions-list'
 )
