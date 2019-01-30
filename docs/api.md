@@ -1,6 +1,9 @@
 # Browsable API
 
-Please see `/api/schema/` in browser for full documentation of available endpoints and methods.
+Please see `/api/schema/` in browser for full documentation of all available endpoints and methods.
+In this document login and few methods are described in order to have working examples at hand.
+
+Some development helper scripts can be found from `backend/scripts/api/`.
 
 # Login
 

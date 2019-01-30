@@ -19,7 +19,7 @@ docker-compose up
 
 ### Migrate database
 
-This needs to be done on first run and everytime Django models are changed.
+This needs to be done on first run and every time Django models are changed.
 
 Find the container id which is running the backend with:
 

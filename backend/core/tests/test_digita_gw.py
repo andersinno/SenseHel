@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
-from core.models import User, Sensor, Apartment, ApartmentSensor
+from core.models import Apartment, ApartmentSensor, Sensor, User
 
 
 class DigitaTest(APITestCase):
@@ -42,22 +42,17 @@ class DigitaTest(APITestCase):
                             "Chain": "0",
                             "LrrRSSI": "-101.000000",
                             "LrrSNR": "0.000000",
-                            "LrrESP": "-104.010300"
+                            "LrrESP": "-104.010300",
                         }
                     ]
                 },
                 "CustomerID": "100002581",
-                "CustomerData": {
-                    "alr": {
-                        "pro": "LORA/Generic",
-                        "ver": "1"
-                    }
-                },
+                "CustomerData": {"alr": {"pro": "LORA/Generic", "ver": "1"}},
                 "ModelCfg": "0",
                 "BatteryLevel": "254",
                 "BatteryTime": "2018-05-16T08:51:30.438+02:00",
                 "Margin": "239",
-                "DevAddr": "FE030CF6"
+                "DevAddr": "FE030CF6",
             }
         }
 
@@ -67,7 +62,9 @@ class DigitaTest(APITestCase):
     def test_valid_gw_data(self):
         sensor = Sensor.objects.create(name="T-800")
         apartment = Apartment.objects.create(user=User.objects.get(username="nkha"))
-        ApartmentSensor.objects.create(apartment=apartment, sensor=sensor, identifier="A81758FFFE030CF6")
+        ApartmentSensor.objects.create(
+            apartment=apartment, sensor=sensor, identifier="A81758FFFE030CF6"
+        )
 
         data = {
             "DevEUI_uplink": {
@@ -98,22 +95,17 @@ class DigitaTest(APITestCase):
                             "Chain": "0",
                             "LrrRSSI": "-101.000000",
                             "LrrSNR": "0.000000",
-                            "LrrESP": "-104.010300"
+                            "LrrESP": "-104.010300",
                         }
                     ]
                 },
                 "CustomerID": "100002581",
-                "CustomerData": {
-                    "alr": {
-                        "pro": "LORA/Generic",
-                        "ver": "1"
-                    }
-                },
+                "CustomerData": {"alr": {"pro": "LORA/Generic", "ver": "1"}},
                 "ModelCfg": "0",
                 "BatteryLevel": "254",
                 "BatteryTime": "2018-05-16T08:51:30.438+02:00",
                 "Margin": "239",
-                "DevAddr": "FE030CF6"
+                "DevAddr": "FE030CF6",
             }
         }
 

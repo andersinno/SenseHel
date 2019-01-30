@@ -1,18 +1,16 @@
 import binascii
-
 import logging
 
 from django.conf import settings
-
 from rest_framework import generics, status, viewsets
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 
 from core.utils.elsys import decode_elsys_payload
+
 from . import serializers
 from .. import models
-
 
 log = logging.getLogger(__name__)
 
@@ -49,7 +47,6 @@ class UserViewSet(
         return models.User.objects.filter(user=self.request.user)
 
     def destroy(self, request, *args, **kwargs):
-        print('-'*100)
         self.request.user.delete()
         return Response({'message': 'Removed'}, status=status.HTTP_202_ACCEPTED)
 
@@ -197,12 +194,12 @@ def digita_gw(request):
     """
     identifier = request.data['DevEUI_uplink']['DevEUI']
     try:
-        apsen = models.ApartmentSensor.objects.get(
-            identifier=identifier
-        )
+        apsen = models.ApartmentSensor.objects.get(identifier=identifier)
     except models.ApartmentSensor.DoesNotExist:
         return Response(
-            {"message": f"ApartmentSensor does not exists with given identifier {identifier}"},
+            {
+                "message": f"ApartmentSensor does not exists with given identifier {identifier}"
+            },
             status=status.HTTP_404_NOT_FOUND,
         )
 
@@ -217,7 +214,9 @@ def digita_gw(request):
                 attribute__uri=uri
             )  # type: models.ApartmentSensorValue
         except models.ApartmentSensorValue.DoesNotExist:
-            log.debug("ApartmentSensorValue does not exists with given URI %s (%s)", uri, key)
+            log.debug(
+                "ApartmentSensorValue does not exists with given URI %s (%s)", uri, key
+            )
         except KeyError:
             log.debug('No configured mapping to attribute for %s', key)
             continue

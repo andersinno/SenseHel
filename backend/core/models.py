@@ -74,6 +74,7 @@ class Sensor(models.Model):
 
     Further capabilities of the product are defined by attributes.
     """
+
     name = models.CharField(max_length=64)
     description = models.TextField(max_length=512)
     provides = models.ManyToManyField('SensorAttribute', related_name='sensors')
