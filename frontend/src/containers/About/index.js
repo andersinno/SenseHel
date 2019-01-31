@@ -6,7 +6,7 @@ import Images from '../../assets/Images';
 import BottomButton from '../../components/BottomButton';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import CustomizedSnackbar from '../../components/Snackbar';
-import LocalStorageKeys from '../../config/LocalStorageKeys';
+import API from '../../services/Api';
 
 class AboutPage extends Component {
   state = {
@@ -36,18 +36,23 @@ class AboutPage extends Component {
   };
 
   handleLogout = () => {
-    localStorage.removeItem(LocalStorageKeys.CURRENT_USER);
+    localStorage.clear();
+    API.setToken('');
     this.setState({ loggedOut: true });
   };
 
-  handleRevokeApartment = () => {
+  handleRevokeApartment = async () => {
     this.setState({ revoking: true, revokeConfirmOpen: false });
 
-    // make API call
-    setTimeout(() => {
-      this.setState({ revoking: false, revoked: true });
+    try {
+      await API.revokeApartment();
+      this.setState({ revoking: false });
       this.handleRevokeSuccess();
-    }, 3000);
+
+      setTimeout(() => this.handleLogout(), 5000);
+    } catch (e) {
+      this.handleRevokeFail(e);
+    }
   };
 
   handleRevokeSuccess = () => {
@@ -55,7 +60,7 @@ class AboutPage extends Component {
       successMessage: {
         title: 'Successfully revoked apartment',
         subtitle:
-          'You can no longer see information about your apartment anymore'
+          'All your information has been erased. You will be logged out in 5 seconds'
       },
       errorMessage: ''
     });

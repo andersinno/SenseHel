@@ -42,6 +42,9 @@ class Api {
       localStorage.setItem(LocalStorageKeys.CURRENT_USER, JSON.stringify(res));
       await this.setToken((res || { token: '' }).token);
     } catch (e) {
+      if (e.response.status === 400) {
+        throw new Error('Incorrect username or password');
+      }
       throw e;
     }
   }
@@ -117,6 +120,16 @@ class Api {
     } catch (e) {
       throw e;
     }
+  }
+
+  revokeApartment() {
+    const currentUser = JSON.parse(
+      localStorage.getItem(LocalStorageKeys.CURRENT_USER)
+    );
+    const ID = currentUser && currentUser.id;
+    if (ID) return this.api.delete(`users/${ID}`);
+
+    throw new Error('User not logged in!');
   }
 }
 
