@@ -125,6 +125,16 @@ class Api {
       throw e;
     }
   }
+
+  revokeApartment() {
+    const currentUser = JSON.parse(
+      localStorage.getItem(LocalStorageKeys.CURRENT_USER)
+    );
+    const ID = currentUser && currentUser.id;
+    if (ID) return this.api.delete(`users/${ID}`);
+
+    throw new Error('User not logged in!');
+  }
 }
 
 const API = new Api(URL);
