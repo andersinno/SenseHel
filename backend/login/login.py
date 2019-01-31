@@ -25,6 +25,7 @@ class LoginTokenAPIView(APIView):
                 'last_name': user.last_name,
                 'phone': user.phone,
                 'email': user.email,
+                'id': user.id,
             },
             status=HTTP_200_OK,
         )
