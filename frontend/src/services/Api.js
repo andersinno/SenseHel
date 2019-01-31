@@ -15,7 +15,11 @@ class Api {
       response => response.data,
       error => {
         if (error.response.status === 401) {
-          localStorage.removeItem(LocalStorageKeys.CURRENT_USER);
+          localStorage.clear();
+
+          // Hacky-ish and ugly but works and quick
+          window.alert('You have been logged out due to inactivity');
+          window.location = '/login';
         }
         throw error;
       }
@@ -42,6 +46,9 @@ class Api {
       localStorage.setItem(LocalStorageKeys.CURRENT_USER, JSON.stringify(res));
       await this.setToken((res || { token: '' }).token);
     } catch (e) {
+      if (e.response.status === 400) {
+        throw new Error('Incorrect username or password');
+      }
       throw e;
     }
   }
