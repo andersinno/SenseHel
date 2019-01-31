@@ -1,6 +1,3 @@
-from collections import OrderedDict
-
-from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from core.models import SensorAttribute, Service, User
@@ -8,11 +5,9 @@ from core.models import SensorAttribute, Service, User
 
 class ServiceTest(APITestCase):
     def setUp(self):
-        user = User.objects.create_user(username="nkha", password="123456")
+        User.objects.create_user(username="nkha", password="123456")
 
-        attribute = SensorAttribute.objects.create(
-            uri='test uri', description='test description'
-        )
+        SensorAttribute.objects.create(uri='test uri', description='test description')
 
     def test_service(self):
         # Without logged in user

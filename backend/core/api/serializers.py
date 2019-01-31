@@ -35,8 +35,6 @@ class SensorAttributeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SensorSerializer(serializers.HyperlinkedModelSerializer):
-    # TODO: Inline provides
-
     class Meta:
         model = models.Sensor
         fields = ('id', 'name', 'description', 'provides')
@@ -71,9 +69,6 @@ class ApartmentSensorSerializer(serializers.ModelSerializer):
 
 
 class ApartmentSerializer(serializers.HyperlinkedModelSerializer):
-    # TODO: nesting resources ?
-    # apartment_sensors = ApartmentSensorSerializer()
-
     class Meta:
         model = models.Apartment
         fields = ('id', 'street', 'city', 'postal_code', 'apartment_sensors')
