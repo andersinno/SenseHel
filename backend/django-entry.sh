@@ -1,9 +1,11 @@
 #!/bin/bash
-until nc -zv "dev-db" 5432
-do
-    echo "Connecting to database ..."
-    sleep 1
-done
+#until nc -z -w 50 "dev-db" 5432
+#do
+#    echo "Connecting to database ..."
+#    sleep 2
+#done
+echo "Waiting for database to be ready"
+/app/manage.py wait_for_database
 
 echo "Applying migrations..."
 python /app/manage.py migrate --noinput
