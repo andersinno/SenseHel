@@ -38,7 +38,7 @@ class Api {
 
   async login(username, password) {
     try {
-      const res = await this.api.post('login', {
+      const res = await this.api.post('login/', {
         username,
         password
       });
@@ -63,12 +63,12 @@ class Api {
   }
 
   async getAvailableServices() {
-    return this.api.get('available-services');
+    return this.api.get('available-services/');
   }
 
   async getSubscribedServices() {
     try {
-      const res = await this.api.get('subscriptions');
+      const res = await this.api.get('subscriptions/');
       localStorage.setItem(
         LocalStorageKeys.SUBSCRIBED_SERVICES,
         JSON.stringify(res)
@@ -87,7 +87,7 @@ class Api {
   }
 
   deleteSubscribedService(id) {
-    return this.api.delete(`subscriptions/${id}`);
+    return this.api.delete(`subscriptions/${id}/`);
   }
 
   async getApartmentSensors() {
@@ -131,7 +131,7 @@ class Api {
       localStorage.getItem(LocalStorageKeys.CURRENT_USER)
     );
     const ID = currentUser && currentUser.id;
-    if (ID) return this.api.delete(`users/${ID}`);
+    if (ID) return this.api.delete(`users/${ID}/`);
 
     throw new Error('User not logged in!');
   }
