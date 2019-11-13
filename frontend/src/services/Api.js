@@ -63,7 +63,7 @@ class Api {
   }
 
   async getAvailableServices() {
-    return this.api.get('available-services/');
+    return this.api.get('services/');
   }
 
   async getSubscribedServices() {
@@ -92,35 +92,8 @@ class Api {
 
   async getApartmentSensors() {
     try {
-      const res = await this.api.get('apartmentsensors');
-
-      return _.reduce(
-        res,
-        (sensors, a) => {
-          const s = _.map(
-            a.apartment_sensor_values,
-            ({
-              description,
-              uri,
-              ui_type: uiType,
-              value,
-              updated_at: updatedAt
-            }) => ({
-              id: `${a.id}-${description.substr(0, 5)}`,
-              name: a.sensor.description,
-              identifier: a.identifier,
-              uri,
-              description,
-              uiType,
-              value,
-              updatedAt
-            })
-          );
-
-          return _.concat(sensors, s);
-        },
-        []
-      );
+      const res = await this.api.get('sensors/');
+      return res
     } catch (e) {
       throw e;
     }
