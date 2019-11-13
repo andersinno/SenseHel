@@ -80,9 +80,11 @@ class Api {
     }
   }
 
-  addSubscribedService(id) {
+  addSubscribedService(id, url, permissions) {
     return this.api.post('subscriptions/', {
-      service: id
+      service: id,
+      service_url: url,
+      permission:permissions,
     });
   }
 
@@ -107,6 +109,12 @@ class Api {
     if (ID) return this.api.delete(`users/${ID}/`);
 
     throw new Error('User not logged in!');
+  }
+
+  updateDatastreamPermissions(permissionData) {
+    return this.api.post('subscriptions/update_datastream_permission/', {
+      permission_data: permissionData
+    });
   }
 }
 
