@@ -15,6 +15,21 @@ class SubscriptionsPage extends Component {
     subscriptions: []
   };
 
+  handlePermissionUpdate = async (data) => {
+    try {
+      await API.updateDatastreamPermissions(data)
+      this.handleRequestSuccess({
+        title: 'Successfully updated!',
+        subtitle: 'You have successfully updated the datastream consent.'
+      });
+    } catch (e) {
+      this.handleRequestFail({
+        title: 'Could not update datastream consent.',
+        subtitle: `${e.message}`
+      });
+    }
+  }
+
   async componentDidMount() {
     this.updateWithPersistedServices();
     await this.fetchServices();
@@ -96,9 +111,9 @@ class SubscriptionsPage extends Component {
     });
   };
 
-  handleSubscribe = async id => {
+  handleSubscribe = async (id, url, permissions) => {
     try {
-      await API.addSubscribedService(id);
+      await API.addSubscribedService(id, url, permissions);
       this.handleRequestSuccess({
         title: 'Successfully subscribed!',
         subtitle: 'You can now view your subscriptions in your home page'
@@ -147,9 +162,11 @@ class SubscriptionsPage extends Component {
             <OfferedServiceCard
               key={service.id}
               service={service}
+              datastreams={service.datastreams}
               subscribed={this.isSubscribed(service.id)}
-              handleSubscribe={() => this.handleSubscribe(service.id)}
+              handleSubscribe={(serviceId, serviceUrl, dataStreamConsent) => this.handleSubscribe(serviceId, serviceUrl, dataStreamConsent)}
               handleUnsubscribe={() => this.handleUnsubscribe(service.id)}
+              handlePermissionUpdate={this.handlePermissionUpdate}
             />
           ))}
         </div>

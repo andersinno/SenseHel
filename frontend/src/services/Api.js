@@ -38,7 +38,7 @@ class Api {
 
   async login(username, password) {
     try {
-      const res = await this.api.post('login', {
+      const res = await this.api.post('login/', {
         username,
         password
       });
@@ -63,12 +63,12 @@ class Api {
   }
 
   async getAvailableServices() {
-    return this.api.get('available-services');
+    return this.api.get('services/');
   }
 
   async getSubscribedServices() {
     try {
-      const res = await this.api.get('subscriptions');
+      const res = await this.api.get('subscriptions/');
       localStorage.setItem(
         LocalStorageKeys.SUBSCRIBED_SERVICES,
         JSON.stringify(res)
@@ -80,47 +80,22 @@ class Api {
     }
   }
 
-  addSubscribedService(id) {
+  addSubscribedService(id, url, permissions) {
     return this.api.post('subscriptions/', {
-      service: id
+      service: id,
+      service_url: url,
+      permission:permissions,
     });
   }
 
   deleteSubscribedService(id) {
-    return this.api.delete(`subscriptions/${id}`);
+    return this.api.delete(`subscriptions/${id}/`);
   }
 
   async getApartmentSensors() {
     try {
-      const res = await this.api.get('apartmentsensors');
-
-      return _.reduce(
-        res,
-        (sensors, a) => {
-          const s = _.map(
-            a.apartment_sensor_values,
-            ({
-              description,
-              uri,
-              ui_type: uiType,
-              value,
-              updated_at: updatedAt
-            }) => ({
-              id: `${a.id}-${description.substr(0, 5)}`,
-              name: a.sensor.description,
-              identifier: a.identifier,
-              uri,
-              description,
-              uiType,
-              value,
-              updatedAt
-            })
-          );
-
-          return _.concat(sensors, s);
-        },
-        []
-      );
+      const res = await this.api.get('sensors/');
+      return res
     } catch (e) {
       throw e;
     }
@@ -131,9 +106,15 @@ class Api {
       localStorage.getItem(LocalStorageKeys.CURRENT_USER)
     );
     const ID = currentUser && currentUser.id;
-    if (ID) return this.api.delete(`users/${ID}`);
+    if (ID) return this.api.delete(`users/${ID}/`);
 
     throw new Error('User not logged in!');
+  }
+
+  updateDatastreamPermissions(permissionData) {
+    return this.api.post('subscriptions/update_datastream_permission/', {
+      permission_data: permissionData
+    });
   }
 }
 

@@ -30,3 +30,8 @@
 .offered-service-card__detail-container {
   padding: 0 0 5px 0;
 }
+
+.datastream-permission p.agree-level{
+  padding-left: 20px;
+  color: #515253 !important;
+}

@@ -11,7 +11,9 @@ const OfferedServiceCard = ({
   service,
   subscribed,
   handleSubscribe,
-  handleUnsubscribe
+  handleUnsubscribe,
+  datastreams,
+  handlePermissionUpdate,
 }) => {
   const {
     id,
@@ -21,7 +23,9 @@ const OfferedServiceCard = ({
     description,
     price,
     benefit_short: benefit,
-    eula_url: eula
+    eula_url: eula,
+    allowed_permissions,
+    url,
   } = service;
   const collapsibleFields = _.pick(service, [
     'description',
@@ -70,6 +74,10 @@ const OfferedServiceCard = ({
             subscribed={subscribed}
             handleSubscribe={handleSubscribe}
             handleUnsubscribe={handleUnsubscribe}
+            datastreams={datastreams}
+            allowed_permissions={allowed_permissions}
+            handlePermissionUpdate={handlePermissionUpdate}
+            serviceUrl={url}
           />
         }
       />
